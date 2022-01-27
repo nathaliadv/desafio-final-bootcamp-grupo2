@@ -6,15 +6,20 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "order")
-public class Order {
+@Table(name = "inbound_order")
+public class InboundOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate creationDate;
+    @ManyToOne
+    private Section section;
+    @OneToMany(mappedBy = "order")
+    private List<Batch> batchs;
 }

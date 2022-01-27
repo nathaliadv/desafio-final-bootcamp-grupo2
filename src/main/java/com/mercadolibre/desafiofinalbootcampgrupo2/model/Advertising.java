@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -18,4 +19,10 @@ public class Advertising {
     private Long id;
     private String description;
     private BigDecimal price;
+    @OneToMany(mappedBy = "advertising")
+    private List<Seller> sellers;
+    @OneToMany(mappedBy = "advertising")
+    private List<Batch> batchs;
+    @ManyToOne
+    private Product product;
 }

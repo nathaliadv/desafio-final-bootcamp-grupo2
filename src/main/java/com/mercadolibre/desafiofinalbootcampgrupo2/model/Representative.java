@@ -10,8 +10,6 @@ import java.util.List;
 @Table(name = "representative")
 public class Representative extends User{
 
-    @OneToMany
+    @OneToMany(mappedBy = "representative")
     private List<Section> section;
-
-
 }

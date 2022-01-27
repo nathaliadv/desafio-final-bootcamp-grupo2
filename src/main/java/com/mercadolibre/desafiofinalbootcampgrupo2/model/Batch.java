@@ -24,4 +24,8 @@ public class Batch {
     private LocalDate expirationDate;
     private LocalDate manufacturingDate;
     private LocalDateTime manufacturingDateTime;
+    @ManyToOne
+    private InboundOrder order;
+    @ManyToOne
+    private Advertising advertising;
 }

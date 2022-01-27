@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,4 +23,8 @@ public class Section {
     private String typeSection;
     @ManyToOne
     private Representative representative;
+    @ManyToOne
+    private Warehouse warehouse;
+    @OneToMany(mappedBy = "section")
+    private List<InboundOrder> orders;
 }

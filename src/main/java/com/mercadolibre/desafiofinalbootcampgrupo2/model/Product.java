@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -18,4 +19,6 @@ public class Product {
     private Long id;
     private String name;
     private double volume;
+    @OneToMany(mappedBy = "product")
+    private List<Advertising> advertisings;
 }
