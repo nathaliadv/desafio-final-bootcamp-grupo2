@@ -1,5 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.model;
 
+import com.mercadolibre.desafiofinalbootcampgrupo2.util.ProductType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,4 +28,12 @@ public class Section {
     private Warehouse warehouse;
     @OneToMany(mappedBy = "section")
     private List<InboundOrder> orders;
+    private ProductType productType;
+
+
+    //TODO verificar calculo
+    public double calVolume(Batch batch){
+
+        return this.volume - (batch.getCurrentQuantity() * batch.getAdvertising().getProduct().getVolume());
+    }
 }
