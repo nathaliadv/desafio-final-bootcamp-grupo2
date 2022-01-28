@@ -32,4 +32,8 @@ public class Advertising {
 
     @ManyToOne
     private Product product;
+
+    @ManyToOne
+    @JsonIgnore
+    private PurchaseOrder purchaseOrder;
 }

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class InboundOrderService {
 
     @Autowired
-    private ProductDAO productDAO;
+    private ProductTypeDAO productDAO;
 
     @Autowired
     private SectionDAO sectionDAO;
