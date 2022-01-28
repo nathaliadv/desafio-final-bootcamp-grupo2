@@ -8,6 +8,7 @@ import java.io.Serializable;
 //TODO tipo de estrategia
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class User implements Serializable {
+
     @Id
     //TODO verificar para gerar auto increment
     @GeneratedValue(strategy = GenerationType.AUTO)

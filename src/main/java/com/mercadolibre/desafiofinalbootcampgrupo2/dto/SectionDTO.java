@@ -1,6 +1,9 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.dto;
 
-public interface SectionDTO {
+import lombok.Data;
+
+@Data
+public class SectionDTO {
 
     private Long sectionCode;
     private Long warehouseCode;

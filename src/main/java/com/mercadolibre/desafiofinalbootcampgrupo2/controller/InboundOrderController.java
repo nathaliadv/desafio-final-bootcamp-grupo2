@@ -28,7 +28,7 @@ public class InboundOrderController {
 
         InboundOrder inboundOrder = service.saveOrder(order);
 
-        return ResponseEntity.created(URI.create("fresh-products/inboundorder/" + inboundOrder.getId())).body(inboundOrder.getBatchs());
-
+        //return ResponseEntity.created(URI.create("fresh-products/inboundorder/" + inboundOrder.getId())).body(inboundOrder.getBatchs());
+        return null;
     }
 }

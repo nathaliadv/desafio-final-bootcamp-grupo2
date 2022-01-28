@@ -12,16 +12,19 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Builder
+@Entity
 @Table(name = "inbound_order")
 public class InboundOrder {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate creationDate;
+
     @ManyToOne
     private Section section;
-    @OneToMany(mappedBy = "order")
+
+    @OneToMany(mappedBy = "inboundOrder", cascade = CascadeType.ALL)
     private List<Batch> batchs;
 }

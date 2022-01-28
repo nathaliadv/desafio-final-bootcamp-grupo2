@@ -14,15 +14,19 @@ import java.util.List;
 @Entity
 @Table(name = "advertising")
 public class Advertising {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
     private BigDecimal price;
-    @OneToMany(mappedBy = "advertising")
-    private List<Seller> sellers;
+
+    @ManyToOne
+    private Seller seller;
+
     @OneToMany(mappedBy = "advertising")
     private List<Batch> batchs;
+
     @ManyToOne
     private Product product;
 }
