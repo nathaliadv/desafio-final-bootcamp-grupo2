@@ -18,7 +18,7 @@ public abstract class User implements Serializable {
     @Id
     //TODO verificar para gerar auto increment
     //TODO criar usuarioDTO
-    //NAO DEVOLVER senha
+    //TODO NAO DEVOLVER senha
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;

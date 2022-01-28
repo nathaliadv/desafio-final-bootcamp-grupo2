@@ -35,7 +35,11 @@ public class Section {
     private ProductType productType;
 
     //TODO verificar calculo
-    public double calVolume(Batch batch){
+    public double calVolumeCheckin(Batch batch){
         return this.volume - (batch.getCurrentQuantity() * batch.getAdvertising().getProduct().getVolume());
+    }
+
+    public double calVolumeCheckout(Batch batch){
+        return this.volume + (batch.getCurrentQuantity() * batch.getAdvertising().getProduct().getVolume());
     }
 }
