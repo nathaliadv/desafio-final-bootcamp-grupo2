@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @AllArgsConstructor
@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "batch")
 public class Batch {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,9 +24,11 @@ public class Batch {
     private int currentQuantity;
     private LocalDate expirationDate;
     private LocalDate manufacturingDate;
-    private LocalDateTime manufacturingDateTime;
-    @ManyToOne
-    private InboundOrder order;
+    private LocalTime manufacturingTime;
+
     @ManyToOne
     private Advertising advertising;
+
+    @ManyToOne
+    private InboundOrder inboundOrder;
 }

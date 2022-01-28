@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "address")
 public class Address {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,6 +21,4 @@ public class Address {
     private String state;
     private int postalCode;
     private String country;
-    @OneToOne
-    private Warehouse warehouse;
 }

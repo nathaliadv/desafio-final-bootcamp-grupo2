@@ -36,7 +36,7 @@ public class InboundOrderService {
 
     public void verifyRequest(InboundOrderDTO orderDTO) {
 
-        Section section = sectionDAO.findById(orderDTO.getSection().getId()).orElseThrow(() -> new RuntimeException());
+        Section section = sectionDAO.findById(orderDTO.getSection().getSectionCode()).orElseThrow(() -> new RuntimeException());
 
         var representativeExist = section.getRepresentative().equals(orderDTO.getRepresentative());
 
@@ -44,7 +44,7 @@ public class InboundOrderService {
             throw new RuntimeException();
         }
 
-        var wareHouseExist = section.getWarehouse().equals(orderDTO.getSection().getWarehouse());
+        var wareHouseExist = section.getWarehouse().equals(orderDTO.getSection().getWarehouseCode());
 
         if (!wareHouseExist) {
             throw new RuntimeException();
@@ -55,7 +55,7 @@ public class InboundOrderService {
 
     public void verifyBatch(Section section, Batch batch) {
 
-        if (!section.getTypeSection().equals(batch.getAdvertising().getProduct().getProductTypes())) {
+        if (!section.getProductType().equals(batch.getAdvertising().getProduct().getProductType())) {
             throw new RuntimeException();
         }
     }
@@ -67,16 +67,18 @@ public class InboundOrderService {
         }
     }
 
-    public InboundOrder saveOrder(InboundOrderDTO order){
+    public InboundOrder saveOrder(InboundOrderDTO order) {
 
-       verifyProduct(order.getBatchs());
-       verifyRequest(order);
+        verifyProduct(order.getBatchs());
+        verifyRequest(order);
+
+        Section section = sectionDAO.findById(order.getSection().getSectionCode()).orElseThrow(() -> new RuntimeException());
 
         InboundOrder orderBuild = InboundOrder
                 .builder()
                 .creationDate(order.getCreationDate())
                 .batchs(order.getBatchs())
-                .section(order.getSection())
+                .section(section)
                 .build();
 
         return orderDAO.save(orderBuild);

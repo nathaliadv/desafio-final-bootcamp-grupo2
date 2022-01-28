@@ -13,12 +13,15 @@ import java.util.List;
 @Entity
 @Table(name = "warehouse")
 public class Warehouse {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
     @OneToOne
     private Address address;
+
     @OneToMany(mappedBy = "warehouse")
     private List<Section> sections;
 }
