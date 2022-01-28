@@ -1,25 +1,17 @@
-package com.mercadolibre.desafiofinalbootcampgrupo2.model;
+package com.mercadolibre.desafiofinalbootcampgrupo2.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Builder
-@Table(name = "batch")
-public class Batch {
+public class BatchDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private double minimumTemperature;
     private double currentTemperature;
     private int initialQuantity;
@@ -27,10 +19,5 @@ public class Batch {
     private LocalDate expirationDate;
     private LocalDate manufacturingDate;
     private LocalTime manufacturingTime;
-
-    @ManyToOne
-    private Advertising advertising;
-
-    @ManyToOne
-    private InboundOrder inboundOrder;
+    private Long advertsimentId;
 }

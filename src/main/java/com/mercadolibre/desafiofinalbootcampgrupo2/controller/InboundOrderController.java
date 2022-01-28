@@ -25,10 +25,7 @@ public class InboundOrderController {
 
     @PostMapping("fresh-products/inboundorder/")
     public ResponseEntity<List<Batch>> inboundOrder(@RequestBody InboundOrderDTO order) {
-
         InboundOrder inboundOrder = service.saveOrder(order);
-
-        //return ResponseEntity.created(URI.create("fresh-products/inboundorder/" + inboundOrder.getId())).body(inboundOrder.getBatchs());
-        return null;
+        return ResponseEntity.created(URI.create("fresh-products/inboundorder/" + inboundOrder.getId())).body(inboundOrder.getBatchs());
     }
 }

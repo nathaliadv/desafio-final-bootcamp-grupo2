@@ -1,8 +1,5 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.dto;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.Representative;
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.Section;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +14,6 @@ public class InboundOrderDTO {
 
     private LocalDate creationDate;
     private SectionDTO section;
-    private List<Batch> batchs;
-    private Representative representative;
+    private List<BatchDTO> batchs;
+    private long representative;
 }

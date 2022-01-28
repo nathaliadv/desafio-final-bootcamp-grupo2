@@ -36,7 +36,6 @@ public class Section {
 
     //TODO verificar calculo
     public double calVolume(Batch batch){
-
         return this.volume - (batch.getCurrentQuantity() * batch.getAdvertising().getProduct().getVolume());
     }
 }
