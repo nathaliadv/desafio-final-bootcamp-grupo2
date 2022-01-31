@@ -3,8 +3,6 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.controller;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ProductTypeDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.AdvertisingDTO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.Product;
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.ProductType;
 import com.mercadolibre.desafiofinalbootcampgrupo2.services.AdvertisingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +25,7 @@ public class AdvertisingController {
     public ResponseEntity<List<AdvertisingDTO>> getAllAdvertising(){
         List<AdvertisingDTO> advertisingList = service.findAll();
 
-        if(advertisingList.size()< 0){
+        if(advertisingList.isEmpty()){
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok().body(advertisingList);
@@ -35,7 +33,11 @@ public class AdvertisingController {
 
     @GetMapping(path = "/fresh-products/list")
     public ResponseEntity<List<ProductTypeDAO.AdvertisingDTO>> ProducgetByIdAdvressing(@RequestParam String type){
+        List<ProductTypeDAO.AdvertisingDTO> products = service.getByType(type);
 
-        return ResponseEntity.ok().body(service.getByType(type));
+        if(products.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().body(products);
     }
 }

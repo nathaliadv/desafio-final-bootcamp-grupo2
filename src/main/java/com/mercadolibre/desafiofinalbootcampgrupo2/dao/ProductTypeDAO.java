@@ -10,16 +10,18 @@ import java.math.BigDecimal;
 import java.util.List;
 
 
+//TOODO - findAll
+
 @Repository
 public interface ProductTypeDAO extends JpaRepository<ProductType, Long> {
 
     public List<ProductType> findByType(String type);
 
-    @Query(value = "Select p.name, ad.description, ad.price, b.current_quantity quantity "
-           + " from product_type pt "
-            + " inner join product p on p.product_type_id = pt.id "
-            + " inner join advertising ad on p.product_type_id = ad.product_id "
-           + " inner join batch b on b.advertising_id = ad.id"
+    @Query(value = " Select p.name, ad.description, ad.price, b.current_quantity quantity "
+           + " from batch b "
+            + " inner join advertising ad on b.advertising_id = ad.id "
+            + " inner join product p on p.id = ad.product_id "
+           + " inner join product_type pt on pt.id = p.product_type_id"
             + " where pt.type = :type ",nativeQuery = true)
     List<AdvertisingDTO> advertisingList (@Param("type") String type);
 
@@ -30,5 +32,9 @@ public interface ProductTypeDAO extends JpaRepository<ProductType, Long> {
          Integer getQuantity();
     }
 }
+
+
+
+
 
 
