@@ -2,6 +2,7 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.dto;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.InboundOrder;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class InboundOrderDTO {
 
     private Long inboundOrderCode;
@@ -33,6 +35,4 @@ public class InboundOrderDTO {
                 .collect(Collectors.toList());
         this.representative = inboundOrder.getSection().getRepresentative().getId();
     }
-
-
 }

@@ -81,7 +81,7 @@ public class InboundOrderService implements EntityService<InboundOrder> {
         return batchResponseDTO;
     }
 
-    private void allVerification(InboundOrderDTO orderDTO, InboundOrder order) {
+    protected void allVerification(InboundOrderDTO orderDTO, InboundOrder order) {
         Long sectionCode = orderDTO.getSection().getSectionCode();
         Long warehouseCode = orderDTO.getSection().getWarehouseCode();
         List<Batch> batches = convertListBatchDtoToEntity(orderDTO.getBatchs());
@@ -90,33 +90,25 @@ public class InboundOrderService implements EntityService<InboundOrder> {
         verifyIfSectorExistsInWarehouse(sectionCode, warehouseCode); // que o armazém é válido E que o setor é válido
         verifyIfRepresentativeWorksInSection(order.getSection(), orderDTO.getRepresentative()); //E que o representante pertence ao armazém
         verifyIfProductsAreTheSameTypeOfSection(batches, order.getSection()); //E que o setor corresponde ao tipo de produto
-        verifyIfSectionHaveSpaceEnoughToAddBatches(order.getSection(), batches); //E que o setor tenha espaço disponível
+        sectionService.verifyIfSectionHaveSpaceEnoughToAddBatches(order.getSection(), batches); //E que o setor tenha espaço disponível
     }
 
-    private void verifyIfSectorExistsInWarehouse(Long sectionCode, Long warehouseCode) {
+    protected void verifyIfSectorExistsInWarehouse(Long sectionCode, Long warehouseCode) {
         if (!sectionService.findById(sectionCode).getWarehouse().getId().equals(warehouseCode))
             throw new RuntimeException("The mentioned Section don't exists in mentioned Warehouse.");
     }
 
-    public void verifyIfRepresentativeWorksInSection(Section section, Long representativeCode) {
+    protected void verifyIfRepresentativeWorksInSection(Section section, Long representativeCode) {
         if (!section.getRepresentative().getId().equals(representativeCode)) {
             throw new RuntimeException("The mentioned Representative don't matches with mentioned Section.");
         }
     }
 
-    public void verifyIfProductsAreTheSameTypeOfSection(List<Batch> batchs, Section section) {
+    protected void verifyIfProductsAreTheSameTypeOfSection(List<Batch> batchs, Section section) {
         for (Batch batch : batchs) {
             Product product = productService.findById(batch.getAdvertising().getProduct().getId());
             if (!product.getProductType().equals(section.getProductType()))
                 throw new RuntimeException("The mentioned Product don't matches with mentioned Section.");
-        }
-    }
-
-    public void verifyIfSectionHaveSpaceEnoughToAddBatches(Section section, List<Batch> batchs) {
-        for (Batch batch : batchs) {
-            if (section.calVolume(batch) < 0) {
-                throw new RepositoryException("Space not available in the section, please contact an administrator");
-            }
         }
     }
 

@@ -2,6 +2,7 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.dto;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.time.LocalTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class BatchDTO {
 
     private double minimumTemperature;
