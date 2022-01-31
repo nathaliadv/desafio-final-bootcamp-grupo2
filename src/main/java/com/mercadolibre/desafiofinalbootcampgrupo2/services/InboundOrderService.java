@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class InboundOrderService {
+public class InboundOrderService implements EntityService<InboundOrder> {
 
     @Autowired
     private SectionService sectionService;
@@ -27,14 +27,20 @@ public class InboundOrderService {
 
     @Autowired
     private AdvertisingService advertisingService;
-    
+
     @Autowired
     private BatchService batchService;
-    
+
     private InboundOrderDAO inboundOrderDAO;
 
     public InboundOrderService(InboundOrderDAO inboundOrderDAO) {
         this.inboundOrderDAO = inboundOrderDAO;
+    }
+
+    @Override
+    public InboundOrder findById(Long id) {
+        return inboundOrderDAO.findById(id)
+                .orElseThrow(() -> new RepositoryException("Inbound Order not exists in database, please contact the administrator"));
     }
 
     public List<BatchResponseDTO> saveInboundOrder(InboundOrderDTO orderDTO) {
@@ -42,29 +48,49 @@ public class InboundOrderService {
         InboundOrder order = convertInboundOrderDtoToEntity(orderDTO);
         List<Batch> batches = convertListBatchDtoToEntity(orderDTO.getBatchs());
 
+        allVerification(orderDTO, order);
+
+        order.setBatchs(batches);
+        for (Batch batch : batches) {
+            batch.setInboundOrder(order);
+        }
+        inboundOrderDAO.save(order);
+
+        List<BatchResponseDTO> batchResponseDTO = new ArrayList<>();
+        batches.forEach(batch -> batchResponseDTO.add(new BatchResponseDTO(batch)));
+        return batchResponseDTO;
+    }
+
+    public List<BatchResponseDTO> updateInboundOrder(InboundOrderDTO orderDTO, Long id) {
+
+        InboundOrder order = convertInboundOrderDtoToEntity(orderDTO);
+        order.setId(findById(id).getId());
+        List<Batch> batches = convertListBatchDtoToEntity(orderDTO.getBatchs());
+
+        allVerification(orderDTO, order);
+
+        order.setBatchs(batches);
+        for (Batch batch : batches) {
+            batch.setInboundOrder(order);
+        }
+        batchService.deleteAllBatchByInboundOrder(order);
+        inboundOrderDAO.save(order);
+
+        List<BatchResponseDTO> batchResponseDTO = new ArrayList<>();
+        batches.forEach(batch -> batchResponseDTO.add(new BatchResponseDTO(batch)));
+        return batchResponseDTO;
+    }
+
+    private void allVerification(InboundOrderDTO orderDTO, InboundOrder order) {
         Long sectionCode = orderDTO.getSection().getSectionCode();
         Long warehouseCode = orderDTO.getSection().getWarehouseCode();
+        List<Batch> batches = convertListBatchDtoToEntity(orderDTO.getBatchs());
 
+        // Init of Requirement 01 validations
         verifyIfSectorExistsInWarehouse(sectionCode, warehouseCode); // que o armazém é válido E que o setor é válido
         verifyIfRepresentativeWorksInSection(order.getSection(), orderDTO.getRepresentative()); //E que o representante pertence ao armazém
         verifyIfProductsAreTheSameTypeOfSection(batches, order.getSection()); //E que o setor corresponde ao tipo de produto
         verifyIfSectionHaveSpaceEnoughToAddBatches(order.getSection(), batches); //E que o setor tenha espaço disponível
-
-        // TODO VERIFICAR SOBRE O BATCH NAO SALVAR O ID DO ORDER QUANDO PERSISTIR ORDER
-
-        order = inboundOrderDAO.save(order);
-
-        for (Batch batch : batches) {
-            batch.setInboundOrder(order);
-        }
-
-        order.setBatchs(batchService.saveListBatches(batches));
-        Long orderCode = order.getId();
-
-        List<BatchResponseDTO> batchResponseDTO = new ArrayList<>();
-        batches.forEach(batch -> batchResponseDTO.add(new BatchResponseDTO(batch, orderCode)));
-
-        return batchResponseDTO;
     }
 
     private void verifyIfSectorExistsInWarehouse(Long sectionCode, Long warehouseCode) {

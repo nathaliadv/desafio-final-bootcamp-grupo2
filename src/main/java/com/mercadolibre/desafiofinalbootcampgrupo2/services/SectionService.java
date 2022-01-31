@@ -5,7 +5,7 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.model.Section;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SectionService {
+public class SectionService implements EntityService<Section> {
 
     private SectionDAO sectionDAO;
 
@@ -13,6 +13,7 @@ public class SectionService {
         this.sectionDAO = sectionDAO;
     }
 
+    @Override
     public Section findById(Long id) {
         return sectionDAO.findById(id)
                 .orElseThrow(() -> new RuntimeException("Section not exists in the Database, please contact the administrator"));

@@ -1,7 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.dto;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.InboundOrder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,8 +13,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class BatchResponseDTO {
 
-    private Long id;
-    private Long advertising;
+    private Long advertisingCode;
     private double currentTemperature;
     private double minimumTemperature;
     private int initialQuantity;
@@ -23,10 +21,9 @@ public class BatchResponseDTO {
     private LocalDate manufacturingDate;
     private LocalTime manufacturingTime;
     private LocalDate expirationDate;
-    private Long inboundOrder;
+    private Long inboundorderCode;
 
-    public BatchResponseDTO(Batch batch, Long inboundOrderCode) {
-        this.id = batch.getId();
+    public BatchResponseDTO(Batch batch) {
         this.currentTemperature = batch.getCurrentTemperature();
         this.minimumTemperature = batch.getMinimumTemperature();
         this.initialQuantity = batch.getInitialQuantity();
@@ -34,7 +31,7 @@ public class BatchResponseDTO {
         this.manufacturingDate = batch.getManufacturingDate();
         this.manufacturingTime = batch.getManufacturingTime();
         this.expirationDate = batch.getExpirationDate();
-        this.advertising = batch.getAdvertising().getId();
-        this.inboundOrder = inboundOrderCode;
+        this.advertisingCode = batch.getAdvertising().getId();
+        this.inboundorderCode = batch.getInboundOrder().getId();
     }
 }

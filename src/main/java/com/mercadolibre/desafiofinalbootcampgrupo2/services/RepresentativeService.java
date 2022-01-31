@@ -6,7 +6,7 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.model.Representative;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RepresentativeService {
+public class RepresentativeService implements EntityService<Representative> {
 
     private RepresentativeDAO representativeDAO;
 
@@ -14,6 +14,7 @@ public class RepresentativeService {
         this.representativeDAO = representativeDAO;
     }
 
+    @Override
     public Representative findById(Long id) {
         return representativeDAO.findById(id)
                 .orElseThrow(() -> new RepositoryException("Representative not exists in database, please contact the administrator"));
