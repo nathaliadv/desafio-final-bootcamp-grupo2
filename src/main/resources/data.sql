@@ -10,9 +10,6 @@ drop table if exists product;
 drop table if exists product_type;
 drop table if exists representative;
 
-
-
-
 -- CREATE TABLES ZONE
 
 create table address (
