@@ -31,6 +31,6 @@ public class Batch {
     @ManyToOne
     private Advertising advertising;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private InboundOrder inboundOrder;
 }

@@ -11,25 +11,27 @@ import java.time.LocalTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BatchDTO {
+public class BatchResponseDTO {
 
-    private double minimumTemperature;
+    private Long advertisingCode;
     private double currentTemperature;
+    private double minimumTemperature;
     private int initialQuantity;
     private int currentQuantity;
-    private LocalDate expirationDate;
     private LocalDate manufacturingDate;
     private LocalTime manufacturingTime;
-    private Long advertsimentId;
+    private LocalDate expirationDate;
+    private Long inboundorderCode;
 
-    public BatchDTO(Batch batch) {
-        this.minimumTemperature = batch.getMinimumTemperature();
+    public BatchResponseDTO(Batch batch) {
         this.currentTemperature = batch.getCurrentTemperature();
+        this.minimumTemperature = batch.getMinimumTemperature();
         this.initialQuantity = batch.getInitialQuantity();
         this.currentQuantity = batch.getCurrentQuantity();
-        this.expirationDate = batch.getExpirationDate();
         this.manufacturingDate = batch.getManufacturingDate();
         this.manufacturingTime = batch.getManufacturingTime();
-        this.advertsimentId = batch.getAdvertising().getId();
+        this.expirationDate = batch.getExpirationDate();
+        this.advertisingCode = batch.getAdvertising().getId();
+        this.inboundorderCode = batch.getInboundOrder().getId();
     }
 }
