@@ -34,9 +34,13 @@ public class AdvertisingService {
         }
     }
 
-    public List<ProductTypeDAO.AdvertisingDTO> getByType(String type){
+    public List<AdvertisingDTO> getByType(String type){
        return productDAO.advertisingList(type);
 
+    }
+
+    public List<AdvertisingDTO> findAllInStock(){
+        return advertisingDAO.findAllInStock();
     }
 
     public AdvertisingDTO convertAdvertisingDTO(Advertising ad){

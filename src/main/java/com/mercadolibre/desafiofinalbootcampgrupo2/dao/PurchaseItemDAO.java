@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PurchaseItemDTO extends JpaRepository<PurchaseItens, Long> {
+public interface PurchaseItemDAO extends JpaRepository<PurchaseItens, Long> {
 }

@@ -1,5 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.model;
 
+import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,9 +23,12 @@ public class PurchaseItens {
     @ManyToOne
     private PurchaseOrder purchaseOrder;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Advertising advertising;
 
 
-
+    public PurchaseItens(ProductDTO product) {
+        this.id = product.getAdvertisingId();
+        this.quantity = product.getQuantity();
+    }
 }

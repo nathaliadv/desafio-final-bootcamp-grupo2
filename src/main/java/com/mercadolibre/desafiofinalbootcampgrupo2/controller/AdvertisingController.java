@@ -23,7 +23,7 @@ public class AdvertisingController {
 
     @GetMapping(path = "/fresh-products/")
     public ResponseEntity<List<AdvertisingDTO>> getAllAdvertising() {
-        List<AdvertisingDTO> advertisingList = service.findAll();
+        List<AdvertisingDTO> advertisingList = service.findAllInStock();
 
         if (advertisingList.isEmpty()) {
             return ResponseEntity.badRequest().build();
@@ -32,8 +32,8 @@ public class AdvertisingController {
     }
 
     @GetMapping(path = "/fresh-products/list")
-    public ResponseEntity<List<ProductTypeDAO.AdvertisingDTO>> ProducgetByIdAdvressing(@RequestParam String type) {
-        List<ProductTypeDAO.AdvertisingDTO> products = service.getByType(type);
+    public ResponseEntity<List<AdvertisingDTO>> ProducgetByIdAdvressing(@RequestParam String type) {
+        List<AdvertisingDTO> products = service.getByType(type);
 
         if (products.isEmpty()) {
             return ResponseEntity.badRequest().build();

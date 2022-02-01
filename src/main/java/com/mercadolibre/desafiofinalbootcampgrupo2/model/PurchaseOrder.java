@@ -30,6 +30,6 @@ public class PurchaseOrder {
     @ManyToOne
     private Buyer buyer;
 
-    @OneToMany(mappedBy = "purchaseOrder")
+    @OneToMany(mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
     private List<PurchaseItens> purchaseItens;
 }
