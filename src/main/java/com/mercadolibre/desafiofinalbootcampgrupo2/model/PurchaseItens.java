@@ -6,30 +6,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.List;
-
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "purchase_order")
-public class PurchaseOrder {
-
+@Table(name = "purchase_itens")
+public class PurchaseItens {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate date;
-
-
-    @OneToOne
-    private PurchaseStatus purchaseStatus;
+    private Integer quantity;
 
     @ManyToOne
-    private Buyer buyer;
+    private PurchaseOrder purchaseOrder;
 
-    @OneToMany(mappedBy = "purchaseOrder")
-    private List<PurchaseItens> purchaseItens;
+    @OneToOne
+    private Advertising advertising;
+
+
+
 }
