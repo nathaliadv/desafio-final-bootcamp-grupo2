@@ -34,4 +34,5 @@ public class Advertising {
 
     @ManyToOne
     private Product product;
+
 }

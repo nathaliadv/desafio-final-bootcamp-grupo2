@@ -1,14 +1,14 @@
-drop table if exists section;
-drop table if exists warehouse;
 drop table if exists address;
-drop table if exists batch;
 drop table if exists advertising;
-drop table if exists seller;
-drop table if exists inbound_order;
+drop table if exists batch;
 drop table if exists hibernate_sequence;
+drop table if exists inbound_order;
 drop table if exists product;
 drop table if exists product_type;
 drop table if exists representative;
+drop table if exists section;
+drop table if exists seller;
+drop table if exists warehouse;
 
 -- CREATE TABLES ZONE
 
@@ -181,3 +181,13 @@ values
     ("Setor de Produtos Congelados", "SETOR04-SP", 15.0, 500, 3, 3, 1),
     ("Setor de Produtos Fresco do Tipo Fruta", "SETOR01-SC", 15.0, 500, 1, 2, 2),
     ("Setor de Produtos Fresco", "SETOR02-SC", 18.0, 500, 1, 2, 2);
+
+INSERT INTO
+    buyer
+VALUE (1, "kenyo@meli.com", "kenyo", "java2020");
+
+
+INSERT INTO purchase_status VALUE (1, "APPROVED");
+INSERT INTO purchase_status VALUE (2, "PENDING");
+INSERT INTO purchase_status VALUE (3, "REJECTED");
+INSERT INTO purchase_status VALUE (4, "DELIVERED");
