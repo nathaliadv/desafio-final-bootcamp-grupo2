@@ -7,9 +7,9 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class ProductService implements EntityService<Product> {
@@ -23,18 +23,18 @@ public class ProductService implements EntityService<Product> {
                 .orElseThrow(() -> new RepositoryException("Product not exists in database, please contact the administrator"));
     }
 
-    public List<ProductResponseDTO> findProductListByID(Long id, String filter){
+    public List<ProductResponseDTO> findProductListByID(Long id, String filter) {
         return sortByAnyParam(productDAO.productList(id), filter);
     }
 
-    public List<ProductResponseDTO> sortByAnyParam(List<ProductResponseDTO> listProduct, String param) {
-
-        switch (param) {
+    public List<ProductResponseDTO> sortByAnyParam(List<ProductResponseDTO> listProduct, String filter) {
+        filter = filter.toUpperCase();
+        switch (filter) {
             case "L":
-                listProduct.sort(Comparator.comparing(ProductResponseDTO::getBatch_id));
+                listProduct.sort(Comparator.comparing(ProductResponseDTO::getBatchCode));
                 break;
             case "C":
-                listProduct.sort(Comparator.comparing(ProductResponseDTO::getCurrent_quantity));
+                listProduct.sort(Comparator.comparing(ProductResponseDTO::getCurrentQuantity));
                 break;
             case "F":
                 listProduct.sort(Comparator.comparing(ProductResponseDTO::getExpirationDate).reversed());
@@ -42,14 +42,6 @@ public class ProductService implements EntityService<Product> {
             default:
                 break;
         }
-
         return listProduct;
     }
-
-    public void validateProductExpirationDate( ProductResponseDTO product){
-        LocalDate today = LocalDate.now();
-        if(product.getExpirationDate().getMonthValue() - today.getMonthValue() < 3)
-            new RepositoryException("expired product");
-    }
-
 }

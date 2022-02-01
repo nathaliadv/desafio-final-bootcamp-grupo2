@@ -3,11 +3,9 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.controller;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductResponseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,11 +14,11 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    ProductService productService;
+    private ProductService productService;
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<List<ProductResponseDTO>> getProductListById(@PathVariable Long id, @PathVariable String param) {
-        List<ProductResponseDTO> productResponseDTOList = productService.findProductListByID(id,param);
+    public ResponseEntity<List<ProductResponseDTO>> getProductListById(@PathVariable Long id, @RequestParam(defaultValue = "") String sortBy) {
+        List<ProductResponseDTO> productResponseDTOList = productService.findProductListByID(id, sortBy);
         return ResponseEntity.ok(productResponseDTOList);
     }
 }

@@ -15,6 +15,6 @@ public interface BatchDAO extends JpaRepository<Batch, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM Batch b WHERE b.inboundOrder = :inboundOrder")
+    @Query(value = "DELETE FROM Batch b WHERE b.inboundOrder = :inboundOrder", nativeQuery = false)
     void deleteAllByInboundOrder(@Param("inboundOrder") InboundOrder inboundOrder);
 }

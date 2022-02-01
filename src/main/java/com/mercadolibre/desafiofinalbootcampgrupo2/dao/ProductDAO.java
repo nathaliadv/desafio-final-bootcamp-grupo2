@@ -12,19 +12,16 @@ import java.util.List;
 @Repository
 public interface ProductDAO extends JpaRepository<Product, Long> {
 
-    @Query(value = "SELECT pd.id as product_id, " +
-            "pd.name as name_product, " +
-            "sec.id as section_id," +
-            "sec.name as name_section, " +
-            "sec.warehouse_id, " +
-            "bt.id as batch_id," +
-            "bt.current_quantity," +
-            "bt.expiration_date " +
-            "FROM product pd " +
-            "INNER JOIN advertising ad ON ad.product_id = pd.id " +
-            "INNER JOIN batch bt ON bt.advertising_id = ad.id " +
-            "INNER JOIN inbound_order ib ON ib.id = bt.inbound_order_id " +
-            "INNER JOIN section sec ON sec.id = ib.section_id " +
-            "WHERE pd.id = :id",nativeQuery = true)
-    List<ProductResponseDTO> productList (@Param("id") Long id);
+    @Query(value = "SELECT " +
+            "new com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductResponseDTO(" +
+            "   prod.id, prod.name, sec.id, sec.warehouse.id, bat.id, bat.currentQuantity, bat.expirationDate" +
+            ") " +
+            "FROM Product prod " +
+            "INNER JOIN Advertising adv ON adv.product = prod " +
+            "INNER JOIN Batch bat ON bat.advertising = adv " +
+            "INNER JOIN InboundOrder inb ON inb = bat.inboundOrder " +
+            "INNER JOIN Section sec ON sec = inb.section " +
+            "WHERE prod.id = :id"
+    )
+    List<ProductResponseDTO> productList(@Param("id") Long id);
 }
