@@ -35,7 +35,7 @@ public class AdvertisingService implements EntityService<Advertising>{
     }
 
     public List<AdvertisingDTO> getByType(String type){
-       return productDAO.advertisingList(type);
+        return productDAO.advertisingList(type);
 
     }
 
