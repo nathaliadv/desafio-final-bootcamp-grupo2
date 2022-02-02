@@ -1,0 +1,311 @@
+{
+	"info": {
+		"_postman_id": "9118c46b-f674-4ae5-b26a-596a455a45f5",
+		"name": "Bootcamp Projeto Integrador",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Requisito 01",
+			"item": [
+				{
+					"name": "POST InboundOrder to save Batch",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"creationDate\": \"2002-12-25\",\n    \"section\": {\n        \"sectionCode\": 1,\n        \"warehouseCode\":1\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 15,\n            \"currentQuantity\": 15,\n            \"expirationDate\": \"2023-12-29\",\n            \"manufacturingDate\": \"2022-02-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        },\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 10,\n            \"currentQuantity\": 10,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        }\n    ],\n    \"representative\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/inboundorder/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"inboundorder",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET InboundOrder",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/inboundorder/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"inboundorder",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT InboundOrder",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"creationDate\": \"2022-12-25\",\n    \"section\": {\n        \"sectionCode\": 1,\n        \"warehouseCode\":1\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 20,\n            \"currentQuantity\": 20,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        },\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 20,\n            \"currentQuantity\": 20,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        }\n    ],\n    \"representative\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/inboundorder/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"inboundorder",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Requisito 02",
+			"item": [
+				{
+					"name": "POST PurchaseOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"buyerId\": 1,\n\t\"products\": [\n\t\t{\n\t\t\t\"advertisingId\": 1,\n\t\t\t\"quantity\": 15\n\t\t},\n        {\n\t\t\t\"advertisingId\": 1,\n\t\t\t\"quantity\": 5\n\t\t}\n\n\t]\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/orders/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"orders",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST InboundOrder to test PurchaseOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"creationDate\": \"2002-12-25\",\n    \"section\": {\n        \"sectionCode\": 1,\n        \"warehouseCode\":1\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 10,\n            \"currentQuantity\": 10,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        }\n    ],\n    \"representative\": 1\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/inboundorder/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"inboundorder",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET  PurchaseOrder by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/orders/?purchaseOrderId=5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"orders",
+								""
+							],
+							"query": [
+								{
+									"key": "purchaseOrderId",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All Advertising",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/in-stock",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"in-stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All Advertising by Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/in-stock/by-type?type=FRESH",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"in-stock",
+								"by-type"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "FRESH"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT PurchaseOrder Copy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"DELIVERED\",\n    \"buyerId\": 1,\n    \"products\": [\n        {\n            \"advertisingId\": 1,\n            \"quantity\": 10\n        },\n        {\n            \"advertisingId\": 1,\n            \"quantity\": 10\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/orders/?purchaseOrderId=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"orders",
+								""
+							],
+							"query": [
+								{
+									"key": "purchaseOrderId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Requisito 03",
+			"item": [
+				{
+					"name": "GET Product Filtered",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/3?sortBy=c",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"3"
+							],
+							"query": [
+								{
+									"key": "sortBy",
+									"value": "c"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
