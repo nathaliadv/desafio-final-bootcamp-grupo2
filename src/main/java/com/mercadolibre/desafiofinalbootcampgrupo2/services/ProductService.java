@@ -1,6 +1,9 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ProductDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dto.SectionDTO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchStockDTO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductByWarehouseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductInAllWarehouseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductResponseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
@@ -10,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 public class ProductService implements EntityService<Product> {
@@ -45,7 +50,25 @@ public class ProductService implements EntityService<Product> {
         return listProduct;
     }
 
-    public List<ProductResponseDTO> findProductListByIdInWarehouse(Long productCode, Long warehouseCode, String filter) {
-        return sortByAnyParam(productDAO.findAllProductsByIdInWarehouse(productCode, warehouseCode), filter);
+    public ProductByWarehouseDTO findProductListByIdInWarehouse(Long productCode, Long warehouseCode, String filter) {
+        List<ProductResponseDTO> listProducts=  sortByAnyParam(productDAO.findAllProductsByIdInWarehouse(productCode, warehouseCode), filter);
+        return convertListProductResponseDTOInProductByWarehouseDTO(listProducts);
+    }
+
+    public ProductByWarehouseDTO convertListProductResponseDTOInProductByWarehouseDTO(List<ProductResponseDTO> productResponseList){
+
+        return ProductByWarehouseDTO.builder()
+                .productId(productResponseList.get(0).getProductCode())
+                .productName(productResponseList.get(0).getProductName())
+                .listBachsStockDto(productResponseList.stream().map(
+                        productResponseDTO -> BatchStockDTO.builder()
+                                .batchCode(productResponseDTO.getBatchCode())
+                                .currentQuantity(productResponseDTO.getCurrentQuantity())
+                                .expirationDate(productResponseDTO.getExpirationDate()).build()).collect(Collectors.toList()))
+                .sectionDto(SectionDTO.builder()
+                        .sectionCode(productResponseList.get(0).getSectionCode())
+                        .warehouseCode(productResponseList.get(0).getWarehouseCode())
+                        .build())
+                .build();
     }
 }

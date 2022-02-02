@@ -1,5 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.controller;
 
+import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductByWarehouseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductInAllWarehouseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductResponseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.services.ProductService;
@@ -18,8 +19,8 @@ public class ProductController {
 
     //Requiriment 03
     @GetMapping(path = "/")
-    public ResponseEntity<List<ProductResponseDTO>> getProductListByIdInWarehouse(@RequestParam Long productCode, @RequestParam Long warehouseCode, @RequestParam(defaultValue = "") String sortBy) {
-        List<ProductResponseDTO> productResponseDTOList = productService.findProductListByIdInWarehouse(productCode, warehouseCode, sortBy);
+    public ResponseEntity<ProductByWarehouseDTO> getProductListByIdInWarehouse(@RequestParam Long productCode, @RequestParam Long warehouseCode, @RequestParam(defaultValue = "") String sortBy) {
+        ProductByWarehouseDTO productResponseDTOList = productService.findProductListByIdInWarehouse(productCode, warehouseCode, sortBy);
         return ResponseEntity.ok(productResponseDTOList);
     }
 
