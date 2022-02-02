@@ -18,6 +18,6 @@ public interface AdvertisingDAO extends JpaRepository<Advertising, Long> {
             + " inner join b.advertising advertising"
             + " inner join advertising.product product "
             + " inner join product.productType productType")
-    public List<AdvertisingDTO> findAllInStock();
+    List<AdvertisingDTO> findAllInStock();
 
 }

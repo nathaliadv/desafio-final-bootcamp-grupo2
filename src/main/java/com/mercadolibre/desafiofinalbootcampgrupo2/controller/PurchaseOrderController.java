@@ -20,21 +20,21 @@ public class PurchaseOrderController {
     @PostMapping(path = "/")
     public ResponseEntity<TotalDTO> createPurchaseOrder(@RequestBody PurchaseOrderDTO purchase) {
         PurchaseOrder purchaseOrder = purchaseOrderService.savePurchaseOrder(purchase);
+        TotalDTO totalPrice = purchaseOrderService.getTotalPriceByPurchaseOrder(purchaseOrder);
 
         return ResponseEntity
                 .created(URI.create("/fresh-products/orders/id/" + purchaseOrder.getId()))
-                .body(purchaseOrderService.getTotalPurchaseOrder(purchase));
+                .body(totalPrice);
     }
 
     @GetMapping(path = "/")
-    public ResponseEntity<PurchaseOrderDTO> getProductsPurchaseOrder(@RequestParam Long purchaseOrderId){
+    public ResponseEntity<PurchaseOrderDTO> getProductsPurchaseOrder(@RequestParam Long purchaseOrderId) {
         return ResponseEntity.ok().body(purchaseOrderService.getProductsByPurchaseId(purchaseOrderId));
     }
 
-    //TODO - nao atualiza a tempo o retorno
     @PutMapping(path = "/")
-    public ResponseEntity<PurchaseOrderDTO> updatePurchaseOrder(@RequestParam Long purchaseOrderId, @RequestBody PurchaseOrderDTO purchaseOrderDto){
-        return ResponseEntity.ok().body(purchaseOrderService.updatePurchaseOrder(purchaseOrderId,purchaseOrderDto));
+    public ResponseEntity<PurchaseOrderDTO> updatePurchaseOrder(@RequestParam Long purchaseOrderId, @RequestBody PurchaseOrderDTO purchaseOrderDto) {
+        return ResponseEntity.ok().body(purchaseOrderService.updatePurchaseOrder(purchaseOrderId, purchaseOrderDto));
     }
 
 }
