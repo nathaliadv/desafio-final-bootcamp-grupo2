@@ -1,6 +1,7 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ProductDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductInAllWarehouseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductResponseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Product;
@@ -22,8 +23,8 @@ public class ProductService implements EntityService<Product> {
                 .orElseThrow(() -> new RepositoryException("Product not exists in database, please contact the administrator"));
     }
 
-    public List<ProductResponseDTO> findProductListByID(Long id, String filter) {
-        return sortByAnyParam(productDAO.productList(id), filter);
+    public List<ProductInAllWarehouseDTO> findProductListByID(Long id) {
+        return productDAO.findAllProductsById(id);
     }
 
     public List<ProductResponseDTO> sortByAnyParam(List<ProductResponseDTO> listProduct, String filter) {
@@ -42,5 +43,9 @@ public class ProductService implements EntityService<Product> {
                 break;
         }
         return listProduct;
+    }
+
+    public List<ProductResponseDTO> findProductListByIdInWarehouse(Long productCode, Long warehouseCode, String filter) {
+        return sortByAnyParam(productDAO.findAllProductsByIdInWarehouse(productCode, warehouseCode), filter);
     }
 }

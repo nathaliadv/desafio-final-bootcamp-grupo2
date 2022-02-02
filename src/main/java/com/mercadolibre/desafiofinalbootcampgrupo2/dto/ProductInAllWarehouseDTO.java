@@ -5,21 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Data
-public class ProductResponseDTO {
+public class ProductInAllWarehouseDTO {
 
     private Long productCode;
-    private String productName;
-
-    private Long sectionCode;
     private Long warehouseCode;
+    private Long totalQuantity;
 
-    private Long batchCode;
-    private int currentQuantity;
-    private LocalDate expirationDate;
 }

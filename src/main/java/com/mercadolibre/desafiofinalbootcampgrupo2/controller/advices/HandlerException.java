@@ -9,8 +9,6 @@ import org.springframework.web.context.request.WebRequest;
 @ControllerAdvice
 public class HandlerException {
 
-
-
         @ExceptionHandler(value = RepositoryException.class)
         protected ResponseEntity<Object> handlePersistencia(RepositoryException ex, WebRequest request) {
             String bodyOfResponse = ex.getMessage();
