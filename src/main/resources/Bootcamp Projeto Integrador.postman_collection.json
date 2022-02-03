@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9118c46b-f674-4ae5-b26a-596a455a45f5",
+		"_postman_id": "ac2d7b4d-5648-4478-973f-37784329922c",
 		"name": "Bootcamp Projeto Integrador",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"creationDate\": \"2002-12-25\",\n    \"section\": {\n        \"sectionCode\": 1,\n        \"warehouseCode\":1\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 15,\n            \"currentQuantity\": 15,\n            \"expirationDate\": \"2023-12-29\",\n            \"manufacturingDate\": \"2022-02-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        },\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 10,\n            \"currentQuantity\": 10,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        }\n    ],\n    \"representative\": 1\n}",
+							"raw": "{\n    \"creationDate\": \"2002-12-25\",\n    \"section\": {\n        \"sectionCode\": 6,\n        \"warehouseCode\":2\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 15,\n            \"currentQuantity\": 15,\n            \"expirationDate\": \"2023-12-29\",\n            \"manufacturingDate\": \"2022-02-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 5\n        },\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 10,\n            \"currentQuantity\": 10,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 5\n        }\n    ],\n    \"representative\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -45,7 +45,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/fresh-products/inboundorder/1",
+							"raw": "localhost:8080/api/v1/fresh-products/inboundorder/",
 							"host": [
 								"localhost"
 							],
@@ -55,7 +55,7 @@
 								"v1",
 								"fresh-products",
 								"inboundorder",
-								"1"
+								""
 							]
 						}
 					},
@@ -279,12 +279,12 @@
 			"name": "Requisito 03",
 			"item": [
 				{
-					"name": "GET Product Filtered",
+					"name": "GET Product Filtered by Warehouse",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/fresh-products/3?sortBy=c",
+							"raw": "localhost:8080/api/v1/fresh-products/?productCode=4&warehouseCode=2",
 							"host": [
 								"localhost"
 							],
@@ -293,12 +293,126 @@
 								"api",
 								"v1",
 								"fresh-products",
-								"3"
+								""
 							],
 							"query": [
 								{
-									"key": "sortBy",
-									"value": "c"
+									"key": "productCode",
+									"value": "4"
+								},
+								{
+									"key": "warehouseCode",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Requisito 04",
+			"item": [
+				{
+					"name": "GET Product Filtered in ALL Warehouses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/warehouse/?productCode=4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"warehouse",
+								""
+							],
+							"query": [
+								{
+									"key": "productCode",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Requisito 05",
+			"item": [
+				{
+					"name": "GET NUMBERDAYS AND CATEGORY (ORDERBY)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/due-date/list?productTypeId=1&numberDays=700&orderBy=asc",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"due-date",
+								"list"
+							],
+							"query": [
+								{
+									"key": "productTypeId",
+									"value": "1"
+								},
+								{
+									"key": "numberDays",
+									"value": "700"
+								},
+								{
+									"key": "orderBy",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET DAYS EXPIRATION",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/due-date/?sectionId=1&warehouseId=1&numberDays=700",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"due-date",
+								""
+							],
+							"query": [
+								{
+									"key": "sectionId",
+									"value": "1"
+								},
+								{
+									"key": "warehouseId",
+									"value": "1"
+								},
+								{
+									"key": "numberDays",
+									"value": "700"
 								}
 							]
 						}
