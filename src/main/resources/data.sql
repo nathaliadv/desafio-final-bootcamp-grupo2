@@ -167,10 +167,10 @@ VALUES
 INSERT INTO
     representative
 VALUES
-    (1, "Nathalia","nathalia@email.com","nat123"),
-    (2, "Luan Albert","l.albert@email.com","albertinho123"),
-    (3, "Rodrigo","rodrigo@email.com","rodrigao123"),
-    (4, "Gabriel","gabrielemail.com","Gabriel123");
+    (1, "nathalia@email.com","Nathalia","$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e"),
+    (2, "l.albert@email.com","Luan Albert","albertinho123"),
+    (3, "rodrigo@email.com","Rodrigo","rodrigao123"),
+    (4, "gabrielemail.com","Gabriel","Gabriel123");
 
 INSERT INTO
     section (description, name, temperature, volume, product_type_id, representative_id, warehouse_id)

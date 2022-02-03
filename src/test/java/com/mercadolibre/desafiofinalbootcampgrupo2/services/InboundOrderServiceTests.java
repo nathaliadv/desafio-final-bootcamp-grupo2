@@ -1,6 +1,5 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
-
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Representative;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Section;
 import org.junit.jupiter.api.Assertions;
