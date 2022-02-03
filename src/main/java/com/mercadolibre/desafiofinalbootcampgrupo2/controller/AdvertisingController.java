@@ -1,6 +1,8 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.controller;
 
 
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.AdvertisingDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ProductTypeDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.AdvertisingDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.services.AdvertisingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +21,9 @@ public class AdvertisingController {
     @Autowired
     private AdvertisingService service;
 
-
     @GetMapping(path = "/in-stock")
-    public ResponseEntity<List<AdvertisingDTO>> getAllAdvertising() {
-        List<AdvertisingDTO> advertisingList = service.findAllInStock();
+    public ResponseEntity<List<AdvertisingDAO.AdvertisingDTO>> getAllAdvertising() {
+        List<AdvertisingDAO.AdvertisingDTO> advertisingList = service.findAllInStock();
 
         if (advertisingList.isEmpty()) {
             return ResponseEntity.badRequest().build();
@@ -31,8 +32,8 @@ public class AdvertisingController {
     }
 
     @GetMapping(path = "/in-stock/by-type")
-    public ResponseEntity<List<AdvertisingDTO>> getProducByType(@RequestParam String type) {
-        List<AdvertisingDTO> products = service.getByType(type);
+    public ResponseEntity<List<ProductTypeDAO.AdvertisingDTO>> getProducByType(@RequestParam String type) {
+        List<ProductTypeDAO.AdvertisingDTO> products = service.getByType(type);
 
         if (products.isEmpty()) {
             return ResponseEntity.badRequest().build();

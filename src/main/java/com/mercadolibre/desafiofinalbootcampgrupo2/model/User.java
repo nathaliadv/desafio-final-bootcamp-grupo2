@@ -1,14 +1,11 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Data
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -18,12 +15,34 @@ public abstract class User implements Serializable {
 
     @Id
     //TODO verificar para gerar auto increment
-    //TODO criar usuarioDTO
-    //TODO NAO DEVOLVER senha
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String email;
     private String password;
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Boolean validPassword(String password) {
+        return this.password.equals(password);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

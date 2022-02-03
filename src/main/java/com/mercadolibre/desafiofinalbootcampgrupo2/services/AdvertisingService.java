@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AdvertisingService implements EntityService<Advertising>{
+public class AdvertisingService implements EntityService<Advertising> {
 
     @Autowired
     private AdvertisingDAO advertisingDAO;
@@ -21,7 +21,7 @@ public class AdvertisingService implements EntityService<Advertising>{
     @Autowired
     private ProductTypeDAO productDAO;
 
-    public List<AdvertisingDTO> findAll(){
+    public List<AdvertisingDTO> findAll() {
 
         try {
             List<Advertising> ad = advertisingDAO.findAll();
@@ -34,16 +34,29 @@ public class AdvertisingService implements EntityService<Advertising>{
         }
     }
 
-    public List<AdvertisingDTO> getByType(String type){
-        return productDAO.advertisingList(type);
-
+    public List<ProductTypeDAO.AdvertisingDTO> getByType(String type) {
+        String typeValidated = convertAndValidateType(type);
+        return productDAO.advertisingList(typeValidated);
     }
 
-    public List<AdvertisingDTO> findAllInStock(){
+    public List<AdvertisingDAO.AdvertisingDTO> findAllInStock() {
         return advertisingDAO.findAllInStock();
     }
 
-    public AdvertisingDTO convertAdvertisingDTO(Advertising ad){
+    public String convertAndValidateType(String type) {
+        switch (type.toUpperCase()) {
+            case "FS":
+                return "FRESH";
+            case "RF":
+                return "COLD";
+            case "FF":
+                return "FREEZE";
+            default:
+                throw new RepositoryException("Type is not valid");
+        }
+    }
+
+    public AdvertisingDTO convertAdvertisingDTO(Advertising ad) {
 
         return AdvertisingDTO.builder()
                 .name(ad.getProduct().getName())
@@ -53,13 +66,13 @@ public class AdvertisingService implements EntityService<Advertising>{
                 .build();
     }
 
-    public List<AdvertisingDTO> convertListAdvertisingDTO(List<Advertising> ad){
+    public List<AdvertisingDTO> convertListAdvertisingDTO(List<Advertising> ad) {
         return ad.stream()
                 .map(this::convertAdvertisingDTO)
                 .collect(Collectors.toList());
     }
 
-    public Integer getAdvertisingQuantity(Advertising ad){
+    public Integer getAdvertisingQuantity(Advertising ad) {
         return ad.getBatchs().stream()
                 .map(Batch::getCurrentQuantity)
                 .reduce(0, Integer::sum);
