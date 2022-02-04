@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -24,13 +25,13 @@ public class InboundOrderController {
     }
 
     @PostMapping(path = "/")
-    public ResponseEntity<List<BatchResponseDTO>> registerInboundOrder(@RequestBody InboundOrderDTO orderDTO) {
+    public ResponseEntity<List<BatchResponseDTO>> registerInboundOrder(@Valid @RequestBody InboundOrderDTO orderDTO) {
         List<BatchResponseDTO> batchResponseDTO = service.saveInboundOrder(orderDTO);
         return ResponseEntity.created(URI.create("/fresh-products/inboundorder/" + batchResponseDTO.get(0).getInboundorderCode())).body(batchResponseDTO);
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<List<BatchResponseDTO>> updateInboundOrder(@RequestBody InboundOrderDTO orderDTO, @PathVariable Long id) {
+    public ResponseEntity<List<BatchResponseDTO>> updateInboundOrder(@Valid @RequestBody InboundOrderDTO orderDTO, @PathVariable Long id) {
         List<BatchResponseDTO> batchResponseDTO = service.updateInboundOrder(orderDTO, id);
         return ResponseEntity.created(URI.create("/fresh-products/inboundorder/" + batchResponseDTO.get(0).getInboundorderCode())).body(batchResponseDTO);
     }

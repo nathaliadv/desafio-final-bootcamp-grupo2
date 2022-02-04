@@ -23,7 +23,7 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<TokenDTO> realizaAutenticacao(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<TokenDTO> performAuthentication(@RequestBody LoginRequest loginRequest) {
         UsernamePasswordAuthenticationToken dadosLogin = loginRequest.converter();
         Authentication authentication = manager.authenticate(dadosLogin);
         String token = tokenService.generateToken(authentication);

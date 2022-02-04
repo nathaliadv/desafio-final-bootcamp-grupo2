@@ -52,7 +52,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         auth.userDetailsService(authenticationService).passwordEncoder(encoder);
-
-        System.out.println(encoder.encode("nat123"));
     }
 }

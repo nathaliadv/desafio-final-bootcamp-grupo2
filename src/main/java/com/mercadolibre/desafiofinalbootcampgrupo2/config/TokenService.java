@@ -52,5 +52,4 @@ public class TokenService {
         Claims body = jwsClaims.getBody();
         return body.getSubject();
     }
-
 }

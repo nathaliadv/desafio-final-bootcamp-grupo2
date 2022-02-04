@@ -3,7 +3,6 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.List;
 

@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,12 +17,16 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Builder
 public class InboundOrderDTO {
-
     private Long inboundOrderCode;
+    @NotNull(message = "CreationDate can not be null")
     private LocalDate creationDate;
+    @NotNull(message = "Section can not be null")
+    @Valid
     private SectionDTO section;
+    @NotNull(message = "Batchs can not be null")
     private List<BatchDTO> batchs;
-    private long representative;
+    @NotNull(message = "Representative can not be null")
+    private Long representative;
 
     public InboundOrderDTO(InboundOrder inboundOrder) {
         this.inboundOrderCode = inboundOrder.getId();

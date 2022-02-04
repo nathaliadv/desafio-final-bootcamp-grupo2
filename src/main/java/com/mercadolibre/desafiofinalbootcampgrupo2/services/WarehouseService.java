@@ -1,6 +1,7 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.WarehouseDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Warehouse;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,6 @@ public class WarehouseService implements EntityService<Warehouse> {
 
     @Override
     public Warehouse findById(Long id) {
-        return warehouseDAO.findById(id).orElseThrow(() -> new RuntimeException("WareHouse not exists in database, please contact the administrator"));
+        return warehouseDAO.findById(id).orElseThrow(() -> new RepositoryException("WareHouse not exists in database, please contact the administrator"));
     }
 }

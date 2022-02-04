@@ -30,17 +30,14 @@ public class Representative extends User{
         this.perfis.forEach(perfil-> authorities.add(new SimpleGrantedAuthority(perfil.getName())));
         return authorities;
     }
-
     @Override
     public String getPassword() {
         return super.getPassword();
     }
-
     @Override
     public String getUsername() {
         return super.getEmail();
     }
-
     @Override
     public boolean isAccountNonExpired() {
         // TODO Auto-generated method stub

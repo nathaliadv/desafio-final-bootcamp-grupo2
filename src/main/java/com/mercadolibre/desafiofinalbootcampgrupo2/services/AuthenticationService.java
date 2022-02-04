@@ -1,7 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.RepresentativeDAO;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

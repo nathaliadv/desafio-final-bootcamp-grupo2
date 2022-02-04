@@ -2,7 +2,6 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.model;
 
 import lombok.*;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
