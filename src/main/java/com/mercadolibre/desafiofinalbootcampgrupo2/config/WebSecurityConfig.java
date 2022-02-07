@@ -39,12 +39,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/auth").permitAll()
-                //.antMatchers(HttpMethod.GET, "/vendas").hasAnyAuthority("ADMIN")
-                .antMatchers(HttpMethod.GET, "/fresh-products").permitAll()
-                .antMatchers(HttpMethod.POST, "/user/add/representative").permitAll()
-                .antMatchers(HttpMethod.POST, "/user/add/buyer").hasAnyAuthority("Representative")
-                .anyRequest().authenticated()
+//                .antMatchers(HttpMethod.POST, "/auth").permitAll()
+//                .antMatchers(HttpMethod.GET, "/vendas").hasAnyAuthority("ADMIN")
+//                .antMatchers(HttpMethod.GET, "/fresh-products").permitAll()
+//                .antMatchers(HttpMethod.POST, "/user/add/representative").permitAll()
+//                .antMatchers(HttpMethod.POST, "/user/add/buyer").hasAnyAuthority("Representative")
+//                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(new AuthenticationViaTokenFilter(tokenService, repository), UsernamePasswordAuthenticationFilter.class);

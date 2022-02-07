@@ -5,15 +5,13 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchResponseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.InboundOrderDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.DateInvalidException;
-import com.mercadolibre.desafiofinalbootcampgrupo2.exception.DontMatchesException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.InboundOrder;
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.Product;
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.Section;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,36 +44,38 @@ public class InboundOrderService implements EntityService<InboundOrder> {
                 .orElseThrow(() -> new RepositoryException("Inbound Order not exists in database, please contact the administrator"));
     }
 
+    @Transactional
     public List<BatchResponseDTO> saveInboundOrder(InboundOrderDTO orderDTO) {
 
         InboundOrder order = convertInboundOrderDtoToEntity(orderDTO);
         List<Batch> batches = convertListBatchDtoToEntity(orderDTO.getBatchs());
 
-        allVerification(orderDTO, order);
-
         order.setBatchs(batches);
         for (Batch batch : batches) {
             batch.setInboundOrder(order);
         }
+
+        allVerification(order);
+
         inboundOrderDAO.save(order);
 
-        List<BatchResponseDTO> batchResponseDTO = new ArrayList<>();
-        batches.forEach(batch -> batchResponseDTO.add(new BatchResponseDTO(batch)));
-        return batchResponseDTO;
+        return batches.stream().map(batch -> new BatchResponseDTO(batch)).collect(Collectors.toList());
     }
 
+    @Transactional
     public List<BatchResponseDTO> updateInboundOrder(InboundOrderDTO orderDTO, Long id) {
 
         InboundOrder order = convertInboundOrderDtoToEntity(orderDTO);
         order.setId(findById(id).getId());
         List<Batch> batches = convertListBatchDtoToEntity(orderDTO.getBatchs());
 
-        allVerification(orderDTO, order);
-
         order.setBatchs(batches);
         for (Batch batch : batches) {
             batch.setInboundOrder(order);
         }
+
+        allVerification(order);
+
         batchService.deleteAllBatchByInboundOrder(order);
         inboundOrderDAO.save(order);
 
@@ -84,82 +84,66 @@ public class InboundOrderService implements EntityService<InboundOrder> {
         return batchResponseDTO;
     }
 
-    protected void allVerification(InboundOrderDTO orderDTO, InboundOrder order) {
-        Long sectionCode = orderDTO.getSection().getSectionCode();
-        Long warehouseCode = orderDTO.getSection().getWarehouseCode();
-        List<Batch> batches = convertListBatchDtoToEntity(orderDTO.getBatchs());
+    protected void allVerification(InboundOrder order) {
+        Long sectionCode = order.getSection().getId();
+        Long warehouseCode = order.getSection().getWarehouse().getId();
+        Long representativeCode =order.getSection().getRepresentative().getId();
+        List<Batch> batches = order.getBatchs();
 
-        // Init of Requirement 01 validations
-        verifyInboundOrderCreationDate(order); // Verifica se a data de criacao é menor ou igual a hoje
+        // Requirement 01 validations
+        verifyCreationDate(order); // Verifica se a data de criacao é menor ou igual a hoje
         verifyExpirationDate(batches); // Verifica se a data expirou
         verifyManufactureDate(batches); // Verifica se a data do manufactoring é menor que a de hoje
-        verifyIfSectorExistsInWarehouse(sectionCode, warehouseCode); // que o armazém é válido E que o setor é válido
-        verifyIfRepresentativeWorksInSection(order.getSection(), orderDTO.getRepresentative()); //E que o representante pertence ao armazém
-        verifyIfProductsAreTheSameTypeOfSection(batches, order.getSection()); //E que o setor corresponde ao tipo de produto
+
+        sectionService.verifyIfRepresentativeWorksInSection(sectionCode, representativeCode); //E que o representante pertence ao armazém
+        sectionService.verifyIfSectorExistsInWarehouse(sectionCode, warehouseCode); // que o armazém é válido E que o setor é válido
+        productService.verifyIfProductsAreTheSameTypeOfSection(batches, order.getSection()); //E que o setor corresponde ao tipo de produto
         sectionService.verifyIfSectionHaveSpaceEnoughToAddBatches(order.getSection(), batches); //E que o setor tenha espaço disponível
     }
 
-    protected void verifyInboundOrderCreationDate(InboundOrder order) {
-        if(order.getCreationDate().isAfter(LocalDate.now()))
-         throw new DateInvalidException("Creation date should not be greater than today");
+    protected void verifyCreationDate(InboundOrder order) {
+        if (order.getCreationDate().isAfter(LocalDate.now()))
+            throw new DateInvalidException("Creation date should not be greater than today");
     }
 
-    protected void verifyIfSectorExistsInWarehouse(Long sectionCode, Long warehouseCode) {
-        if (!sectionService.findById(sectionCode).getWarehouse().getId().equals(warehouseCode))
-            throw new RepositoryException("The mentioned Section don't exists in mentioned Warehouse.");
-    }
-
-    protected void verifyIfRepresentativeWorksInSection(Section section, Long representativeCode) {
-        if (!section.getRepresentative().getId().equals(representativeCode)) {
-            throw new DontMatchesException("The mentioned Representative don't matches with mentioned Section.");
-        }
-    }
-
-    protected void verifyIfProductsAreTheSameTypeOfSection(List<Batch> batchs, Section section) {
-        for (Batch batch : batchs) {
-            Product product = productService.findById(batch.getAdvertising().getProduct().getId());
-            if (!product.getProductType().equals(section.getProductType()))
-                throw new DontMatchesException("The mentioned Product don't matches with mentioned Section.");
-        }
-    }
 
     protected void verifyExpirationDate(List<Batch> batchs) {
         LocalDate dateGreater = LocalDate.now().plusDays(21L);
 
         batchs.forEach(batch ->
-            {
-                if(batch.getExpirationDate().isBefore(dateGreater)) {
-                    throw new DateInvalidException("Expiration date " + batch.getExpirationDate() + " must be greater than " + dateGreater);
+                {
+                    if (batch.getExpirationDate().isBefore(dateGreater)) {
+                        throw new DateInvalidException("Expiration date " + batch.getExpirationDate() + " must be greater than " + dateGreater);
+                    }
                 }
-            }
         );
     }
 
     protected void verifyManufactureDate(List<Batch> batchs) {
         batchs.forEach(batch ->
                 {
-                    if(batch.getManufacturingDate().isAfter(LocalDate.now())) {
+                    if (batch.getManufacturingDate().isAfter(LocalDate.now())) {
                         throw new DateInvalidException("Manufacturing date " + batch.getManufacturingDate() + " must be less than today");
                     }
                 }
         );
     }
 
-    public InboundOrder convertInboundOrderDtoToEntity(InboundOrderDTO orderDTO) {
+    private InboundOrder convertInboundOrderDtoToEntity(InboundOrderDTO orderDTO) {
         return InboundOrder.builder()
                 .creationDate(orderDTO.getCreationDate())
                 .section(sectionService.findById(orderDTO.getSection().getSectionCode()))
                 .build();
     }
 
-    public List<Batch> convertListBatchDtoToEntity(List<BatchDTO> batchDTO) {
+    private List<Batch> convertListBatchDtoToEntity(List<BatchDTO> batchDTO) {
         return batchDTO.
                 stream().
                 map(this::convertBatchDtoToEntity).
                 collect(Collectors.toList());
     }
 
-    public Batch convertBatchDtoToEntity(BatchDTO batchDTO) {
+    private Batch convertBatchDtoToEntity(BatchDTO batchDTO) {
         return Batch.builder()
                 .currentTemperature(batchDTO.getCurrentTemperature())
                 .currentQuantity(batchDTO.getCurrentQuantity())

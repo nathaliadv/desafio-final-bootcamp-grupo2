@@ -1,6 +1,7 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.SectionDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.exception.DontMatchesException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.SectionSpaceNotAvailableException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
@@ -41,6 +42,17 @@ public class SectionService implements EntityService<Section> {
             if (section.calVolumeCheckin(batch) < 0) {
                 throw new SectionSpaceNotAvailableException("Space not available in the section, please contact an administrator");
             }
+        }
+    }
+
+    protected void verifyIfSectorExistsInWarehouse(Long sectionCode, Long warehouseCode) {
+        if (!findById(sectionCode).getWarehouse().getId().equals(warehouseCode))
+            throw new RepositoryException("The mentioned Section don't exists in mentioned Warehouse.");
+    }
+
+    protected void verifyIfRepresentativeWorksInSection(Long sectionCode, Long representativeCode) {
+        if (!findById(sectionCode).getRepresentative().getId().equals(representativeCode)) {
+            throw new DontMatchesException("The mentioned Representative don't matches with mentioned Section.");
         }
     }
 }

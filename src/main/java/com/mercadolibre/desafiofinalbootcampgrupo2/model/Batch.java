@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "batch")
+@Table(name = "tb_batch")
 public class Batch {
 
     @Id

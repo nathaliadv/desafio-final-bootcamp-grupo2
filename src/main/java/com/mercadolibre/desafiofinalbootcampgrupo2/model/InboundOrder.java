@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "inbound_order")
+@Table(name = "tb_inbound_order")
 public class InboundOrder {
 
     @Id

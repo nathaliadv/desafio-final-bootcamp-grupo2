@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "section")
+@Table(name = "tb_section")
 public class Section {
 
     @Id
