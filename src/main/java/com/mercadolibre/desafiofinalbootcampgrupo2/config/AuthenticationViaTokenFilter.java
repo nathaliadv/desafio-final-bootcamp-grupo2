@@ -5,7 +5,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.mercadolibre.desafiofinalbootcampgrupo2.dao.RepresentativeDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.UserDAO;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,9 +13,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 public class AuthenticationViaTokenFilter extends OncePerRequestFilter {
     private TokenService tokenService;
-    private RepresentativeDAO repository;
+    private UserDAO repository;
 
-    public AuthenticationViaTokenFilter(TokenService tokenService, RepresentativeDAO repository){
+    public AuthenticationViaTokenFilter(TokenService tokenService, UserDAO repository){
         this.tokenService = tokenService;
         this.repository = repository;
     }
@@ -39,6 +39,8 @@ public class AuthenticationViaTokenFilter extends OncePerRequestFilter {
     private void performsTokenAuthenticationInSpring(String token) {
         String userName = tokenService.getUsername(token);
         UserDetails user = this.repository.findByEmail(userName);
+        System.out.println("user " + userName);
+        System.out.println(user);
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication); //forçando autenticacao pelo spring
     }

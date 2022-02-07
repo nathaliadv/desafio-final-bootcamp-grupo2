@@ -3,6 +3,7 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.config;
 import java.util.Date;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Representative;
+import com.mercadolibre.desafiofinalbootcampgrupo2.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class TokenService {
 
 
     public String generateToken(Authentication authentication) {
-        Representative loggedInUser = (Representative) authentication.getPrincipal();
+        User loggedInUser = (User) authentication.getPrincipal();
         Date today = new Date();
         //TODO Ajustar depreciacao
         Long exp = new Long(expiration);
@@ -30,7 +31,7 @@ public class TokenService {
 
         return Jwts.builder()
                 .setIssuer("Nossa APP")
-                .setSubject(loggedInUser.getUsername())
+                .setSubject(loggedInUser.getEmail())
                 .setIssuedAt(today)
                 .setExpiration(expiration)
                 .signWith(SignatureAlgorithm.HS256, secret)

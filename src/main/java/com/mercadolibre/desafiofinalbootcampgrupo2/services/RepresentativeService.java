@@ -1,6 +1,7 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.RepresentativeDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dto.RepresentativeDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Representative;
 import org.springframework.stereotype.Service;
@@ -19,4 +20,15 @@ public class RepresentativeService implements EntityService<Representative> {
         return representativeDAO.findById(id)
                 .orElseThrow(() -> new RepositoryException("Representative not exists in database, please contact the administrator"));
     }
+
+//    public RepresentativeDTO saveRepresentative(RepresentativeDTO representativeDTO) {
+//        representativeDAO.save(buyer);
+//
+//        RepresentativeDTO representative = RepresentativeDTO.builder()
+//                .name(representativeDTO.getName())
+//                .email(representativeDTO.getEmail())
+//                .build();
+//
+//        representativeDAO.save(buyer);
+//    }
 }
