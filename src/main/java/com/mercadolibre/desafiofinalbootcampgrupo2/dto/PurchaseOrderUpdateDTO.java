@@ -10,20 +10,18 @@ import lombok.NoArgsConstructor;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PurchaseOrderDTO {
+public class PurchaseOrderUpdateDTO {
 
     @NotNull(message = "Status can not be null.")
     @NotEmpty(message = "Status can not be empty.")
     private String status;
-    @NotNull(message = "Buyer id can not be null.")
-    private Long buyerId;
     @Valid
+    @NotEmpty(message = "Product list can not be empty.")
     private List<ProductDTO> products;
 }

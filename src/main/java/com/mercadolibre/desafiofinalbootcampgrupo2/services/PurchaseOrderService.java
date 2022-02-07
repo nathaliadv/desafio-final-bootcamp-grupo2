@@ -4,10 +4,13 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.dao.PurchaseOrderDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.PurchaseStatusDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.PurchaseOrderDTO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dto.PurchaseOrderUpdateDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.TotalDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -37,16 +40,16 @@ public class PurchaseOrderService implements EntityService<PurchaseOrder> {
                 .orElseThrow(() -> new RepositoryException("Purchase order not exists in the Database"));
     }
 
-    public PurchaseOrder savePurchaseOrder(PurchaseOrderDTO purchaseDTO) {
-        Buyer buyer = buyerService.findById(purchaseDTO.getBuyerId());
-        List<PurchaseItens> purchaseItens = convertProductsDtoToPurchaseItens(purchaseDTO.getProducts());
-        PurchaseOrder purchaseOrder = convertPurchaseOrderDTOtoEntity(purchaseDTO);
+    public PurchaseOrder savePurchaseOrder(List<ProductDTO> products, Authentication authentication) {
+        List<PurchaseItens> purchaseItens = convertProductsDtoToPurchaseItens(products);
 
-        for (PurchaseItens purchaseItem : purchaseItens) {
-            purchaseItem.setPurchaseOrder(purchaseOrder);
-        }
+        PurchaseOrder purchaseOrder = PurchaseOrder.builder()
+                .purchaseStatus(new PurchaseStatus(2L, "PENDING"))
+                .date(LocalDate.now())
+                .buyer(buyerService.findById(getUserId(authentication)))
+                .build();
 
-        purchaseOrder.setBuyer(buyer);
+        purchaseItens.forEach(item -> item.setPurchaseOrder(purchaseOrder));
         purchaseOrder.setPurchaseItens(purchaseItens);
 
         return purchaseOrderDAO.save(purchaseOrder);
@@ -64,13 +67,6 @@ public class PurchaseOrderService implements EntityService<PurchaseOrder> {
         return new TotalDTO(total);
     }
 
-    private PurchaseOrder convertPurchaseOrderDTOtoEntity(PurchaseOrderDTO purchaseDTO) {
-        return PurchaseOrder.builder()
-                .purchaseStatus(new PurchaseStatus(2L, "PENDING"))
-                .date(LocalDate.now())
-                .build();
-    }
-
     private List<PurchaseItens> convertProductsDtoToPurchaseItens(List<ProductDTO> products) {
         return products.stream().map(
                 product -> PurchaseItens.builder()
@@ -80,13 +76,13 @@ public class PurchaseOrderService implements EntityService<PurchaseOrder> {
         ).collect(Collectors.toList());
     }
 
-    public PurchaseOrderDTO getProductsByPurchaseId(Long purchaseOrderId) {
+    public PurchaseOrderDTO getProductsByPurchaseId(Long purchaseOrderId, Authentication authentication) {
         PurchaseOrder purchaseOrder = findById(purchaseOrderId);
 
-        return convertPurchaseOrderInPurchaseOrderDto(purchaseOrder);
+        return convertPurchaseOrderInPurchaseOrderDto(purchaseOrder, authentication);
     }
 
-    public PurchaseOrderDTO updatePurchaseOrder(Long purchaseOrderId, PurchaseOrderDTO purchaseOrderDto) {
+    public PurchaseOrderDTO updatePurchaseOrder(Long purchaseOrderId, PurchaseOrderUpdateDTO purchaseOrderDto, Authentication authentication) {
         PurchaseOrder purchaseOrder = findById(purchaseOrderId);
 
         PurchaseStatus status = purchaseOrderStatusDAO.findByStatusCode(purchaseOrderDto.getStatus());
@@ -108,7 +104,7 @@ public class PurchaseOrderService implements EntityService<PurchaseOrder> {
 
         purchaseOrder = purchaseOrderDAO.save(purchaseOrder);
 
-        return convertPurchaseOrderInPurchaseOrderDto(purchaseOrder);
+        return convertPurchaseOrderInPurchaseOrderDto(purchaseOrder, authentication);
     }
 
     public List<PurchaseItens> convertListProductsDTOInPurchaseItens(List<ProductDTO> productsDto) {
@@ -120,7 +116,7 @@ public class PurchaseOrderService implements EntityService<PurchaseOrder> {
         }).collect(Collectors.toList());
     }
 
-    public PurchaseOrderDTO convertPurchaseOrderInPurchaseOrderDto(PurchaseOrder purchaseOrder) {
+    public PurchaseOrderDTO convertPurchaseOrderInPurchaseOrderDto(PurchaseOrder purchaseOrder, Authentication authentication) {
 
         List<PurchaseItens> itens = purchaseOrder.getPurchaseItens();
         List<ProductDTO> products = new ArrayList<>();
@@ -135,7 +131,11 @@ public class PurchaseOrderService implements EntityService<PurchaseOrder> {
         return PurchaseOrderDTO.builder()
                 .status(purchaseOrder.getPurchaseStatus().getStatusCode())
                 .products(products)
-                .buyerId(purchaseOrder.getBuyer().getId())
+                .buyerId(getUserId(authentication))
                 .build();
+    }
+
+    private Long getUserId(Authentication authentication) {
+        return ((Buyer) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
     }
 }

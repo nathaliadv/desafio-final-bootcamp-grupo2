@@ -3,7 +3,6 @@ drop table if exists advertising;
 drop table if exists batch;
 drop table if exists hibernate_sequence;
 drop table if exists inbound_order;
-drop table if exists perfil;
 drop table if exists product;
 drop table if exists product_type;
 drop table if exists purchase_itens;
@@ -11,7 +10,6 @@ drop table if exists purchase_order;
 drop table if exists purchase_status;
 drop table if exists section;
 drop table if exists user;
-drop table if exists user_perfis;
 drop table if exists warehouse;
 
 -- CREATE TABLES ZONE
@@ -63,12 +61,6 @@ CREATE TABLE `inbound_order` (
                                  `section_id` bigint DEFAULT NULL,
                                  PRIMARY KEY (`id`),
                                  KEY `FKssby27jgvmajihvv9wsls44sm` (`section_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-CREATE TABLE `perfil` (
-                          `id` bigint NOT NULL AUTO_INCREMENT,
-                          `name` varchar(255) DEFAULT NULL,
-                          PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `product` (
@@ -136,15 +128,6 @@ CREATE TABLE `user` (
                         PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `user_perfis` (
-                               `seller_id` bigint NOT NULL,
-                               `perfis_id` bigint NOT NULL,
-                               `buyer_id` bigint NOT NULL,
-                               KEY `FKfbtf5677bk0g7drvaq6etsrwh` (`perfis_id`),
-                               KEY `FKmwa5716jna23eljwjok4g8iw` (`seller_id`),
-                               KEY `FK6pty2cfdjjq3nstd7g4nkifna` (`buyer_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 CREATE TABLE `warehouse` (
                              `id` bigint NOT NULL AUTO_INCREMENT,
                              `name` varchar(255) DEFAULT NULL,
@@ -175,17 +158,18 @@ INSERT INTO
 VALUES
     ("Representative", 1, "fulano@email.com", "Fulano", "$2a$10$c68AsV1lai7YKKg5g/QWEevpsIaQit6vsmcz4jPwjSYyTGrRPhvgq"), -- albertinho123
     ("Representative", 2, "nathalia@email.com", "Nathalia", "$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e"), -- nat123
-    ("Buyer", 3, "nathalia@email.com", "Rodrigo", "$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e"), -- nat123
-    ("Buyer", 4, "lua@email.com", "Luazinho", "$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e"); -- nat123
+    ("Buyer", 3, "rod@email.com", "Rodrigo", "$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e"), -- nat123
+    ("Buyer", 4, "lua@email.com", "Luazinho", "$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e"), -- nat123
+    ("Seller", 5, "aderson@email.com", "Aderson", "$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e"); -- nat123
 
 INSERT INTO
     advertising (price, description, product_id, seller_id)
 VALUES
-    (20.0, "Melancia gostosinha nham nham", 3, 4),
-    (25.0, "Sorvetinho gostosinho nham nham", 7, 3),
-    (5.0, "Queijinho gostosinho nham nham", 8, 2),
-    (10.0, "Salaminho gostosinho nham nham", 9, 2),
-    (2.50, "Maçazinha gostosinha nham nham", 4, 3);
+    (20.0, "Melancia gostosinha nham nham", 3, 5),
+    (25.0, "Sorvetinho gostosinho nham nham", 7, 5),
+    (5.0, "Queijinho gostosinho nham nham", 8, 5),
+    (10.0, "Salaminho gostosinho nham nham", 9, 5),
+    (2.50, "Maçazinha gostosinha nham nham", 4, 5);
 
 
 INSERT INTO
