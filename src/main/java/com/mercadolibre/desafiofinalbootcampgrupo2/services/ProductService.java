@@ -6,8 +6,11 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchStockDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductByWarehouseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductInAllWarehouseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductResponseDTO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.exception.DontMatchesException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
+import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Product;
+import com.mercadolibre.desafiofinalbootcampgrupo2.model.Section;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +56,14 @@ public class ProductService implements EntityService<Product> {
     public ProductByWarehouseDTO findProductListByIdInWarehouse(Long productCode, Long warehouseCode, String filter) {
         List<ProductResponseDTO> listProducts=  sortByAnyParam(productDAO.findAllProductsByIdInWarehouse(productCode, warehouseCode), filter);
         return convertListProductResponseDTOInProductByWarehouseDTO(listProducts);
+    }
+
+    protected void verifyIfProductsAreTheSameTypeOfSection(List<Batch> batchs, Section section) {
+        for (Batch batch : batchs) {
+            Product product = findById(batch.getAdvertising().getProduct().getId());
+            if (!product.getProductType().equals(section.getProductType()))
+                throw new DontMatchesException("The mentioned Product don't matches with mentioned Section.");
+        }
     }
 
     public ProductByWarehouseDTO convertListProductResponseDTOInProductByWarehouseDTO(List<ProductResponseDTO> productResponseList){

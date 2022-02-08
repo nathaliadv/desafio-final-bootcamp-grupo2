@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "product")
+@Table(name = "tb_product")
 public class Product {
 
     @Id

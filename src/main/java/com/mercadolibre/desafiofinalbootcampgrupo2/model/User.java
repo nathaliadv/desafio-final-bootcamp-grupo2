@@ -14,13 +14,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-//TODO tipo de estrategia
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "tb_user")
 public abstract class User implements Serializable, UserDetails, GrantedAuthority {
 
     @Id
-    //TODO verificar para gerar auto increment
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;
