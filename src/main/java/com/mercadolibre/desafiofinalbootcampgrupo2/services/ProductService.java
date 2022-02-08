@@ -32,7 +32,11 @@ public class ProductService implements EntityService<Product> {
     }
 
     public List<ProductInAllWarehouseDTO> findProductListByID(Long id) {
-        return productDAO.findAllProductsById(id);
+        List<ProductInAllWarehouseDTO> lista = productDAO.findAllProductsById(id);
+        if(lista.size() == 0)
+            new RepositoryException("Product not exists in database, please contact the administrator");
+
+        return lista;
     }
 
     public List<ProductResponseDTO> sortByAnyParam(List<ProductResponseDTO> listProduct, String filter) {
