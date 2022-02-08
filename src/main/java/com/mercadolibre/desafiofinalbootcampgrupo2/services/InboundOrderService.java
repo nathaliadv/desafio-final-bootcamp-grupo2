@@ -99,21 +99,22 @@ public class InboundOrderService implements EntityService<InboundOrder> {
         verifyExpirationDate(batches); // Verifica se a data expirou
         verifyManufactureDate(batches); // Verifica se a data do manufactoring é menor que a de hoje
 
+
         // Requirement 01 validations
         verifyIfIsARepresentative(representativeCode); //Verifica se é um representante
+
         sectionService.verifyIfRepresentativeWorksInSection(sectionCode, representativeCode); //E que o representante pertence ao armazém
         sectionService.verifyIfSectorExistsInWarehouse(sectionCode, warehouseCode); // que o armazém é válido E que o setor é válido
         productService.verifyIfProductsAreTheSameTypeOfSection(batches, order.getSection()); //E que o setor corresponde ao tipo de produto
         sectionService.verifyIfSectionHaveSpaceEnoughToAddBatches(order.getSection(), batches); //E que o setor tenha espaço disponível
     }
 
-    protected void verifyCreationDate(InboundOrder order) {
+    public void verifyCreationDate(InboundOrder order) {
         if (order.getCreationDate().isAfter(LocalDate.now()))
             throw new DateInvalidException("Creation date should not be greater than today");
     }
 
-
-    protected void verifyExpirationDate(List<Batch> batchs) {
+    public void verifyExpirationDate(List<Batch> batchs) {
         LocalDate dateGreater = LocalDate.now().plusDays(21L);
 
         batchs.forEach(batch ->
@@ -125,11 +126,13 @@ public class InboundOrderService implements EntityService<InboundOrder> {
         );
     }
 
+
     private void verifyIfIsARepresentative(Long representativeCode ){
          if(representativeService.findById(representativeCode) == null)
              throw new RepresentativeInvalidException("Representante invalido");
     }
-    protected void verifyManufactureDate(List<Batch> batchs) {
+  
+    public void verifyManufactureDate(List<Batch> batchs) {
         batchs.forEach(batch ->
                 {
                     if (batch.getManufacturingDate().isAfter(LocalDate.now())) {
