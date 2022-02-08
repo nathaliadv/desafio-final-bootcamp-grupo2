@@ -36,11 +36,21 @@ public class AdvertisingService implements EntityService<Advertising> {
 
     public List<ProductTypeDAO.AdvertisingDTO> getByType(String type) {
         String typeValidated = convertAndValidateType(type);
+
+        List<ProductTypeDAO.AdvertisingDTO> products = productDAO.advertisingList(typeValidated);
+
+        checkIfListIsEmpty(products);
+
         return productDAO.advertisingList(typeValidated);
     }
 
     public List<AdvertisingDAO.AdvertisingDTO> findAllInStock() {
-        return advertisingDAO.findAllInStock();
+
+        List<AdvertisingDAO.AdvertisingDTO> products = advertisingDAO.findAllInStock();
+
+        checkIfListIsEmpty(products);
+
+        return products;
     }
 
     public String convertAndValidateType(String type) {
@@ -82,5 +92,13 @@ public class AdvertisingService implements EntityService<Advertising> {
     public Advertising findById(Long id) {
         return advertisingDAO.findById(id)
                 .orElseThrow(() -> new RepositoryException("Advertising not exists in the Database"));
+    }
+
+    public <T> void checkIfListIsEmpty(List<T> list) {
+
+        if(list.isEmpty())
+        {
+            throw new RepositoryException("");
+        }
     }
 }

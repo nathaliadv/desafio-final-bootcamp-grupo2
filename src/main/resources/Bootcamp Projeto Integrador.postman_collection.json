@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ac2d7b4d-5648-4478-973f-37784329922c",
+		"_postman_id": "9cd7c0ed-c599-426e-b992-71b4232d4ec1",
 		"name": "Bootcamp Projeto Integrador",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -100,6 +100,16 @@
 				{
 					"name": "POST PurchaseOrder",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJsdWFAZW1haWwuY29tIiwiaWF0IjoxNjQ0MjY4MzA5LCJleHAiOjE2NDQzNTQ3MDl9.DwwMUcLLFJhyh3thaEuo5Z3gAfeqytqy2JPMDHybeoY",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -109,7 +119,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"buyerId\": 1,\n\t\"products\": [\n\t\t{\n\t\t\t\"advertisingId\": 1,\n\t\t\t\"quantity\": 15\n\t\t},\n        {\n\t\t\t\"advertisingId\": 1,\n\t\t\t\"quantity\": 5\n\t\t}\n\n\t]\n}"
+							"raw": "{\n    \"products\":\n    [\n\n    ]\n}\n"
 						},
 						"url": {
 							"raw": "localhost:8080/api/v1/fresh-products/orders/",

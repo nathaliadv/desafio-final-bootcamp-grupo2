@@ -1,9 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.exception.DateInvalidException;
-import com.mercadolibre.desafiofinalbootcampgrupo2.exception.DontMatchesException;
-import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
-import com.mercadolibre.desafiofinalbootcampgrupo2.exception.SectionSpaceNotAvailableException;
+import com.mercadolibre.desafiofinalbootcampgrupo2.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -50,6 +47,12 @@ public class HandlerException {
         return ResponseEntity.badRequest().body(bodyOfResponse);
     }
 
+    @ExceptionHandler(value = RepresentativeInvalidException.class)
+    protected ResponseEntity<Object> handleRepresentativeInvalid(DateInvalidException ex, WebRequest request) {
+        String bodyOfResponse = ex.getMessage();
+        return ResponseEntity.badRequest().body(bodyOfResponse);
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
@@ -61,4 +64,5 @@ public class HandlerException {
         });
         return errors;
     }
+
 }

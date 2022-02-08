@@ -25,9 +25,6 @@ public class AdvertisingController {
     public ResponseEntity<List<AdvertisingDAO.AdvertisingDTO>> getAllAdvertising() {
         List<AdvertisingDAO.AdvertisingDTO> advertisingList = service.findAllInStock();
 
-        if (advertisingList.isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        }
         return ResponseEntity.ok().body(advertisingList);
     }
 
@@ -35,9 +32,6 @@ public class AdvertisingController {
     public ResponseEntity<List<ProductTypeDAO.AdvertisingDTO>> getProducByType(@RequestParam String type) {
         List<ProductTypeDAO.AdvertisingDTO> products = service.getByType(type);
 
-        if (products.isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        }
         return ResponseEntity.ok().body(products);
     }
 }
