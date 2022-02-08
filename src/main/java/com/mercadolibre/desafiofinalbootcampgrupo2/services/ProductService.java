@@ -54,8 +54,14 @@ public class ProductService implements EntityService<Product> {
     }
 
     public ProductByWarehouseDTO findProductListByIdInWarehouse(Long productCode, Long warehouseCode, String filter) {
+        validateProduct(productCode);
         List<ProductResponseDTO> listProducts=  sortByAnyParam(productDAO.findAllProductsByIdInWarehouse(productCode, warehouseCode), filter);
         return convertListProductResponseDTOInProductByWarehouseDTO(listProducts);
+    }
+
+    public void validateProduct( Long productId){
+        productDAO.findById(productId)
+                .orElseThrow(() -> new RepositoryException("Product not exists in database, please contact the administrator"));
     }
 
     protected void verifyIfProductsAreTheSameTypeOfSection(List<Batch> batchs, Section section) {

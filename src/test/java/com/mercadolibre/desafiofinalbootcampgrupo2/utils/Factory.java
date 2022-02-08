@@ -2,12 +2,14 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.utils;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.InboundOrderDTO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductResponseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.SectionDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.InboundOrder;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Section;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -92,5 +94,34 @@ public class Factory {
                         .advertsimentId(5L)
                         .build()
         );
+    }
+
+    public static List<ProductResponseDTO> generateListProductResponseDTO( ){
+
+        List<ProductResponseDTO> list = new ArrayList<>();
+
+        list.add(ProductResponseDTO.builder().
+                productCode(1l).
+                batchCode(1l).
+                productName("Teste").
+                currentQuantity(10).
+                expirationDate(LocalDate.now()).
+                build());
+        list.add(ProductResponseDTO.builder().
+                productCode(2l).
+                batchCode(2l).
+                productName("Teste2").
+                currentQuantity(10).
+                expirationDate(LocalDate.now()).
+                build());
+        list.add(ProductResponseDTO.builder().
+                productCode(3l).
+                batchCode(3l).
+                productName("Teste3").
+                currentQuantity(10).
+                expirationDate(LocalDate.now()).
+                build());
+
+        return list;
     }
 }
