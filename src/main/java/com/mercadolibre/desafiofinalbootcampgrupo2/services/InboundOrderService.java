@@ -6,6 +6,7 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchResponseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.InboundOrderDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.DateInvalidException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
+import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepresentativeInvalidException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.InboundOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class InboundOrderService implements EntityService<InboundOrder> {
 
     @Autowired
     private BatchService batchService;
+
+    @Autowired
+    private RepresentativeService representativeService;
 
     private InboundOrderDAO inboundOrderDAO;
 
@@ -90,10 +94,14 @@ public class InboundOrderService implements EntityService<InboundOrder> {
         Long representativeCode =order.getSection().getRepresentative().getId();
         List<Batch> batches = order.getBatchs();
 
-        // Requirement 01 validations
+
         verifyCreationDate(order); // Verifica se a data de criacao é menor ou igual a hoje
         verifyExpirationDate(batches); // Verifica se a data expirou
         verifyManufactureDate(batches); // Verifica se a data do manufactoring é menor que a de hoje
+
+
+        // Requirement 01 validations
+        verifyIfIsARepresentative(representativeCode); //Verifica se é um representante
 
         sectionService.verifyIfRepresentativeWorksInSection(sectionCode, representativeCode); //E que o representante pertence ao armazém
         sectionService.verifyIfSectorExistsInWarehouse(sectionCode, warehouseCode); // que o armazém é válido E que o setor é válido
@@ -101,13 +109,12 @@ public class InboundOrderService implements EntityService<InboundOrder> {
         sectionService.verifyIfSectionHaveSpaceEnoughToAddBatches(order.getSection(), batches); //E que o setor tenha espaço disponível
     }
 
-    protected void verifyCreationDate(InboundOrder order) {
+    public void verifyCreationDate(InboundOrder order) {
         if (order.getCreationDate().isAfter(LocalDate.now()))
             throw new DateInvalidException("Creation date should not be greater than today");
     }
 
-
-    protected void verifyExpirationDate(List<Batch> batchs) {
+    public void verifyExpirationDate(List<Batch> batchs) {
         LocalDate dateGreater = LocalDate.now().plusDays(21L);
 
         batchs.forEach(batch ->
@@ -119,7 +126,13 @@ public class InboundOrderService implements EntityService<InboundOrder> {
         );
     }
 
-    protected void verifyManufactureDate(List<Batch> batchs) {
+
+    private void verifyIfIsARepresentative(Long representativeCode ){
+         if(representativeService.findById(representativeCode) == null)
+             throw new RepresentativeInvalidException("Representante invalido");
+    }
+  
+    public void verifyManufactureDate(List<Batch> batchs) {
         batchs.forEach(batch ->
                 {
                     if (batch.getManufacturingDate().isAfter(LocalDate.now())) {
