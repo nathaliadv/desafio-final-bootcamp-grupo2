@@ -1,0 +1,2 @@
+package com.mercadolibre.desafiofinalbootcampgrupo2.controller;public class PurchaseOrderControllerIntegrationTest {
+}
