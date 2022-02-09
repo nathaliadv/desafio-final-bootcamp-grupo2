@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/auth").permitAll()
                 //inicio - requisito 2
                 .antMatchers(HttpMethod.GET, "/fresh-products/in-stock").hasAnyAuthority("Representative")
-//                .antMatchers(HttpMethod.GET, "/fresh-products/in-stock/by-type *").hasAnyAuthority("Representative")
+                .antMatchers(HttpMethod.GET, "/fresh-products/in-stock/by-type*").hasAnyAuthority("Representative")
 //                .antMatchers(HttpMethod.POST, "/fresh-products/orders/").hasAnyAuthority("Buyer")
 //                .antMatchers(HttpMethod.GET, "/fresh-products/orders/").hasAnyAuthority("Buyer")
 //                .antMatchers(HttpMethod.PUT, "/fresh-products/orders/").hasAnyAuthority("Buyer")

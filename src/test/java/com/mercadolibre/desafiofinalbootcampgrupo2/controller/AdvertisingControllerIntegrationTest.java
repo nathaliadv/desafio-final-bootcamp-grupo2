@@ -1,6 +1,7 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.controller;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.AdvertisingDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ProductTypeDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.utils.TypeOfUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.TokenGenerator.getUserToken;
+import static java.lang.String.format;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -30,6 +32,9 @@ public class AdvertisingControllerIntegrationTest {
 
     @MockBean
     private AdvertisingDAO advertisingDAO;
+
+    @MockBean
+    private ProductTypeDAO productTypeDAO;
 
     @Test
     void shouldNotGetAllAdvertisingWhenUserIsNotAuthorize() throws Exception {
@@ -56,8 +61,8 @@ public class AdvertisingControllerIntegrationTest {
     void shouldReturnOKWhenRepresentativeIsAuthorizedAndListOfProductIsNotEmptyToGetAllAdvertising() throws Exception {
         String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
 
-        List<AdvertisingDAO.AdvertisingDTO> advertisings = new ArrayList<>();
-        advertisings.add(new AdvertisingDAO.AdvertisingDTO() {
+        List<AdvertisingDAO.AdvertisingDTO> advertising = new ArrayList<>();
+        advertising.add(new AdvertisingDAO.AdvertisingDTO() {
             @Override
             public String getName() {
                 return "Maçã";
@@ -79,8 +84,8 @@ public class AdvertisingControllerIntegrationTest {
             }
         });
 
-        System.out.println(advertisings);
-        Mockito.when(advertisingDAO.findAllInStock()).thenReturn(advertisings);
+        System.out.println(advertising);
+        Mockito.when(advertisingDAO.findAllInStock()).thenReturn(advertising);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                         .get("/fresh-products/in-stock")
@@ -114,5 +119,71 @@ public class AdvertisingControllerIntegrationTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .header("Authorization", token))
                 .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void shouldReturnForbiddenWhenBuyerIsNotAuthorizedToGetProductByType() throws Exception {
+        String token = getUserToken(mockMvc, TypeOfUser.BUYER);
+        String type = "FS";
+        Mockito.when(productTypeDAO.advertisingList(type)).thenReturn(new ArrayList<>());
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get(format("/fresh-products/in-stock/by-type?type=%s", type))
+                        .accept(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void shouldReturnNotFundWhenRepresentativeIsAuthorizedAndListOfProductIsEmptyToGetProductByType() throws Exception {
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
+        String type = "FS";
+        Mockito.when(productTypeDAO.advertisingList(type)).thenReturn(new ArrayList<>());
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get(format("/fresh-products/in-stock/by-type?type=%s", type))
+                        .accept(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void shouldReturnOKWhenRepresentativeIsAuthorizedToGetProductByType() throws Exception {
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
+        String type = "FRESH";
+        List<ProductTypeDAO.AdvertisingDTO> advertising = new ArrayList<>();
+        advertising.add(new ProductTypeDAO.AdvertisingDTO() {
+            @Override
+            public String getName() {
+                return "Melancia";
+            }
+
+            @Override
+            public String getDescription() {
+                return "Melancia gostosinha nham nham";
+            }
+
+            @Override
+            public BigDecimal getPrice() {
+                return new BigDecimal("13.50");
+            }
+
+            @Override
+            public Integer getQuantity() {
+                return 10;
+            }
+        });
+
+        Mockito.when(productTypeDAO.advertisingList(type)).thenReturn(advertising);
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                        .get(format("/fresh-products/in-stock/by-type?type=%s", "FS"))
+                        .accept(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String expected = "Melancia gostosinha nham nham";
+        Assertions.assertTrue(result.getResponse().getContentAsString().contains(expected));
     }
 }

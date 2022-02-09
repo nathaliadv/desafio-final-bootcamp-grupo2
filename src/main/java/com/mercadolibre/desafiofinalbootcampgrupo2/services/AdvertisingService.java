@@ -19,7 +19,7 @@ public class AdvertisingService implements EntityService<Advertising> {
     private AdvertisingDAO advertisingDAO;
 
     @Autowired
-    private ProductTypeDAO productDAO;
+    private ProductTypeDAO productTypeDAO;
 
     public List<AdvertisingDTO> findAll() {
 
@@ -36,12 +36,10 @@ public class AdvertisingService implements EntityService<Advertising> {
 
     public List<ProductTypeDAO.AdvertisingDTO> getByType(String type) {
         String typeValidated = convertAndValidateType(type);
-
-        List<ProductTypeDAO.AdvertisingDTO> products = productDAO.advertisingList(typeValidated);
-
+        List<ProductTypeDAO.AdvertisingDTO> products = productTypeDAO.advertisingList(typeValidated);
         checkIfListIsEmpty(products);
 
-        return productDAO.advertisingList(typeValidated);
+        return products;
     }
 
     public List<AdvertisingDAO.AdvertisingDTO> findAllInStock() {
@@ -95,7 +93,6 @@ public class AdvertisingService implements EntityService<Advertising> {
     }
 
     public <T> void checkIfListIsEmpty(List<T> list) {
-
         if(list.isEmpty())
         {
             throw new RepositoryException("");
