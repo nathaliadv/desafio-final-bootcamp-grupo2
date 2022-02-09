@@ -2,6 +2,7 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.InboundOrderDTO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.utils.TypeOfUser;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 import javax.annotation.security.RunAs;
 
 import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.Factory.generateValidInboundOrderDTO;
+import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.TokenGenerator.getUserToken;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 
 @AutoConfigureMockMvc
@@ -36,9 +38,12 @@ public class ProductControllerTest {
     @WithMockUser(value = "spring")
     @Test
     public void shouldListProductListByIdInWarehouse() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/?productCode=4&warehouseCode=2")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(""))
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/?productCode=3&warehouseCode=1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token)
+                        .content(""))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
@@ -48,9 +53,12 @@ public class ProductControllerTest {
     //REQ4
     @Test
     public void shouldReturnTheTotalQuantityOfSpecifyProduct() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/warehouse/?productCode=4")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(""))
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/warehouse/?productCode=3")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token)
+                        .content(""))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
@@ -59,9 +67,12 @@ public class ProductControllerTest {
 
     @Test
     public void shouldReturnTheProductsByDueDate() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/due-date/?sectionId=6&warehouseId=2&numberDays=900")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(""))
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/due-date/?sectionId=2&warehouseId=1&numberDays=900")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token)
+                        .content(""))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
@@ -70,9 +81,12 @@ public class ProductControllerTest {
 
     @Test
     public void shouldReturnTheProductsByDueDateANDFilter() throws Exception {
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
+
         mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/due-date/list?productTypeId=1&numberDays=700&orderBy=asc")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(""))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token)
+                        .content(""))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
