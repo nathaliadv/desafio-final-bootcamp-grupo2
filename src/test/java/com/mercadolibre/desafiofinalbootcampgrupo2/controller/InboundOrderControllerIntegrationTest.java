@@ -2,6 +2,7 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.InboundOrderDTO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.utils.TypeOfUser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,11 +15,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.Factory.generateValidInboundOrderDTO;
+import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.TokenGenerator.getUserToken;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class InboundOrderControllerTestConfig {
+public class InboundOrderControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -30,9 +32,11 @@ public class InboundOrderControllerTestConfig {
     public void registerInboundOrderShouldSaveAnInboundOrderWhenCorrectData() throws Exception {
         InboundOrderDTO validInboundOrderDTO = generateValidInboundOrderDTO();
         String payload = mapper.writeValueAsString(validInboundOrderDTO);
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/fresh-products/inboundorder/")
                         .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token)
                         .content(payload))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.header().exists("Location"))
@@ -45,11 +49,13 @@ public class InboundOrderControllerTestConfig {
     public void registerInboundOrderShouldReturn400WhenIncorrectDate() throws Exception {
         InboundOrderDTO inboundOrderDTO = generateValidInboundOrderDTO();
         inboundOrderDTO.setBatchs(null);
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
 
         String payload = mapper.writeValueAsString(inboundOrderDTO);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/fresh-products/inboundorder/")
                         .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token)
                         .content(payload))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
@@ -59,22 +65,28 @@ public class InboundOrderControllerTestConfig {
 
     @Test
     public void getInboundOrderByIdShouldReturnAnInboundOrderDTOWhenExistingId() throws Exception {
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
         Long existingID = 1L;
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/inboundorder/{id}", existingID))
+        mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .get("/fresh-products/inboundorder/{id}", existingID)
+                                .header("Authorization", token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
                 .andReturn();
-
-        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
     public void getInboundOrderByIdShouldReturn404WhenNonExistingId() throws Exception {
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
         Long nonExistingID = 1000L;
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/inboundorder/{id}", nonExistingID))
+        MvcResult result = mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .get("/fresh-products/inboundorder/{id}", nonExistingID)
+                                .header("Authorization", token))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/plain;charset=UTF-8"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
@@ -88,9 +100,11 @@ public class InboundOrderControllerTestConfig {
         Long existingID = 1L;
         InboundOrderDTO validInboundOrderDTO = generateValidInboundOrderDTO();
         String payload = mapper.writeValueAsString(validInboundOrderDTO);
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
 
         mockMvc.perform(MockMvcRequestBuilders.put("/fresh-products/inboundorder/{id}", existingID)
                         .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token)
                         .content(payload))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.header().exists("Location"))
@@ -106,9 +120,10 @@ public class InboundOrderControllerTestConfig {
         inboundOrderDTO.setBatchs(null);
 
         String payload = mapper.writeValueAsString(inboundOrderDTO);
-
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
         mockMvc.perform(MockMvcRequestBuilders.put("/fresh-products/inboundorder/{id}", existingID)
                         .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token)
                         .content(payload))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
@@ -118,6 +133,7 @@ public class InboundOrderControllerTestConfig {
 
     @Test
     public void putInboundOrderShouldReturn404WhenIncorrectDate() throws Exception {
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
         Long nonExistingID = 1L;
         InboundOrderDTO inboundOrderDTO = generateValidInboundOrderDTO();
         inboundOrderDTO.setBatchs(null);
@@ -126,6 +142,7 @@ public class InboundOrderControllerTestConfig {
 
         mockMvc.perform(MockMvcRequestBuilders.put("/fresh-products/inboundorder/{id}", nonExistingID)
                         .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token)
                         .content(payload))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))

@@ -1,10 +1,17 @@
 INSERT INTO tb_user (dtype, id, email, name, password)
-VALUES ('Representative', 1, 'fulano@email.com', 'Fulano', '$2a$10$c68AsV1lai7YKKg5g/QWEevpsIaQit6vsmcz4jPwjSYyTGrRPhvgq'),     -- albertinho123
-       ('Representative', 2, 'nathalia@email.com', 'Nathalia', '$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e'), -- nat123
-       ('Buyer', 3, 'rod@email.com', 'Rodrigo', '$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e'),                -- nat123
-       ('Buyer', 4, 'luan@email.com', 'Luazinho', '$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e'),               -- nat123
-       ('Seller', 5, 'aderson@email.com', 'Aderson', '$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e'), -- nat123
-       ('Seller', 6, 'gabriel@email.com', 'Gabriel', '$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e'); -- nat123
+VALUES ('Representative', 1, 'fulano@email.com', 'Fulano',
+        '$2a$10$c68AsV1lai7YKKg5g/QWEevpsIaQit6vsmcz4jPwjSYyTGrRPhvgq'), -- albertinho123
+       ('Representative', 2, 'nathalia@email.com', 'Nathalia',
+        '$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e'), -- nat123
+       ('Buyer', 3, 'rod@email.com', 'Rodrigo',
+        '$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e'), -- nat123
+       ('Buyer', 4, 'luan@email.com', 'Luazinho',
+        '$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e'), -- nat123
+       ('Seller', 5, 'aderson@email.com', 'Aderson',
+        '$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e'), -- nat123
+       ('Seller', 6, 'gabriel@email.com', 'Gabriel',
+        '$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e'); -- nat123
+
 
 INSERT INTO tb_product_type (type)
 VALUES ('FRESH'),
@@ -23,8 +30,6 @@ VALUES ('Banana Prata', 1, 1),
        ('Queijo Mussarela', 1, 2),
        ('Salame', 1, 2),
        ('Queijo Mineiro', 1, 2);
-
-
 
 
 INSERT INTO tb_advertising (price, description, product_id, seller_id)
@@ -63,3 +68,12 @@ INSERT INTO tb_purchase_status
 VALUES (3, 'REJECTED');
 INSERT INTO tb_purchase_status
 VALUES (4, 'DELIVERED');
+
+INSERT INTO tb_inbound_order
+VALUES (1, current_date(), 1);
+
+INSERT INTO tb_batch
+VALUES (1, 15, 10, '2023-12-29', 15, '2022-01-22', '05:30:00', 10, 5, 1),
+       (2, 15, 10, '2023-12-29', 15, '2022-01-22', '05:30:00', 10, 5, 1);
+
+INSERT INTO tb_purchase_order VALUES (1, current_date(),3,1);
