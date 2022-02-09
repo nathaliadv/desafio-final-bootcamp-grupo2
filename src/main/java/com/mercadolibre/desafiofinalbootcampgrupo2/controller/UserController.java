@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping(path = "/add/buyer")
-    public void addUser(@RequestBody Buyer buyer) {
+    public void addBuyer(@RequestBody Buyer buyer) {
         buyer = (Buyer) userService.encoderPassword(buyer);
         buyerService.saveBuyer(buyer);
     }

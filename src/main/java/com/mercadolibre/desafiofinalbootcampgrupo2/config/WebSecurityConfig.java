@@ -5,7 +5,6 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.services.AuthenticationServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -65,6 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //fim - requisito 5
 //                .antMatchers(HttpMethod.POST, "/user/add/representative").permitAll()
 //                .antMatchers(HttpMethod.POST, "/user/add/buyer").permitAll()
+//                .antMatchers(HttpMethod.POST, "/user/add/seller").permitAll()
 //                .anyRequest().authenticated()
 //                .anyRequest().permitAll()
                 .and().csrf().disable()
