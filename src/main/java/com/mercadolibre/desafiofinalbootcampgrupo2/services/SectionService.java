@@ -52,7 +52,7 @@ public class SectionService implements EntityService<Section> {
 
     protected void verifyIfRepresentativeWorksInSection(Long sectionCode, Long representativeCode) {
         if (!findById(sectionCode).getRepresentative().getId().equals(representativeCode)) {
-            throw new DontMatchesException("The mentioned Representative don't matches with mentioned Section.");
+            throw new DontMatchesException("Representative don't matches with mentioned Section.");
         }
     }
 }
