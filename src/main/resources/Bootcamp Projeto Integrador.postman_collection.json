@@ -11,11 +11,21 @@
 				{
 					"name": "POST InboundOrder to save Batch",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MjE3MjQsImV4cCI6MTY0NDUwODEyNH0._rHw30p2TaP5TBM4jZSBU91X4AcUVlk3GadLndam1cQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"creationDate\": \"2002-12-25\",\n    \"section\": {\n        \"sectionCode\": 6,\n        \"warehouseCode\":2\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 15,\n            \"currentQuantity\": 15,\n            \"expirationDate\": \"2023-12-29\",\n            \"manufacturingDate\": \"2022-02-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 5\n        },\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 10,\n            \"currentQuantity\": 10,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 5\n        }\n    ],\n    \"representative\": 2\n}",
+							"raw": "{\n    \"creationDate\": \"2022-02-01\",\n    \"section\": {\n        \"sectionCode\": 2,\n        \"warehouseCode\":2\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 15,\n            \"currentQuantity\": 15,\n            \"expirationDate\": \"2022-12-29\",\n            \"manufacturingDate\": \"2022-02-02\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 5\n        },\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 10,\n            \"currentQuantity\": 10,\n            \"expirationDate\": \"2022-11-25\",\n            \"manufacturingDate\": \"2022-02-02\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 5\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -42,10 +52,20 @@
 				{
 					"name": "GET InboundOrder",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MjE3MjQsImV4cCI6MTY0NDUwODEyNH0._rHw30p2TaP5TBM4jZSBU91X4AcUVlk3GadLndam1cQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/fresh-products/inboundorder/",
+							"raw": "localhost:8080/api/v1/fresh-products/inboundorder/1",
 							"host": [
 								"localhost"
 							],
@@ -55,7 +75,7 @@
 								"v1",
 								"fresh-products",
 								"inboundorder",
-								""
+								"1"
 							]
 						}
 					},
@@ -64,11 +84,21 @@
 				{
 					"name": "PUT InboundOrder",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MjE3MjQsImV4cCI6MTY0NDUwODEyNH0._rHw30p2TaP5TBM4jZSBU91X4AcUVlk3GadLndam1cQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"creationDate\": \"2022-12-25\",\n    \"section\": {\n        \"sectionCode\": 1,\n        \"warehouseCode\":1\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 20,\n            \"currentQuantity\": 20,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        },\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 20,\n            \"currentQuantity\": 20,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        }\n    ],\n    \"representative\": 1\n}",
+							"raw": "{\n    \"creationDate\": \"2022-02-09\",\n    \"section\": {\n        \"sectionCode\": 2,\n        \"warehouseCode\":1\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 20,\n            \"currentQuantity\": 20,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-08\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        },\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 20,\n            \"currentQuantity\": 20,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-08\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -119,7 +149,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"products\":\n    [\n\n    ]\n}\n"
+							"raw": "{\n    \"products\":\n    [\n        {\n            \"advertisingId\": 2,\n            \"quantity\": 15\n        },\n        {\n            \"advertisingId\": 1,\n            \"quantity\": 5\n        }\n\n    ]\n}\n"
 						},
 						"url": {
 							"raw": "localhost:8080/api/v1/fresh-products/orders/",
@@ -172,10 +202,20 @@
 				{
 					"name": "GET  PurchaseOrder by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJsdWFAZW1haWwuY29tIiwiaWF0IjoxNjQ0MjY4MzA5LCJleHAiOjE2NDQzNTQ3MDl9.DwwMUcLLFJhyh3thaEuo5Z3gAfeqytqy2JPMDHybeoY",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/fresh-products/orders/?purchaseOrderId=5",
+							"raw": "localhost:8080/api/v1/fresh-products/orders/?purchaseOrderId=1",
 							"host": [
 								"localhost"
 							],
@@ -190,7 +230,7 @@
 							"query": [
 								{
 									"key": "purchaseOrderId",
-									"value": "5"
+									"value": "1"
 								}
 							]
 						}
@@ -221,10 +261,20 @@
 				{
 					"name": "GET All Advertising by Type",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJmdWxhbm9AZW1haWwuY29tIiwiaWF0IjoxNjQ0MjYxMzI2LCJleHAiOjE2NDQzNDc3MjZ9.wSXfWN79ou_B4vQWM2eXTEecD3JcHtUEg-DhIrKP0wc",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/fresh-products/in-stock/by-type?type=FRESH",
+							"raw": "localhost:8080/api/v1/fresh-products/in-stock/by-type?type=RF",
 							"host": [
 								"localhost"
 							],
@@ -239,7 +289,7 @@
 							"query": [
 								{
 									"key": "type",
-									"value": "FRESH"
+									"value": "RF"
 								}
 							]
 						}
@@ -249,6 +299,16 @@
 				{
 					"name": "PUT PurchaseOrder Copy",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJsdWFAZW1haWwuY29tIiwiaWF0IjoxNjQ0MjY4MzA5LCJleHAiOjE2NDQzNTQ3MDl9.DwwMUcLLFJhyh3thaEuo5Z3gAfeqytqy2JPMDHybeoY",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [
 							{
@@ -258,7 +318,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"status\": \"DELIVERED\",\n    \"buyerId\": 1,\n    \"products\": [\n        {\n            \"advertisingId\": 1,\n            \"quantity\": 10\n        },\n        {\n            \"advertisingId\": 1,\n            \"quantity\": 10\n        }\n    ]\n}"
+							"raw": "{\n    \"status\": \"DELIVERED\",\n    \"products\": [\n        {\n            \"advertisingId\": 1,\n            \"quantity\": 10\n        },\n        {\n            \"advertisingId\": 1,\n            \"quantity\": 10\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/api/v1/fresh-products/orders/?purchaseOrderId=1",
@@ -359,9 +419,26 @@
 			"item": [
 				{
 					"name": "GET NUMBERDAYS AND CATEGORY (ORDERBY)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJsdWFAZW1haWwuY29tIiwiaWF0IjoxNjQ0MjY4MzA5LCJleHAiOjE2NDQzNTQ3MDl9.DwwMUcLLFJhyh3thaEuo5Z3gAfeqytqy2JPMDHybeoY",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "localhost:8080/api/v1/fresh-products/due-date/list?productTypeId=1&numberDays=700&orderBy=asc",
 							"host": [
@@ -395,9 +472,21 @@
 				},
 				{
 					"name": "GET DAYS EXPIRATION",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/api/v1/fresh-products/due-date/?sectionId=1&warehouseId=1&numberDays=700",
 							"host": [
@@ -424,6 +513,40 @@
 									"key": "numberDays",
 									"value": "700"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authorization",
+			"item": [
+				{
+					"name": "Authorization",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"nathalia@email.com\",\n    \"password\": \"nat123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth"
 							]
 						}
 					},
