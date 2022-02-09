@@ -4,6 +4,9 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.dao.RepresentativeDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.RepresentativeDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Representative;
+import com.mercadolibre.desafiofinalbootcampgrupo2.model.User;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,14 +24,13 @@ public class RepresentativeService implements EntityService<Representative> {
                 .orElseThrow(() -> new RepositoryException("Representative not exists in database, please contact the administrator"));
     }
 
-//    public RepresentativeDTO saveRepresentative(RepresentativeDTO representativeDTO) {
-//        representativeDAO.save(buyer);
-//
-//        RepresentativeDTO representative = RepresentativeDTO.builder()
-//                .name(representativeDTO.getName())
-//                .email(representativeDTO.getEmail())
-//                .build();
-//
-//        representativeDAO.save(buyer);
-//    }
+    public void verifyIfRepresentativeIsValid( Authentication authentication ){
+        findById(getUserId(authentication));
+    }
+
+    private Long getUserId(Authentication authentication) {
+        return ((Representative) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+    }
+
+
 }

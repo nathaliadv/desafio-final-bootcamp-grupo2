@@ -28,6 +28,5 @@ public class AuthenticationController {
         Authentication authentication = manager.authenticate(dadosLogin);
         String token = tokenService.generateToken(authentication);
         return ResponseEntity.ok(new TokenDTO(token, "Bearer"));
-
     }
 }

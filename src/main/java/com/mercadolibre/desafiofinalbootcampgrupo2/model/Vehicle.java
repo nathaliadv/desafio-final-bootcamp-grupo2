@@ -9,29 +9,29 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "tb_purchase_order")
-public class PurchaseOrder {
+@Table(name = "tb_vehicle")
+public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private LocalDate date;
+    private long id;
 
-    @OneToOne
-    private PurchaseStatus purchaseStatus;
+    private String licensePlate;
+    private String vehicleModel;
+    private LocalDate maintenanceDate;
+    private double mileage;
 
     @ManyToOne
-    private Buyer buyer;
+    private Warehouse warehouse;
 
-    @OneToOne
-    private Tracking tracking;
+    @ManyToOne
+    private Representative representative;
 
-    @OneToMany(mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
-    private List<PurchaseItens> purchaseItens;
+    @OneToMany
+    private List<Tracking> tracking;
 }

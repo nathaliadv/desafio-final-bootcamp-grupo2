@@ -1,29 +1,30 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
-@Table(name = "tb_warehouse")
-public class Warehouse {
+@Table(name = "tb_tracking")
+public class Tracking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
+    private long id;
+
+    private String observacao;
 
     @OneToOne
-    private Address address;
+    private PurchaseOrder purchaseOrder;
 
-    @OneToMany(mappedBy = "warehouse")
-    private List<Section> sections;
+    @ManyToOne
+    private Vehicle vehicle;
 
-    @OneToMany(mappedBy = "warehouse")
-    private List<Vehicle> vehicles;
 }
