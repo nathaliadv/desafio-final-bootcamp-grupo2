@@ -39,7 +39,6 @@ public class AuthenticationViaTokenFilter extends OncePerRequestFilter {
     private void performsTokenAuthenticationInSpring(String token) {
         String userName = tokenService.getUsername(token);
         UserDetails user = this.repository.findByEmail(userName);
-        System.out.println("user " + userName);
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication); //forçando autenticacao pelo spring
     }

@@ -29,7 +29,6 @@ public abstract class User implements Serializable, UserDetails, GrantedAuthorit
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(this.getClass().getSimpleName()));
-        System.out.println(this.getClass().getSimpleName());
         return authorities;
     }
 

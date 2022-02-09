@@ -154,11 +154,11 @@ VALUES ('Representative', 1, 'fulano@email.com', 'Fulano', '$2a$10$c68AsV1lai7YK
        ('Seller', 5, 'aderson@email.com', 'Aderson', '$2a$10$OfyZEQrKF3zUQ5volj.m3.tNE6899EZKoIrE1LOh8U9I/wW8Ipg5e'); -- nat123
 
 INSERT INTO tb_advertising (price, description, product_id, seller_id)
-VALUES (20.0, 'Melancia gostosinha nham nham', 3, 4),
-       (25.0, 'Sorvetinho gostosinho nham nham', 7, 3),
-       (5.0, 'Queijinho gostosinho nham nham', 8, 2),
-       (10.0, 'Salaminho gostosinho nham nham', 9, 2),
-       (2.50, 'Maçazinha gostosinha nham nham', 4, 3);
+VALUES (20.0, 'Melancia gostosinha nham nham', 3, 5),
+       (25.0, 'Sorvetinho gostosinho nham nham', 7, 5),
+       (5.0, 'Queijinho gostosinho nham nham', 8, 5),
+       (10.0, 'Salaminho gostosinho nham nham', 9, 5),
+       (2.50, 'Maçazinha gostosinha nham nham', 4, 5);
 
 
 INSERT INTO tb_address (street, city, state, country, postal_code)

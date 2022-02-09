@@ -5,6 +5,7 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.services.AuthenticationServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -39,14 +40,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .antMatchers(HttpMethod.POST, "/auth").permitAll()
-//                //inicio - requisito 2
-//                .antMatchers(HttpMethod.GET, "/fresh-products/in-stock").hasAnyAuthority("Representative")
+                .antMatchers(HttpMethod.POST, "/auth").permitAll()
+                //inicio - requisito 2
+                .antMatchers(HttpMethod.GET, "/fresh-products/in-stock").hasAnyAuthority("Representative")
 //                .antMatchers(HttpMethod.GET, "/fresh-products/in-stock/by-type *").hasAnyAuthority("Representative")
 //                .antMatchers(HttpMethod.POST, "/fresh-products/orders/").hasAnyAuthority("Buyer")
 //                .antMatchers(HttpMethod.GET, "/fresh-products/orders/").hasAnyAuthority("Buyer")
 //                .antMatchers(HttpMethod.PUT, "/fresh-products/orders/").hasAnyAuthority("Buyer")
-                //fim - requisito 2
+//                //fim - requisito 2
 //                .antMatchers(HttpMethod.POST, "/user/add/representative").permitAll()
 //                .antMatchers(HttpMethod.POST, "/user/add/buyer").permitAll()
 //                .anyRequest().authenticated()
