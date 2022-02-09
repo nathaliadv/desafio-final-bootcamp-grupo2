@@ -18,7 +18,7 @@ import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.Factory.generate
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class InboundOrderControllerTest {
+public class InboundOrderControllerTestConfig {
 
     @Autowired
     private MockMvc mockMvc;

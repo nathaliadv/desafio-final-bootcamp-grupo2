@@ -1,6 +1,7 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -8,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class LoginRequest {
 
     private String user;

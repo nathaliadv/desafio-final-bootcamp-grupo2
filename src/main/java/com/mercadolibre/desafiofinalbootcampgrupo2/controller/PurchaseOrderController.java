@@ -38,6 +38,4 @@ public class PurchaseOrderController {
     public ResponseEntity<PurchaseOrderDTO> updatePurchaseOrder(@RequestParam Long purchaseOrderId, @Valid @RequestBody PurchaseOrderUpdateDTO purchaseOrderUpdateDto, Authentication authentication) {
         return ResponseEntity.ok().body(purchaseOrderService.updatePurchaseOrder(purchaseOrderId, purchaseOrderUpdateDto, authentication));
     }
-
-    //TODO - CRIAR UM FECHAR COMPRA QUE MUDE O STATUS E DIMINUIR OS PRODUTOS DO ESTOQUE (QUANTIDADE E VOLUME)
 }

@@ -16,10 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
-    //TODO criar o service para criptografar a senha ao savar no banco de dados
-    // TODO validar os parametros recebidos
-
     @Autowired
     private RepresentativeService representativeService;
 
@@ -31,7 +27,6 @@ public class UserController {
 
     @PostMapping(path = "/add/representative")
     public void addRepresentative(@RequestBody Representative representative) {
-        //representativeService.saveRepresentative(representative);
         representativeDAO.save(representative);
     }
 
