@@ -40,7 +40,7 @@ public class ProductControllerTest {
     public void shouldListProductListByIdInWarehouse() throws Exception {
         String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/?productCode=3&warehouseCode=1")
+        mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/?productCode=3&warehouseCode=2")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", token)
                         .content(""))
@@ -69,7 +69,7 @@ public class ProductControllerTest {
     public void shouldReturnTheProductsByDueDate() throws Exception {
         String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/due-date/?sectionId=2&warehouseId=1&numberDays=900")
+        mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/due-date/?sectionId=6&warehouseId=2&numberDays=900")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", token)
                         .content(""))
