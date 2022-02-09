@@ -36,7 +36,6 @@ public class Section {
     @ManyToOne
     private ProductType productType;
 
-    //TODO verificar calculo
     public double calVolumeCheckin(Batch batch){
         return this.volume - (batch.getCurrentQuantity() * batch.getAdvertising().getProduct().getVolume());
     }

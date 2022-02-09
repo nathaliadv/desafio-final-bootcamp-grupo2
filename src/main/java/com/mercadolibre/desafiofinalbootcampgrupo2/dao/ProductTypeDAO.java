@@ -9,9 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 import java.util.List;
 
-
-//TOODO - findAll
-
 @Repository
 public interface ProductTypeDAO extends JpaRepository<ProductType, Long> {
 

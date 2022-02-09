@@ -20,15 +20,4 @@ public class RepresentativeService implements EntityService<Representative> {
         return representativeDAO.findById(id)
                 .orElseThrow(() -> new RepositoryException("Representative not exists in database, please contact the administrator"));
     }
-
-//    public RepresentativeDTO saveRepresentative(RepresentativeDTO representativeDTO) {
-//        representativeDAO.save(buyer);
-//
-//        RepresentativeDTO representative = RepresentativeDTO.builder()
-//                .name(representativeDTO.getName())
-//                .email(representativeDTO.getEmail())
-//                .build();
-//
-//        representativeDAO.save(buyer);
-//    }
 }
