@@ -44,8 +44,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //inicio - requisito 2
                 .antMatchers(HttpMethod.GET, "/fresh-products/in-stock").hasAnyAuthority("Representative")
                 .antMatchers(HttpMethod.GET, "/fresh-products/in-stock/by-type*").hasAnyAuthority("Representative")
-//                //fim - requisito 2
-                .anyRequest().permitAll()
+                //fim - requisito 2
+                .antMatchers(HttpMethod.POST, "/user/add/representative").permitAll()
+                .antMatchers(HttpMethod.POST, "/user/add/buyer").permitAll()
+                .antMatchers(HttpMethod.POST, "/user/add/seller").permitAll()
+                .anyRequest().authenticated()
+//                .anyRequest().permitAll()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(new AuthenticationViaTokenFilter(tokenService, repository), UsernamePasswordAuthenticationFilter.class);
