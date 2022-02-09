@@ -41,14 +41,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/auth").permitAll()
+                //inicio - requisito 1
+                .antMatchers(HttpMethod.POST, "/fresh-products/inboundorder/").hasAnyAuthority("Representative")
+                .antMatchers(HttpMethod.GET, "/fresh-products/inboundorder/*").hasAnyAuthority("Representative")
+                .antMatchers(HttpMethod.PUT, "/fresh-products/inboundorder/*").hasAnyAuthority("Representative")
+                //fim - requisito 1
                 //inicio - requisito 2
                 .antMatchers(HttpMethod.GET, "/fresh-products/in-stock").hasAnyAuthority("Representative")
                 .antMatchers(HttpMethod.GET, "/fresh-products/in-stock/by-type*").hasAnyAuthority("Representative")
+                .antMatchers(HttpMethod.POST, "/fresh-products/orders/").hasAnyAuthority("Buyer")
+                .antMatchers(HttpMethod.GET, "/fresh-products/orders/").hasAnyAuthority("Buyer")
+                .antMatchers(HttpMethod.PUT, "/fresh-products/orders/").hasAnyAuthority("Buyer")
                 //fim - requisito 2
-                .antMatchers(HttpMethod.POST, "/user/add/representative").permitAll()
-                .antMatchers(HttpMethod.POST, "/user/add/buyer").permitAll()
-                .antMatchers(HttpMethod.POST, "/user/add/seller").permitAll()
-                .anyRequest().authenticated()
+                //inicio - requisito 3
+                .antMatchers(HttpMethod.GET, "/fresh-products/*").hasAnyAuthority("Representative")
+                //fim - requisito 3
+                //inicio - requisito 4
+                .antMatchers(HttpMethod.GET, "/fresh-products/warehouse/*").hasAnyAuthority("Representative")
+                //fim - requisito 4
+                //inicio - requisito 5
+                .antMatchers(HttpMethod.GET, "/fresh-products/due-date/*").hasAnyAuthority("Representative")
+                .antMatchers(HttpMethod.GET, "/fresh-products/due-date/list/*").hasAnyAuthority("Representative")
+                //fim - requisito 5
+//                .antMatchers(HttpMethod.POST, "/user/add/representative").permitAll()
+//                .antMatchers(HttpMethod.POST, "/user/add/buyer").permitAll()
+//                .anyRequest().authenticated()
 //                .anyRequest().permitAll()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

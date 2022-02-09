@@ -4,12 +4,17 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.dao.InboundOrderDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchResponseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.InboundOrderDTO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dto.InboundOrderRequestDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.DateInvalidException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepresentativeInvalidException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
+import com.mercadolibre.desafiofinalbootcampgrupo2.model.Buyer;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.InboundOrder;
+import com.mercadolibre.desafiofinalbootcampgrupo2.model.Representative;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -49,7 +54,7 @@ public class InboundOrderService implements EntityService<InboundOrder> {
     }
 
     @Transactional
-    public List<BatchResponseDTO> saveInboundOrder(InboundOrderDTO orderDTO) {
+    public List<BatchResponseDTO> saveInboundOrder(InboundOrderRequestDTO orderDTO, Authentication authentication) {
 
         InboundOrder order = convertInboundOrderDtoToEntity(orderDTO);
         List<Batch> batches = convertListBatchDtoToEntity(orderDTO.getBatchs());
@@ -59,7 +64,7 @@ public class InboundOrderService implements EntityService<InboundOrder> {
             batch.setInboundOrder(order);
         }
 
-        allVerification(order);
+        allVerification(order, orderDTO.getSection().getWarehouseCode(),  authentication);
 
         inboundOrderDAO.save(order);
 
@@ -67,7 +72,7 @@ public class InboundOrderService implements EntityService<InboundOrder> {
     }
 
     @Transactional
-    public List<BatchResponseDTO> updateInboundOrder(InboundOrderDTO orderDTO, Long id) {
+    public List<BatchResponseDTO> updateInboundOrder(InboundOrderRequestDTO orderDTO, Long id, Authentication authentication) {
 
         InboundOrder order = convertInboundOrderDtoToEntity(orderDTO);
         order.setId(findById(id).getId());
@@ -78,7 +83,7 @@ public class InboundOrderService implements EntityService<InboundOrder> {
             batch.setInboundOrder(order);
         }
 
-        allVerification(order);
+        allVerification(order, orderDTO.getSection().getWarehouseCode(),  authentication);
 
         batchService.deleteAllBatchByInboundOrder(order);
         inboundOrderDAO.save(order);
@@ -88,10 +93,10 @@ public class InboundOrderService implements EntityService<InboundOrder> {
         return batchResponseDTO;
     }
 
-    protected void allVerification(InboundOrder order) {
+    protected void allVerification(InboundOrder order, Long warehouseId, Authentication authentication) {
         Long sectionCode = order.getSection().getId();
-        Long warehouseCode = order.getSection().getWarehouse().getId();
-        Long representativeCode =order.getSection().getRepresentative().getId();
+        Long warehouseCode = warehouseId;
+        Long representativeCode = getUserId(authentication);
         List<Batch> batches = order.getBatchs();
 
 
@@ -142,7 +147,7 @@ public class InboundOrderService implements EntityService<InboundOrder> {
         );
     }
 
-    private InboundOrder convertInboundOrderDtoToEntity(InboundOrderDTO orderDTO) {
+    private InboundOrder convertInboundOrderDtoToEntity(InboundOrderRequestDTO orderDTO) {
         return InboundOrder.builder()
                 .creationDate(orderDTO.getCreationDate())
                 .section(sectionService.findById(orderDTO.getSection().getSectionCode()))
@@ -167,5 +172,9 @@ public class InboundOrderService implements EntityService<InboundOrder> {
                 .minimumTemperature(batchDTO.getMinimumTemperature())
                 .advertising(advertisingService.findById(batchDTO.getAdvertsimentId()))
                 .build();
+    }
+
+    private Long getUserId(Authentication authentication) {
+        return ((Representative) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
     }
 }

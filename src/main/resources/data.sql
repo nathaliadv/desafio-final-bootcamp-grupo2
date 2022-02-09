@@ -174,8 +174,8 @@ VALUES ('Armazem Melicidade', 1),
 INSERT INTO tb_section (description, name, temperature, volume, product_type_id, representative_id, warehouse_id)
 values ('Setor de Produtos Fresco do Tipo Fruta', 'SETOR01-SP', 15.0, 500, 1, 1, 1),
        ('Setor de Produtos Fresco', 'SETOR02-SP', 18.0, 500, 1, 1, 1),
-       ('Setor de Produtos Frios', 'SETOR03-SP', 10.0, 500, 2, 3, 1),
-       ('Setor de Produtos Congelados', 'SETOR04-SP', 15.0, 500, 3, 3, 1),
+       ('Setor de Produtos Frios', 'SETOR03-SP', 10.0, 500, 2, 1, 1),
+       ('Setor de Produtos Congelados', 'SETOR04-SP', 15.0, 500, 3, 2, 2),
        ('Setor de Produtos Fresco do Tipo Fruta', 'SETOR01-SC', 15.0, 500, 1, 2, 2),
        ('Setor de Produtos Fresco', 'SETOR02-SC', 18.0, 500, 1, 2, 2);
 
