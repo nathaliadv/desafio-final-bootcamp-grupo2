@@ -351,10 +351,20 @@
 				{
 					"name": "GET Product Filtered by Warehouse",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MjcxODIsImV4cCI6MTY0NDUxMzU4Mn0.ALNmHxdvt3QbufazoJTDSUJrVqVxLgKqiqFNByuIFX8",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/fresh-products/?productCode=4&warehouseCode=2",
+							"raw": "localhost:8080/api/v1/fresh-products/?productCode=3&warehouseCode=1",
 							"host": [
 								"localhost"
 							],
@@ -368,11 +378,11 @@
 							"query": [
 								{
 									"key": "productCode",
-									"value": "4"
+									"value": "3"
 								},
 								{
 									"key": "warehouseCode",
-									"value": "2"
+									"value": "1"
 								}
 							]
 						}
@@ -387,6 +397,16 @@
 				{
 					"name": "GET Product Filtered in ALL Warehouses",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MjcxODIsImV4cCI6MTY0NDUxMzU4Mn0.ALNmHxdvt3QbufazoJTDSUJrVqVxLgKqiqFNByuIFX8",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -428,7 +448,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJsdWFAZW1haWwuY29tIiwiaWF0IjoxNjQ0MjY4MzA5LCJleHAiOjE2NDQzNTQ3MDl9.DwwMUcLLFJhyh3thaEuo5Z3gAfeqytqy2JPMDHybeoY",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MjcxODIsImV4cCI6MTY0NDUxMzU4Mn0.ALNmHxdvt3QbufazoJTDSUJrVqVxLgKqiqFNByuIFX8",
 									"type": "string"
 								}
 							]
@@ -476,6 +496,16 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MjcxODIsImV4cCI6MTY0NDUxMzU4Mn0.ALNmHxdvt3QbufazoJTDSUJrVqVxLgKqiqFNByuIFX8",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
