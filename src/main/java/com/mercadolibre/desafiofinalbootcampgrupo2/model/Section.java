@@ -1,5 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class Section {
 
     @ManyToOne
     private Representative representative;
+
 
     @ManyToOne
     private Warehouse warehouse;

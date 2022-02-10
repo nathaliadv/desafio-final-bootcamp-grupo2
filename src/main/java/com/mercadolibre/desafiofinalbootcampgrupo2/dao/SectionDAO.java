@@ -1,5 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.dao;
 
+import com.mercadolibre.desafiofinalbootcampgrupo2.dto.SectionInfoDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Section;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
