@@ -1,12 +1,9 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.utils;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchDTO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.dto.InboundOrderDTO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductResponseDTO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.dto.SectionDTO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.InboundOrder;
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.Section;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dto.*;
+import com.mercadolibre.desafiofinalbootcampgrupo2.model.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -62,12 +59,23 @@ public class Factory {
                 .creationDate(LocalDate.now())
                 .section(generateValidSectionDTO())
                 .batchs(generateListOfValidBatchDTOs())
-                .representative(2L)
                 .build();
     }
 
     public static SectionDTO generateValidSectionDTO() {
-        return SectionDTO.builder().sectionCode(6L).warehouseCode(2L).build();
+        return SectionDTO.builder().sectionCode(1L).warehouseCode(1L).build();
+    }
+
+    public static InboundOrderDTO generateInvalidInboundOrderDTO() {
+        return InboundOrderDTO.builder()
+                .creationDate(LocalDate.now())
+                .section(generateInvalidSectionDTO())
+                .batchs(generateListOfValidBatchDTOs())
+                .build();
+    }
+
+    public static SectionDTO generateInvalidSectionDTO() {
+        return SectionDTO.builder().sectionCode(6L).warehouseCode(1L).build();
     }
 
     public static List<BatchDTO> generateListOfValidBatchDTOs() {
@@ -96,7 +104,7 @@ public class Factory {
         );
     }
 
-    public static List<ProductResponseDTO> generateListProductResponseDTO( ){
+    public static List<ProductResponseDTO> generateListProductResponseDTO() {
 
         List<ProductResponseDTO> list = new ArrayList<>();
 
@@ -125,4 +133,40 @@ public class Factory {
         return list;
     }
 
+    public static PurchaseOrderCreateDTO generateListOfValidPurchaseOrderCreateDTO() {
+        List<ProductDTO> list = new ArrayList<>();
+
+        list.add(ProductDTO
+                .builder()
+                .advertisingId(1L)
+                .quantity(10)
+                .build());
+
+        list.add(ProductDTO
+                .builder()
+                .advertisingId(2L)
+                .quantity(5)
+                .build());
+
+        return new PurchaseOrderCreateDTO(list);
+    }
+
+    public static PurchaseOrderDTO generateListOfValidPurchaseOrderDTO() {
+        List<ProductDTO> list = new ArrayList<>();
+        String status = "DELIVERED";
+
+        list.add(ProductDTO
+                .builder()
+                .advertisingId(1L)
+                .quantity(2)
+                .build());
+
+        list.add(ProductDTO
+                .builder()
+                .advertisingId(2L)
+                .quantity(10)
+                .build());
+
+        return PurchaseOrderDTO.builder().status(status).products(list).build();
+    }
 }
