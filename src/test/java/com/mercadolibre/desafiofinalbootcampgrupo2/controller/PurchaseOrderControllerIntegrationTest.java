@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.PurchaseOrderCreateDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.PurchaseOrderDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.utils.TypeOfUser;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -71,5 +73,31 @@ public class PurchaseOrderControllerIntegrationTest {
                         .header("Authorization", token)
                         .content(payload))
                 .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    public void shouldGetPurchaseOrderWhenCorrectData() throws Exception {
+        String token = getUserToken(mockMvc, TypeOfUser.BUYER);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/orders/")
+                        .queryParam("purchaseOrderId", "1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    public void shouldNotFoundPurchaseOrderWhenPurchaseOrderIdIsInvalid() throws Exception {
+        String token = getUserToken(mockMvc, TypeOfUser.BUYER);
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/orders/")
+                        .queryParam("purchaseOrderId", "2")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andReturn();
+
+        String expect = "Purchase order not exists in the Database";
+        Assertions.assertTrue(result.getResponse().getContentAsString().contains(expect));
     }
 }

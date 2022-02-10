@@ -76,4 +76,9 @@ INSERT INTO tb_batch
 VALUES (1, 15, 10, '2023-12-29', 15, '2022-01-22', '05:30:00', 10, 5, 1),
        (2, 15, 10, '2023-12-29', 15, '2022-01-22', '05:30:00', 10, 5, 1);
 
-INSERT INTO tb_purchase_order VALUES (1, current_date(),3,1);
+INSERT INTO tb_purchase_order
+VALUES (1, current_date(), 3, 1);
+
+INSERT INTO tb_purchase_itens
+VALUES (1, 15, 2, 1),
+       (2, 5, 1, 1);
