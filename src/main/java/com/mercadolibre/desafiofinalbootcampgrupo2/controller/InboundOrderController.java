@@ -27,14 +27,14 @@ public class InboundOrderController {
     }
 
     @PostMapping(path = "/")
-    public ResponseEntity<List<BatchResponseDTO>> registerInboundOrder(@Valid @RequestBody InboundOrderRequestDTO orderDTO, Authentication authentication) {
-        List<BatchResponseDTO> batchResponseDTO = service.saveInboundOrder(orderDTO, authentication);
+    public ResponseEntity<List<BatchResponseDTO>> registerInboundOrder(@Valid @RequestBody InboundOrderRequestDTO orderDTO) {
+        List<BatchResponseDTO> batchResponseDTO = service.saveInboundOrder(orderDTO);
         return ResponseEntity.created(URI.create("/fresh-products/inboundorder/" + batchResponseDTO.get(0).getInboundorderCode())).body(batchResponseDTO);
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<List<BatchResponseDTO>> updateInboundOrder(@Valid @RequestBody InboundOrderRequestDTO orderDTO, @PathVariable Long id, Authentication authentication) {
-        List<BatchResponseDTO> batchResponseDTO = service.updateInboundOrder(orderDTO, id, authentication);
+    public ResponseEntity<List<BatchResponseDTO>> updateInboundOrder(@Valid @RequestBody InboundOrderRequestDTO orderDTO, @PathVariable Long id) {
+        List<BatchResponseDTO> batchResponseDTO = service.updateInboundOrder(orderDTO, id);
         return ResponseEntity.created(URI.create("/fresh-products/inboundorder/" + batchResponseDTO.get(0).getInboundorderCode())).body(batchResponseDTO);
     }
 }

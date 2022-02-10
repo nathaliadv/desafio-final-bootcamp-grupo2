@@ -3,17 +3,14 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.InboundOrderDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchResponseDTO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.dto.InboundOrderDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.InboundOrderRequestDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.DateInvalidException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepresentativeInvalidException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.Buyer;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.InboundOrder;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Representative;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +51,7 @@ public class InboundOrderService implements EntityService<InboundOrder> {
     }
 
     @Transactional
-    public List<BatchResponseDTO> saveInboundOrder(InboundOrderRequestDTO orderDTO, Authentication authentication) {
+    public List<BatchResponseDTO> saveInboundOrder(InboundOrderRequestDTO orderDTO) {
 
         InboundOrder order = convertInboundOrderDtoToEntity(orderDTO);
         List<Batch> batches = convertListBatchDtoToEntity(orderDTO.getBatchs());
@@ -64,7 +61,7 @@ public class InboundOrderService implements EntityService<InboundOrder> {
             batch.setInboundOrder(order);
         }
 
-        allVerification(order, orderDTO.getSection().getWarehouseCode(),  authentication);
+        allVerification(order, orderDTO.getSection().getWarehouseCode());
 
         inboundOrderDAO.save(order);
 
@@ -72,7 +69,7 @@ public class InboundOrderService implements EntityService<InboundOrder> {
     }
 
     @Transactional
-    public List<BatchResponseDTO> updateInboundOrder(InboundOrderRequestDTO orderDTO, Long id, Authentication authentication) {
+    public List<BatchResponseDTO> updateInboundOrder(InboundOrderRequestDTO orderDTO, Long id) {
 
         InboundOrder order = convertInboundOrderDtoToEntity(orderDTO);
         order.setId(findById(id).getId());
@@ -83,7 +80,7 @@ public class InboundOrderService implements EntityService<InboundOrder> {
             batch.setInboundOrder(order);
         }
 
-        allVerification(order, orderDTO.getSection().getWarehouseCode(),  authentication);
+        allVerification(order, orderDTO.getSection().getWarehouseCode());
 
         batchService.deleteAllBatchByInboundOrder(order);
         inboundOrderDAO.save(order);
@@ -93,10 +90,10 @@ public class InboundOrderService implements EntityService<InboundOrder> {
         return batchResponseDTO;
     }
 
-    protected void allVerification(InboundOrder order, Long warehouseId, Authentication authentication) {
+    protected void allVerification(InboundOrder order, Long warehouseId) {
         Long sectionCode = order.getSection().getId();
         Long warehouseCode = warehouseId;
-        Long representativeCode = getUserId(authentication);
+        Long representativeCode = getUserIdLogged();
         List<Batch> batches = order.getBatchs();
 
 
@@ -132,11 +129,11 @@ public class InboundOrderService implements EntityService<InboundOrder> {
     }
 
 
-    private void verifyIfIsARepresentative(Long representativeCode ){
-         if(representativeService.findById(representativeCode) == null)
-             throw new RepresentativeInvalidException("Representante invalido");
+    private void verifyIfIsARepresentative(Long representativeCode) {
+        if (representativeService.findById(representativeCode) == null)
+            throw new RepresentativeInvalidException("Representante invalido");
     }
-  
+
     public void verifyManufactureDate(List<Batch> batchs) {
         batchs.forEach(batch ->
                 {
@@ -174,7 +171,7 @@ public class InboundOrderService implements EntityService<InboundOrder> {
                 .build();
     }
 
-    private Long getUserId(Authentication authentication) {
+    private Long getUserIdLogged() {
         return ((Representative) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
     }
 }

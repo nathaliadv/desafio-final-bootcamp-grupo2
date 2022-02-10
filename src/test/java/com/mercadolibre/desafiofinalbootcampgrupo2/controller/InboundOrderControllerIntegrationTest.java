@@ -60,7 +60,7 @@ public class InboundOrderControllerIntegrationTest extends ApplicationConfigTest
     }
 
     @Test
-    public void ShouldReturn404WhenRegisterInboundOrderSectionIsNotValid() throws Exception {
+    public void shouldReturn404WhenRegisterInboundOrderSectionIsNotValid() throws Exception {
         InboundOrderDTO inboundOrderDTO = generateInvalidInboundOrderDTO();
         inboundOrderDTO.setBatchs(null);
         String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);

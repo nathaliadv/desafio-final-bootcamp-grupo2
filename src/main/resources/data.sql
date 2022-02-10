@@ -32,13 +32,13 @@ VALUES ('Banana Prata', 1, 1),
        ('Queijo Mineiro', 1, 2);
 
 
-INSERT INTO tb_advertising (price, description, product_id, seller_id)
-VALUES (20.0, 'Melancia gostosinha nham nham', 3, 5),
-       (25.0, 'Sorvetinho gostosinho nham nham', 7, 6),
-       (5.0, 'Queijinho gostosinho nham nham', 8, 5),
-       (10.0, 'Salaminho gostosinho nham nham', 9, 6),
-       (2.50, 'Maçazinha gostosinha nham nham', 4, 5),
-       (300.50, 'Carninha gostosinha nham nham', 5, 6);
+INSERT INTO tb_advertising (free_shipping, price, description, product_id, seller_id)
+VALUES (true, 20.0, 'Melancia gostosinha nham nham', 3, 5),
+       (false, 25.0, 'Sorvetinho gostosinho nham nham', 7, 6),
+       (true, 5.0, 'Queijinho gostosinho nham nham', 8, 5),
+       (true, 10.0, 'Salaminho gostosinho nham nham', 9, 6),
+       (false, 2.50, 'Maçazinha gostosinha nham nham', 4, 5),
+       (false, 300.50, 'Carninha gostosinha nham nham', 5, 6);
 
 
 INSERT INTO tb_address (street, city, state, country, postal_code)

@@ -13,21 +13,20 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AdvertisingDTO {
+public class AdvertisingResponseDTO {
 
     private Long id;
-    @NotNull(message = "ProductCode can't be null.")
-    private Long productCode;
-    @NotNull(message = "Description can't be null.")
+    private String productName;
+    private String productType;
     private String description;
-    @NotNull(message = "Price can't be null.")
     private BigDecimal price;
-    @NotNull(message = "FreeShipping can't be null.")
     private Boolean freeShipping;
+    private Integer quantity;
 
-    public AdvertisingDTO(Advertising advertising) {
+    public AdvertisingResponseDTO(Advertising advertising) {
         this.id = advertising.getId();
-        this.productCode = advertising.getProduct().getId();
+        this.productName = advertising.getProduct().getName();
+        this.productType = advertising.getProduct().getProductType().getType();
         this.description = advertising.getDescription();
         this.price = advertising.getPrice();
         this.freeShipping = advertising.getFreeShipping();

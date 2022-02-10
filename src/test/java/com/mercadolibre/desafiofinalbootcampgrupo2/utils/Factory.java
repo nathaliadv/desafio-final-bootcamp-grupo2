@@ -169,4 +169,13 @@ public class Factory {
 
         return PurchaseOrderDTO.builder().status(status).products(list).build();
     }
+
+    public static AdvertisingDTO generateValidAdvertisingDTO(){
+        return AdvertisingDTO.builder()
+                .description("This is a description about the Advertising")
+                .price(BigDecimal.valueOf(150))
+                .freeShipping(true)
+                .productCode(1L)
+                .build();
+    }
 }

@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Data
@@ -13,8 +14,15 @@ import java.math.BigDecimal;
 @Builder
 public class AdvertisingDTO {
 
-    private String name;
+    @NotNull(message = "ProductCode can't be null.")
+    private Long productCode;
+
+    @NotNull(message = "Description can't be null.")
     private String description;
+
+    @NotNull(message = "Price can't be null.")
     private BigDecimal price;
-    private Integer quantity;
+
+    @NotNull(message = "FreeShipping can't be null.")
+    private Boolean freeShipping;
 }

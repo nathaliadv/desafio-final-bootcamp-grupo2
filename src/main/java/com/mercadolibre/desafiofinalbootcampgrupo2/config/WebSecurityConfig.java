@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, "/fresh-products/orders/").hasAnyAuthority("Buyer")
                 //fim - requisito 2
                 //inicio - requisito 3
-                .antMatchers(HttpMethod.GET, "/fresh-products/*").hasAnyAuthority("Representative")
+                //.antMatchers(HttpMethod.GET, "/fresh-products/*").hasAnyAuthority("Representative")
                 //fim - requisito 3
                 //inicio - requisito 4
                 .antMatchers(HttpMethod.GET, "/fresh-products/warehouse/*").hasAnyAuthority("Representative")
@@ -67,6 +67,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.POST, "/user/add/buyer").permitAll()
 //                .anyRequest().authenticated()
 //                .anyRequest().permitAll()
+                // INICIO - REQ 6 GABRIEL
+                .antMatchers("/fresh-products/advertisings/**").hasAnyAuthority("Seller")
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(new AuthenticationViaTokenFilter(tokenService, repository), UsernamePasswordAuthenticationFilter.class);
