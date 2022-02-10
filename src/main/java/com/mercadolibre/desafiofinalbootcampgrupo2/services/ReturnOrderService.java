@@ -3,6 +3,7 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.PurchaseItemDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ReturnCauseDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ReturnOrderDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ReturnOrderItensDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ReturnItemDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ReturnOrderResponseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
@@ -30,6 +31,7 @@ public class ReturnOrderService {
 
     @Autowired
     ReturnCauseDAO returnCauseDAO;
+
 
     public ReturnOrder saveReturnOrder(List<ReturnItemDTO> itens, String cause, Authentication authentication) {
         List<ReturnOrderItens> returnOrderItens = convertListPurchaseItemDtoInListReturnOrderItens(itens);
@@ -66,7 +68,6 @@ public class ReturnOrderService {
 
             returnOrderItens.add(returnOrderItem);
         }
-
         return returnOrderItens;
     }
 
@@ -98,7 +99,6 @@ public class ReturnOrderService {
 
             listReturnItemDTO.add(returnOrderDto);
         }
-
         return listReturnItemDTO;
     }
 
