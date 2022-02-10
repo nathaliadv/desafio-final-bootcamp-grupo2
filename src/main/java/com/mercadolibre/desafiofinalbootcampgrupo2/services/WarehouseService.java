@@ -1,6 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.dao.WarehouseDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.WarehouseDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Warehouse;
 import org.springframework.stereotype.Service;

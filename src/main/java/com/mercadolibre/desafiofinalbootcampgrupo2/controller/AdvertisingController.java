@@ -1,8 +1,8 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.controller;
 
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.dao.AdvertisingDAO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ProductTypeDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.AdvertisingDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.ProductTypeDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.services.AdvertisingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

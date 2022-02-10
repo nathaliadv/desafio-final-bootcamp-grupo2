@@ -14,6 +14,8 @@ import java.util.List;
 @Builder
 public class ReturnOrderResponseDTO {
 
+    private Long order;
+
     private LocalDate date;
 
     private String returnStatus;

@@ -23,7 +23,6 @@ public class ReturnOrderController {
     @PostMapping(path = "/")
     public ResponseEntity<ReturnOrderResponseDTO> createReturnOrder(@Valid @RequestBody ReturnOrderCreateDTO returnOrderCreateDTO, Authentication authentication) {
         ReturnOrder returnOrder = returnOrderService.saveReturnOrder(returnOrderCreateDTO.getItens(), returnOrderCreateDTO.getReturnCause(), authentication);
-
         return ResponseEntity
                 .created(URI.create("/fresh-products/orders/id/" + returnOrder.getId())).body(returnOrderService.getReturnOrderById(returnOrder.getId()));
     }
@@ -32,4 +31,12 @@ public class ReturnOrderController {
     public ResponseEntity<ReturnOrderResponseDTO> getReturnOrderById(@RequestParam Long returnOrderId) {
         return ResponseEntity.ok().body(returnOrderService.getReturnOrderById(returnOrderId));
     }
+
+    @PutMapping(path = "/")
+    public ResponseEntity<ReturnOrderResponseDTO> updateReturnOrder(@RequestParam Long returnOrderId, @Valid @RequestBody ReturnOrderCreateDTO returnOrderCreateDTO){
+        ReturnOrder returnOrder = returnOrderService.updateReturnOrder(returnOrderId, returnOrderCreateDTO);
+        return ResponseEntity.ok().body(returnOrderService.getReturnOrderById(returnOrder.getId()));
+    }
+
+
 }

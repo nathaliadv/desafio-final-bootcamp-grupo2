@@ -1,7 +1,7 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.controller;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.dao.AdvertisingDAO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ProductTypeDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.AdvertisingDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.ProductTypeDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.utils.TypeOfUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

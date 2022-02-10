@@ -1,4 +1,4 @@
-package com.mercadolibre.desafiofinalbootcampgrupo2.dao;
+package com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.ReturnStatus;
 import org.springframework.data.jpa.repository.JpaRepository;

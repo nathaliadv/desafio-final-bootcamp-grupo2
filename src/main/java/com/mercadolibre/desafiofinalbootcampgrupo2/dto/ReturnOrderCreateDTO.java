@@ -18,7 +18,7 @@ public class ReturnOrderCreateDTO {
 
     @Valid
     @NotEmpty(message = "Itens list can not be empty.")
-    private List<ReturnItemDTO> itens;
+    private List<ReturnItemCreateDTO> itens;
     @NotNull(message = "Return's cause can not be null.")
     @NotEmpty(message = "Return's cause can not be empty.")
     private String returnCause;

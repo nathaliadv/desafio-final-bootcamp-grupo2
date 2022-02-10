@@ -11,10 +11,9 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ReturnItemDTO {
-
-    @NotNull(message = "Return item can not be null.")
-    private Long returnItemId;
+public class ReturnItemCreateDTO {
+    @NotNull(message = "Purchase item can not be null.")
+    private Long purchaseItemId;
     @NotNull(message = "Quantity can not be null.")
     private Integer quantity;
 }
