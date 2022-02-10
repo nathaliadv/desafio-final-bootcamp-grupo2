@@ -64,7 +64,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //fim - requisito 5
                 //inicio - requisito 6 - nathalia
                 .antMatchers(HttpMethod.POST, "/fresh-products/returnorders/").hasAnyAuthority("Buyer")
-                //fim - requisito 6 - nathalia
+                .antMatchers(HttpMethod.GET, "/fresh-products/returnorders/*").hasAnyAuthority("Buyer")
+                .antMatchers(HttpMethod.PUT, "/fresh-products/returnorders/*").hasAnyAuthority("Buyer")
 //                .antMatchers(HttpMethod.POST, "/user/add/representative").permitAll()
 //                .antMatchers(HttpMethod.POST, "/user/add/buyer").permitAll()
 //                .anyRequest().authenticated()
