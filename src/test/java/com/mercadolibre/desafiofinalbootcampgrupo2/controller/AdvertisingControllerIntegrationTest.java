@@ -2,6 +2,7 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.controller;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.AdvertisingDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ProductTypeDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.utils.ApplicationConfigTest;
 import com.mercadolibre.desafiofinalbootcampgrupo2.utils.TypeOfUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,9 +24,8 @@ import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.TokenGenerator.g
 import static java.lang.String.format;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-public class AdvertisingControllerIntegrationTest {
+
+public class AdvertisingControllerIntegrationTest extends ApplicationConfigTest {
 
     @Autowired
     private MockMvc mockMvc;

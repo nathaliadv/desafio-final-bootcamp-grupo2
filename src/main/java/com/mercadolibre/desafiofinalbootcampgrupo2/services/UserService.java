@@ -5,6 +5,8 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Buyer;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.mercadolibre.desafiofinalbootcampgrupo2.model.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,4 +20,9 @@ public class UserService {
                 .orElseThrow(() -> new RepositoryException("User not exists in the Database"));
     }
 
+    public User encoderPassword(User user) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
+        return user;
+    }
 }

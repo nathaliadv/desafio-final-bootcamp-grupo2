@@ -40,13 +40,13 @@ public class PurchaseOrderService implements EntityService<PurchaseOrder> {
                 .orElseThrow(() -> new RepositoryException("Purchase order not exists in the Database"));
     }
 
-    public PurchaseOrder savePurchaseOrder(List<ProductDTO> products, Authentication authentication) {
+    public PurchaseOrder savePurchaseOrder(List<ProductDTO> products) {
         List<PurchaseItens> purchaseItens = convertProductsDtoToPurchaseItens(products);
 
         PurchaseOrder purchaseOrder = PurchaseOrder.builder()
                 .purchaseStatus(new PurchaseStatus(2L, "PENDING"))
                 .date(LocalDate.now())
-                .buyer(buyerService.findById(getUserId(authentication)))
+                .buyer(buyerService.findById(getUserId()))
                 .build();
 
         purchaseItens.forEach(item -> item.setPurchaseOrder(purchaseOrder));
@@ -76,13 +76,13 @@ public class PurchaseOrderService implements EntityService<PurchaseOrder> {
         ).collect(Collectors.toList());
     }
 
-    public PurchaseOrderDTO getProductsByPurchaseId(Long purchaseOrderId, Authentication authentication) {
+    public PurchaseOrderDTO getProductsByPurchaseId(Long purchaseOrderId) {
         PurchaseOrder purchaseOrder = findById(purchaseOrderId);
 
-        return convertPurchaseOrderInPurchaseOrderDto(purchaseOrder, authentication);
+        return convertPurchaseOrderInPurchaseOrderDto(purchaseOrder);
     }
 
-    public PurchaseOrderDTO updatePurchaseOrder(Long purchaseOrderId, PurchaseOrderUpdateDTO purchaseOrderDto, Authentication authentication) {
+    public PurchaseOrderDTO updatePurchaseOrder(Long purchaseOrderId, PurchaseOrderUpdateDTO purchaseOrderDto) {
         PurchaseOrder purchaseOrder = findById(purchaseOrderId);
 
         PurchaseStatus status = purchaseOrderStatusDAO.findByStatusCode(purchaseOrderDto.getStatus());
@@ -104,7 +104,7 @@ public class PurchaseOrderService implements EntityService<PurchaseOrder> {
 
         purchaseOrder = purchaseOrderDAO.save(purchaseOrder);
 
-        return convertPurchaseOrderInPurchaseOrderDto(purchaseOrder, authentication);
+        return convertPurchaseOrderInPurchaseOrderDto(purchaseOrder);
     }
 
     public List<PurchaseItens> convertListProductsDTOInPurchaseItens(List<ProductDTO> productsDto) {
@@ -116,26 +116,25 @@ public class PurchaseOrderService implements EntityService<PurchaseOrder> {
         }).collect(Collectors.toList());
     }
 
-    public PurchaseOrderDTO convertPurchaseOrderInPurchaseOrderDto(PurchaseOrder purchaseOrder, Authentication authentication) {
-
+    public PurchaseOrderDTO convertPurchaseOrderInPurchaseOrderDto(PurchaseOrder purchaseOrder) {
         List<PurchaseItens> itens = purchaseOrder.getPurchaseItens();
         List<ProductDTO> products = new ArrayList<>();
 
-        for (PurchaseItens item : itens) {
-            products.add(ProductDTO.builder()
-                    .advertisingId(item.getAdvertising().getId())
-                    .quantity(item.getQuantity())
-                    .build());
-        }
+        itens.forEach(item -> products.add(
+                ProductDTO
+                        .builder()
+                        .advertisingId(item.getAdvertising().getId())
+                        .quantity(item.getQuantity())
+                        .build()));
 
         return PurchaseOrderDTO.builder()
                 .status(purchaseOrder.getPurchaseStatus().getStatusCode())
                 .products(products)
-                .buyerId(getUserId(authentication))
+                .buyerId(getUserId())
                 .build();
     }
 
-    private Long getUserId(Authentication authentication) {
+    private Long getUserId() {
         return ((Buyer) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
     }
 }

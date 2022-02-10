@@ -1,6 +1,7 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ProductDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.WarehouseDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.SectionDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchStockDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductByWarehouseDTO;
@@ -24,6 +25,9 @@ public class ProductService implements EntityService<Product> {
 
     @Autowired
     private ProductDAO productDAO;
+
+    @Autowired
+    private WarehouseDAO warehouseDAO;
 
     @Override
     public Product findById(Long id) {
@@ -58,14 +62,23 @@ public class ProductService implements EntityService<Product> {
     }
 
     public ProductByWarehouseDTO findProductListByIdInWarehouse(Long productCode, Long warehouseCode, String filter) {
+        validateWarehouseCode(warehouseCode);
         validateProduct(productCode);
         List<ProductResponseDTO> listProducts=  sortByAnyParam(productDAO.findAllProductsByIdInWarehouse(productCode, warehouseCode), filter);
+        if(listProducts.size() == 0){
+            throw new RepositoryException("Product does not exist in Warehouse.");
+        }
         return convertListProductResponseDTOInProductByWarehouseDTO(listProducts);
     }
 
     public void validateProduct( Long productId){
         productDAO.findById(productId)
                 .orElseThrow(() -> new RepositoryException("Product not exists in database, please contact the administrator"));
+    }
+
+    public void validateWarehouseCode( Long warehouseCode){
+        warehouseDAO.findById(warehouseCode)
+                .orElseThrow(() -> new RepositoryException("Warehouse not exists in database, please contact the administrator"));
     }
 
     protected void verifyIfProductsAreTheSameTypeOfSection(List<Batch> batchs, Section section) {
