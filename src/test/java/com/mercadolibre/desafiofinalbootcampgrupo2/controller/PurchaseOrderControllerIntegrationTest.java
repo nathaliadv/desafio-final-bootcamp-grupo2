@@ -90,7 +90,7 @@ public class PurchaseOrderControllerIntegrationTest extends ApplicationConfigTes
         String token = getUserToken(mockMvc, TypeOfUser.BUYER);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/orders/")
-                        .queryParam("purchaseOrderId", "2")
+                        .queryParam("purchaseOrderId", "20")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", token))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())

@@ -74,11 +74,41 @@ VALUES (1, current_date(), 1);
 
 INSERT INTO tb_batch
 VALUES (1, 15, 10, '2023-12-29', 15, '2022-01-22', '05:30:00', 10, 5, 1),
-       (2, 15, 10, '2023-12-29', 15, '2022-01-22', '05:30:00', 10, 5, 1);
+       (2, 15, 10, '2023-12-29', 15, '2022-01-22', '05:30:00', 10, 5, 1),
+       (3, 15, 10, '2023-12-29', 15, '2022-01-22', '05:30:00', 10, 1, 1),
+       (4, 15, 10, '2023-12-29', 15, '2022-01-22', '05:30:00', 10, 1, 1);
 
 INSERT INTO tb_purchase_order
-VALUES (1, current_date(), 3, 1);
+VALUES (1, current_date(), 3, 1),
+       (2, current_date(), 3, 4),
+       (3, current_date(), 3, 4);
 
 INSERT INTO tb_purchase_itens
-VALUES (1, 15, 2, 1),
-       (2, 5, 1, 1);
+VALUES (1, 15, 5, 1),
+       (2, 5, 1, 1),
+       (3, 1, 1, 2),
+       (4, 5, 5, 2),
+       (5, 2, 1, 3),
+       (6, 5, 5, 3);
+
+INSERT INTO tb_return_status
+VALUES (1, 'APPROVED');
+INSERT INTO tb_return_status
+VALUES (2, 'PENDING');
+INSERT INTO tb_return_status
+VALUES (3, 'REJECTED');
+
+INSERT INTO tb_return_cause
+VALUES (1, 'WITHDRAWAL');
+INSERT INTO tb_return_cause
+VALUES (2, 'DEFECT');
+
+INSERT INTO tb_return_order
+VALUES (1, current_date(), 3, 2, 1),
+       (2, current_date(), 3, 2, 1);
+
+INSERT INTO tb_return_order_itens
+VALUES (1, 1, 3, 1),
+       (2, 5, 4, 1),
+       (3, 2, 5, 2),
+       (4, 5, 6, 2);

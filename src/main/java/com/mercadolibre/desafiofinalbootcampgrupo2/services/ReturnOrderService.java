@@ -1,8 +1,8 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.PurchaseItemDAO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.ReturnCauseDAO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.ReturnOrderDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.PurchaseItemDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ReturnCauseDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ReturnOrderDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ReturnItemCreateDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ReturnItemDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ReturnOrderCreateDTO;
@@ -35,7 +35,7 @@ public class ReturnOrderService {
     ReturnCauseDAO returnCauseDAO;
 
 
-    public ReturnOrder saveReturnOrder(List<ReturnItemCreateDTO> itens, String cause, Authentication authentication) {
+    public ReturnOrder saveReturnOrder(List<ReturnItemCreateDTO> itens, String cause) {
         List<ReturnOrderItens> returnOrderItens = convertListPurchaseItemDtoInListReturnOrderItens(itens);
 
         ReturnCause returnCause = verifyAndReturnCause(cause);
@@ -43,7 +43,7 @@ public class ReturnOrderService {
         ReturnOrder returnOrder = ReturnOrder.builder()
                 .returnStatus(new ReturnStatus(2L, "PENDING"))
                 .date(LocalDate.now())
-                .buyer(buyerService.findById(getUserId(authentication)))
+                .buyer(buyerService.findById(getUserId()))
                 .returnsCause(returnCause)
                 .build();
 
@@ -120,7 +120,7 @@ public class ReturnOrderService {
         return listReturnItemDTO;
     }
 
-    private Long getUserId(Authentication authentication) {
+    private Long getUserId() {
         return ((Buyer) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
     }
 

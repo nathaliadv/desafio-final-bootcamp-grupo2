@@ -1,7 +1,7 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.PurchaseOrderDAO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.PurchaseStatusDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.PurchaseOrderDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.PurchaseStatusDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.PurchaseOrderDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.PurchaseOrderUpdateDTO;
@@ -9,7 +9,6 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.dto.TotalDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 

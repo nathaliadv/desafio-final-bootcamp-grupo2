@@ -1,6 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.BatchDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.BatchDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchDueDateDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;

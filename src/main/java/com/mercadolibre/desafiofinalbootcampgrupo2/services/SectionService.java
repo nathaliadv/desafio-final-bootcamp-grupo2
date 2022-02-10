@@ -1,6 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.SectionDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.SectionDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.DontMatchesException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.SectionSpaceNotAvailableException;

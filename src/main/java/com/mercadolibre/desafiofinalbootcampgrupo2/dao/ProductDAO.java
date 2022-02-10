@@ -1,4 +1,4 @@
-package com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao;
+package com.mercadolibre.desafiofinalbootcampgrupo2.dao;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductInAllWarehouseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductResponseDTO;

@@ -169,4 +169,23 @@ public class Factory {
 
         return PurchaseOrderDTO.builder().status(status).products(list).build();
     }
+
+    public static ReturnOrderCreateDTO generateValidReturnOrderCreateDTO() {
+        List<ReturnItemCreateDTO> itens = new ArrayList<>();
+        String returnCause = "DEFECT";
+
+        itens.add(ReturnItemCreateDTO.builder()
+                .purchaseItemId(5L)
+                .quantity(2)
+                .build()
+        );
+
+        itens.add(ReturnItemCreateDTO.builder()
+                .purchaseItemId(6L)
+                .quantity(5)
+                .build()
+        );
+
+        return ReturnOrderCreateDTO.builder().itens(itens).returnCause(returnCause).build();
+    }
 }

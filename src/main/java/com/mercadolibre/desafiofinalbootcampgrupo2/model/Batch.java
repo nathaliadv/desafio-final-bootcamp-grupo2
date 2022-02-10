@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -33,4 +34,7 @@ public class Batch {
 
     @ManyToOne(cascade = CascadeType.ALL)
     private InboundOrder inboundOrder;
+
+    @ManyToMany(mappedBy = "batch")
+    private List<PurchaseItens> purchaseItens;
 }

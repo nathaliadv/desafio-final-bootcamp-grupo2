@@ -1,7 +1,7 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.ProductDAO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.WarehouseDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ProductDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.WarehouseDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.SectionDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchStockDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductByWarehouseDTO;

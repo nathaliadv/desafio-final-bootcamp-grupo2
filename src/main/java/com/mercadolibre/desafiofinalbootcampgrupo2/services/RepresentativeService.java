@@ -1,6 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.RepresentativeDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.RepresentativeDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Representative;
 import org.springframework.beans.factory.annotation.Autowired;

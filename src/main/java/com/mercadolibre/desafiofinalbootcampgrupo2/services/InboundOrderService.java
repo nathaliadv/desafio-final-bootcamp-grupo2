@@ -1,6 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.InboundOrderDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.InboundOrderDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchResponseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.InboundOrderRequestDTO;

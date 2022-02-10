@@ -1,6 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.controller.advices.dao.BuyerDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.BuyerDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Buyer;
 import org.springframework.beans.factory.annotation.Autowired;
