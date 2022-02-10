@@ -45,7 +45,7 @@ public class VehicleControllerTest extends ApplicationConfigTest {
     public void shouldShowVehicleById() throws Exception {
         String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/fleet/detail/?vehicleId=1")
+        mockMvc.perform(MockMvcRequestBuilders.get("/fleet/detailById/?vehicleId=2")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", token)
                 .content(""))
