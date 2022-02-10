@@ -1,4 +1,4 @@
-package com.mercadolibre.desafiofinalbootcampgrupo2.services.unit;
+package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductResponseDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.services.ProductService;

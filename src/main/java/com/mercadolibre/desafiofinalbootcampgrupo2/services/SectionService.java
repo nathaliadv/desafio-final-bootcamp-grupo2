@@ -24,18 +24,7 @@ public class SectionService implements EntityService<Section> {
         return sectionDAO.findById(id)
                 .orElseThrow(() -> new RepositoryException("Section not exists in the Database, please contact the administrator"));
     }
-  
-   public void calVolumeCheckin(Batch batch, Section section){
 
-        section.calVolumeCheckin(batch);
-        sectionDAO.save(section);
-    }
-
-    public void calVolumeCheckout(Batch batch, Section section){
-
-        section.calVolumeCheckout(batch);
-        sectionDAO.save(section);
-    }
 
     public void verifyIfSectionHaveSpaceEnoughToAddBatches(Section section, List<Batch> batchs) {
         for (Batch batch : batchs) {

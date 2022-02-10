@@ -5,6 +5,7 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchDueDateDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.InboundOrder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +16,8 @@ import java.util.List;
 @Service
 public class BatchService implements EntityService<Batch> {
 
+    @Autowired
     private BatchDAO batchDAO;
-
-    public BatchService(BatchDAO batchDAO) {
-        this.batchDAO = batchDAO;
-    }
 
     @Override
     public Batch findById(Long id) {
