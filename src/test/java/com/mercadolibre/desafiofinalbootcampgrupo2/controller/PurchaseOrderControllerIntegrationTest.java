@@ -3,6 +3,7 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.PurchaseOrderCreateDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.PurchaseOrderDTO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.utils.ApplicationConfigTest;
 import com.mercadolibre.desafiofinalbootcampgrupo2.utils.TypeOfUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,10 +21,8 @@ import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.Factory.generate
 import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.Factory.generateListOfValidPurchaseOrderDTO;
 import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.TokenGenerator.getUserToken;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@ActiveProfiles("test")
-public class PurchaseOrderControllerIntegrationTest {
+
+public class PurchaseOrderControllerIntegrationTest extends ApplicationConfigTest {
 
     @Autowired
     private MockMvc mockMvc;

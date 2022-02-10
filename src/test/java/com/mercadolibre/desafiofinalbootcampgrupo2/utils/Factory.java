@@ -1,10 +1,9 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.utils;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.*;
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.InboundOrder;
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.Section;
+import com.mercadolibre.desafiofinalbootcampgrupo2.model.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -65,6 +64,18 @@ public class Factory {
 
     public static SectionDTO generateValidSectionDTO() {
         return SectionDTO.builder().sectionCode(1L).warehouseCode(1L).build();
+    }
+
+    public static InboundOrderDTO generateInvalidInboundOrderDTO() {
+        return InboundOrderDTO.builder()
+                .creationDate(LocalDate.now())
+                .section(generateInvalidSectionDTO())
+                .batchs(generateListOfValidBatchDTOs())
+                .build();
+    }
+
+    public static SectionDTO generateInvalidSectionDTO() {
+        return SectionDTO.builder().sectionCode(6L).warehouseCode(1L).build();
     }
 
     public static List<BatchDTO> generateListOfValidBatchDTOs() {

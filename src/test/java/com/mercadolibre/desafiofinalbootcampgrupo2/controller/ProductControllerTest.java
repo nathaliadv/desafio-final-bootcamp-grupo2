@@ -1,22 +1,19 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.controller;
 
+import com.mercadolibre.desafiofinalbootcampgrupo2.utils.ApplicationConfigTest;
 import com.mercadolibre.desafiofinalbootcampgrupo2.utils.TypeOfUser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.TokenGenerator.getUserToken;
 
-@AutoConfigureMockMvc
-@ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ProductControllerTest {
+public class ProductControllerTest extends ApplicationConfigTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -64,10 +61,13 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void shouldReturnTheProductsByDueDateANDFilter() throws Exception {
+    public void shouldReturnTheProductsByDueDateANDFilterASC() throws Exception {
         String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/due-date/list?productTypeId=1&numberDays=700&orderBy=asc")
+        mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/due-date/list")
+                        .queryParam("productTypeId", "1")
+                        .queryParam("numberDays", "700")
+                        .queryParam("orderBy", "asc")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", token)
                         .content(""))
@@ -75,5 +75,36 @@ public class ProductControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
                 .andReturn();
+    }
+
+    @Test
+    public void shouldReturnTheProductsByDueDateANDFilterDESC() throws Exception {
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/due-date/list")
+                        .queryParam("productTypeId", "1")
+                        .queryParam("numberDays", "700")
+                        .queryParam("orderBy", "asc")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token)
+                        .content(""))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
+                .andReturn();
+    }
+
+    @Test
+    public void shouldReturnBadRequestWhenFilterOrderByIsInvalid() throws Exception {
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/fresh-products/due-date/list")
+                        .queryParam("productTypeId", "1")
+                        .queryParam("numberDays", "700")
+                        .queryParam("orderBy", "descending")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token)
+                        .content(""))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 }

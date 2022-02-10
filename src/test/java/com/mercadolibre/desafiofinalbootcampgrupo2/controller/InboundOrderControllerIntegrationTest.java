@@ -2,25 +2,21 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.InboundOrderDTO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.utils.ApplicationConfigTest;
 import com.mercadolibre.desafiofinalbootcampgrupo2.utils.TypeOfUser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.Factory.generateInvalidInboundOrderDTO;
 import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.Factory.generateValidInboundOrderDTO;
 import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.TokenGenerator.getUserToken;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@ActiveProfiles("test")
-public class InboundOrderControllerIntegrationTest {
+public class InboundOrderControllerIntegrationTest extends ApplicationConfigTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -48,6 +44,24 @@ public class InboundOrderControllerIntegrationTest {
     @Test
     public void registerInboundOrderShouldReturn400WhenIncorrectDate() throws Exception {
         InboundOrderDTO inboundOrderDTO = generateValidInboundOrderDTO();
+        inboundOrderDTO.setBatchs(null);
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
+
+        String payload = mapper.writeValueAsString(inboundOrderDTO);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/fresh-products/inboundorder/")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token)
+                        .content(payload))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
+                .andReturn();
+    }
+
+    @Test
+    public void ShouldReturn404WhenRegisterInboundOrderSectionIsNotValid() throws Exception {
+        InboundOrderDTO inboundOrderDTO = generateInvalidInboundOrderDTO();
         inboundOrderDTO.setBatchs(null);
         String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
 

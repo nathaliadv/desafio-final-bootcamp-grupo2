@@ -1,5 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.controller;
 
+import com.mercadolibre.desafiofinalbootcampgrupo2.utils.ApplicationConfigTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.net.URI;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-public class AuthenticationControllerIntegrationTest {
+public class AuthenticationControllerIntegrationTest extends ApplicationConfigTest {
     @Autowired
     private MockMvc mockMvc;
 
