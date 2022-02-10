@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +34,21 @@ public class VehicleService {
                 .orElseThrow(() -> new VehicleException("Vehicle not not exists in database, please contact the Representative")));
     }
 
-    public VehicleDTO findVehiclebyId(Long id ){
-        return convertToVehicleDTO(vehicleDAO.findById(id)
-                .orElseThrow(() -> new VehicleException("Vehicle not not exists in database, please contact the Representative")));
+    public VehicleDTO findVehicleByPlaque(String plate,Authentication authentication ){
+        representativeService.verifyIfRepresentativeIsValid(authentication);
+
+        if(vehicleDAO.findBylicensePlate(plate) == null)
+            throw new VehicleException("Vehicle not not exists in database, please contact the Representative");
+
+        return convertToVehicleDTO(vehicleDAO.findBylicensePlate(plate));
     }
+
+    public List<VehicleDTO> findVehicleByMaintenanceDate(String vehicleModel, Authentication authentication ){
+        representativeService.verifyIfRepresentativeIsValid(authentication);
+        return convertToVehicleDTO(vehicleDAO.findByVehicleModel(vehicleModel));
+    }
+
+
 
     public List<VehicleDTO> findAllVehicles( Authentication authentication){
         representativeService.verifyIfRepresentativeIsValid(authentication);

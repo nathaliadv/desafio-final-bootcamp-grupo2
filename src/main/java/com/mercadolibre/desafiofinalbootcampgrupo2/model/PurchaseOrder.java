@@ -29,9 +29,6 @@ public class PurchaseOrder {
     @ManyToOne
     private Buyer buyer;
 
-    @OneToOne
-    private Tracking tracking;
-
     @OneToMany(mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
     private List<PurchaseItens> purchaseItens;
 }

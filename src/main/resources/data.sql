@@ -69,16 +69,18 @@ VALUES (3, 'REJECTED');
 INSERT INTO tb_purchase_status
 VALUES (4, 'DELIVERED');
 
-INSERT INTO tb_inbound_order
-VALUES (1, current_date(), 1);
+
 
 INSERT INTO tb_batch
 VALUES (1, 15, 10, '2023-12-29', 15, '2022-01-22', '05:30:00', 10, 5, 1),
        (2, 15, 10, '2023-12-29', 15, '2022-01-22', '05:30:00', 10, 5, 1);
 
-INSERT INTO tb_purchase_order
-VALUES (1, current_date(), 3, 1);
+
 
 INSERT INTO tb_purchase_itens
 VALUES (1, 15, 2, 1),
        (2, 5, 1, 1);
+
+
+INSERT INTO tb_vehicle
+VALUES (10,'Teste Placa', current_date(),100,'Teste Modelo',1,1,1)

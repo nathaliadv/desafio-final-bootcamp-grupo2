@@ -169,4 +169,30 @@ public class Factory {
 
         return PurchaseOrderDTO.builder().status(status).products(list).build();
     }
+
+    public static VehicleDTO generateListOfValidVehicleCreateDTO() {
+        return VehicleDTO.builder().
+                vehicleModel("Modelo Teste").
+                licensePlate("Placa Teste").
+                maintenanceDate(LocalDate.now().minusMonths(2)).
+                mileage(1000).
+                representativeId(1l).
+                warehouseId(1l).
+                build();
+
+    }
+
+    public static VehicleUpdateDTO generateListOfValidVehicleUpdateDTO() {
+        return VehicleUpdateDTO.builder().
+                licensePlate("Placa Teste").
+                maintenanceDate(LocalDate.now().minusMonths(2)).
+                mileage(1000).
+                warehouseId(1l).
+                id(1l).
+                build();
+
+    }
+
+
+
 }

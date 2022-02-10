@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -25,9 +26,23 @@ public class VehicleController {
 
 
     //Requiriment 06
-    @GetMapping(path = "/detail/")
+    @GetMapping(path = "/detailById/")
     public ResponseEntity<VehicleDTO> getVehicleById(@RequestParam Long vehicleId,Authentication authentication) {
         VehicleDTO vehicleDTO = vehicleService.findVehiclebyId(vehicleId, authentication);
+        return ResponseEntity.ok(vehicleDTO);
+    }
+
+    //Requiriment 06
+    @GetMapping(path = "/detailByPlate/")
+    public ResponseEntity<VehicleDTO> getVehicleByPlaque(@RequestParam String vehiclePlate,Authentication authentication) {
+        VehicleDTO vehicleDTO = vehicleService.findVehicleByPlaque(vehiclePlate, authentication);
+        return ResponseEntity.ok(vehicleDTO);
+    }
+
+    //Requiriment 06
+    @GetMapping(path = "/detailAllByMaintenanceDate/")
+    public ResponseEntity<List<VehicleDTO>> getVehicleByMaintenanceDate(@RequestParam String vehicleModel, Authentication authentication) {
+        List<VehicleDTO> vehicleDTO = vehicleService.findVehicleByMaintenanceDate(vehicleModel, authentication);
         return ResponseEntity.ok(vehicleDTO);
     }
 

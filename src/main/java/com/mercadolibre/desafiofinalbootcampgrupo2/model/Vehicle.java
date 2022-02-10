@@ -32,6 +32,4 @@ public class Vehicle {
     @ManyToOne
     private Representative representative;
 
-    @OneToMany
-    private List<Tracking> tracking;
 }

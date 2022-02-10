@@ -35,12 +35,6 @@ public class HandlerException {
         return ResponseEntity.badRequest().body(bodyOfResponse);
     }
 
-    @ExceptionHandler(value = TrackingException.class)
-    protected ResponseEntity<Object> handleTrackingException(TrackingException ex, WebRequest request) {
-        String bodyOfResponse = ex.getMessage();
-        return ResponseEntity.badRequest().body(bodyOfResponse);
-    }
-
     @ExceptionHandler(value = VehicleException.class)
     protected ResponseEntity<Object> handleVehicleException(VehicleException ex, WebRequest request) {
         String bodyOfResponse = ex.getMessage();
