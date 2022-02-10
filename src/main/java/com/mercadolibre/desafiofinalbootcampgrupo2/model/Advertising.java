@@ -24,6 +24,7 @@ public class Advertising {
     private Long id;
     private String description;
     private BigDecimal price;
+    private Boolean freeShipping;
 
     @ManyToOne
     private Seller seller;

@@ -24,37 +24,43 @@ public class HandlerException {
     private MessageSource messageSource;
 
     @ExceptionHandler(value = RepositoryException.class)
-    protected ResponseEntity<Object> handlePersistencia(RepositoryException ex, WebRequest request) {
+    protected ResponseEntity<Object> handlePersistencia(RepositoryException ex) {
         String bodyOfResponse = ex.getMessage();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(bodyOfResponse);
     }
 
     @ExceptionHandler(value = SectionSpaceNotAvailableException.class)
-    protected ResponseEntity<Object> handleSectionSpace(SectionSpaceNotAvailableException ex, WebRequest request) {
+    protected ResponseEntity<Object> handleSectionSpace(SectionSpaceNotAvailableException ex) {
+        String bodyOfResponse = ex.getMessage();
+        return ResponseEntity.badRequest().body(bodyOfResponse);
+    }
+
+    @ExceptionHandler(value = VehicleException.class)
+    protected ResponseEntity<Object> handleVehicleException(VehicleException ex, WebRequest request) {
         String bodyOfResponse = ex.getMessage();
         return ResponseEntity.badRequest().body(bodyOfResponse);
     }
 
     @ExceptionHandler(value = DontMatchesException.class)
-    protected ResponseEntity<Object> handleRepresentativeDontMatches(DontMatchesException ex, WebRequest request) {
+    protected ResponseEntity<Object> handleRepresentativeDontMatches(DontMatchesException ex) {
         String bodyOfResponse = ex.getMessage();
         return ResponseEntity.badRequest().body(bodyOfResponse);
     }
 
     @ExceptionHandler(value = DateInvalidException.class)
-    protected ResponseEntity<Object> handleDateInvalid(DateInvalidException ex, WebRequest request) {
+    protected ResponseEntity<Object> handleDateInvalid(DateInvalidException ex) {
         String bodyOfResponse = ex.getMessage();
         return ResponseEntity.badRequest().body(bodyOfResponse);
     }
 
     @ExceptionHandler(value = ProductNotFoundException.class)
-    protected ResponseEntity<Object> handleProductNotFound(DateInvalidException ex, WebRequest request) {
+    protected ResponseEntity<Object> handleProductNotFound(DateInvalidException ex) {
         String bodyOfResponse = ex.getMessage();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(bodyOfResponse);
     }
 
     @ExceptionHandler(value = RepresentativeInvalidException.class)
-    protected ResponseEntity<Object> handleRepresentativeInvalid(DateInvalidException ex, WebRequest request) {
+    protected ResponseEntity<Object> handleRepresentativeInvalid(DateInvalidException ex) {
         String bodyOfResponse = ex.getMessage();
         return ResponseEntity.badRequest().body(bodyOfResponse);
     }

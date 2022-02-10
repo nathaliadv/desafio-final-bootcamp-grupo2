@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9cd7c0ed-c599-426e-b992-71b4232d4ec1",
+		"_postman_id": "3e65f238-00ba-44ef-8aca-b60351f73dc5",
 		"name": "Bootcamp Projeto Integrador",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -16,7 +16,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MjE3MjQsImV4cCI6MTY0NDUwODEyNH0._rHw30p2TaP5TBM4jZSBU91X4AcUVlk3GadLndam1cQ",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MzU0MjYsImV4cCI6MTY0NDUyMTgyNn0.Y3n89EDfiQn-M-dsW10d3Vo_eesl9P371ghJhzlMHGQ",
 									"type": "string"
 								}
 							]
@@ -25,7 +25,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"creationDate\": \"2022-02-01\",\n    \"section\": {\n        \"sectionCode\": 2,\n        \"warehouseCode\":2\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 15,\n            \"currentQuantity\": 15,\n            \"expirationDate\": \"2022-12-29\",\n            \"manufacturingDate\": \"2022-02-02\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 5\n        },\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 10,\n            \"currentQuantity\": 10,\n            \"expirationDate\": \"2022-11-25\",\n            \"manufacturingDate\": \"2022-02-02\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 5\n        }\n    ]\n}",
+							"raw": "{\n    \"creationDate\": \"2022-02-01\",\n    \"section\": {\n        \"sectionCode\": 6,\n        \"warehouseCode\":2\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 15,\n            \"currentQuantity\": 15,\n            \"expirationDate\": \"2022-12-29\",\n            \"manufacturingDate\": \"2022-02-02\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 5\n        },\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 10,\n            \"currentQuantity\": 10,\n            \"expirationDate\": \"2022-11-25\",\n            \"manufacturingDate\": \"2022-02-02\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 5\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -57,7 +57,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MjE3MjQsImV4cCI6MTY0NDUwODEyNH0._rHw30p2TaP5TBM4jZSBU91X4AcUVlk3GadLndam1cQ",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MzU0MjYsImV4cCI6MTY0NDUyMTgyNn0.Y3n89EDfiQn-M-dsW10d3Vo_eesl9P371ghJhzlMHGQ",
 									"type": "string"
 								}
 							]
@@ -89,7 +89,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MjE3MjQsImV4cCI6MTY0NDUwODEyNH0._rHw30p2TaP5TBM4jZSBU91X4AcUVlk3GadLndam1cQ",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MzU0MjYsImV4cCI6MTY0NDUyMTgyNn0.Y3n89EDfiQn-M-dsW10d3Vo_eesl9P371ghJhzlMHGQ",
 									"type": "string"
 								}
 							]
@@ -98,7 +98,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"creationDate\": \"2022-02-09\",\n    \"section\": {\n        \"sectionCode\": 2,\n        \"warehouseCode\":1\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 20,\n            \"currentQuantity\": 20,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-08\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        },\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 20,\n            \"currentQuantity\": 20,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-08\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        }\n    ]\n}",
+							"raw": "{\n    \"creationDate\": \"2022-02-09\",\n    \"section\": {\n        \"sectionCode\": 6,\n        \"warehouseCode\":2\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 20,\n            \"currentQuantity\": 20,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-08\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        },\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 20,\n            \"currentQuantity\": 20,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-08\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -135,7 +135,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJsdWFAZW1haWwuY29tIiwiaWF0IjoxNjQ0MjY4MzA5LCJleHAiOjE2NDQzNTQ3MDl9.DwwMUcLLFJhyh3thaEuo5Z3gAfeqytqy2JPMDHybeoY",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJyb2RAZW1haWwuY29tIiwiaWF0IjoxNjQ0NDM1NTkzLCJleHAiOjE2NDQ1MjE5OTN9.NFcAC23KlrBIkshOcExJjl1XT9DDP7nChSO0rFZPS-8",
 									"type": "string"
 								}
 							]
@@ -171,6 +171,16 @@
 				{
 					"name": "POST InboundOrder to test PurchaseOrder",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MzU2OTgsImV4cCI6MTY0NDUyMjA5OH0.RAkXysAtG1ZIEgFM1aSXwNW-i-gAw79Yw23dhP1tF7E",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -180,7 +190,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"creationDate\": \"2002-12-25\",\n    \"section\": {\n        \"sectionCode\": 1,\n        \"warehouseCode\":1\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 10,\n            \"currentQuantity\": 10,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        }\n    ],\n    \"representative\": 1\n}"
+							"raw": "{\n    \"creationDate\": \"2002-12-25\",\n    \"section\": {\n        \"sectionCode\": 6,\n        \"warehouseCode\":2\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 10,\n            \"currentQuantity\": 10,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-01-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        }\n    ],\n    \"representative\": 1\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/api/v1/fresh-products/inboundorder/",
@@ -207,7 +217,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJsdWFAZW1haWwuY29tIiwiaWF0IjoxNjQ0MjY4MzA5LCJleHAiOjE2NDQzNTQ3MDl9.DwwMUcLLFJhyh3thaEuo5Z3gAfeqytqy2JPMDHybeoY",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJyb2RAZW1haWwuY29tIiwiaWF0IjoxNjQ0NDM1NTkzLCJleHAiOjE2NDQ1MjE5OTN9.NFcAC23KlrBIkshOcExJjl1XT9DDP7nChSO0rFZPS-8",
 									"type": "string"
 								}
 							]
@@ -240,6 +250,16 @@
 				{
 					"name": "GET All Advertising",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MzU2OTgsImV4cCI6MTY0NDUyMjA5OH0.RAkXysAtG1ZIEgFM1aSXwNW-i-gAw79Yw23dhP1tF7E",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -304,7 +324,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJsdWFAZW1haWwuY29tIiwiaWF0IjoxNjQ0MjY4MzA5LCJleHAiOjE2NDQzNTQ3MDl9.DwwMUcLLFJhyh3thaEuo5Z3gAfeqytqy2JPMDHybeoY",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJyb2RAZW1haWwuY29tIiwiaWF0IjoxNjQ0NDM1NTkzLCJleHAiOjE2NDQ1MjE5OTN9.NFcAC23KlrBIkshOcExJjl1XT9DDP7nChSO0rFZPS-8",
 									"type": "string"
 								}
 							]
@@ -364,7 +384,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/fresh-products/?productCode=3&warehouseCode=1",
+							"raw": "localhost:8080/api/v1/fresh-products/?productCode=3&warehouseCode=2",
 							"host": [
 								"localhost"
 							],
@@ -382,7 +402,7 @@
 								},
 								{
 									"key": "warehouseCode",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						}
@@ -402,7 +422,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MjcxODIsImV4cCI6MTY0NDUxMzU4Mn0.ALNmHxdvt3QbufazoJTDSUJrVqVxLgKqiqFNByuIFX8",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJuYXRoYWxpYUBlbWFpbC5jb20iLCJpYXQiOjE2NDQ0MzU2OTgsImV4cCI6MTY0NDUyMjA5OH0.RAkXysAtG1ZIEgFM1aSXwNW-i-gAw79Yw23dhP1tF7E",
 									"type": "string"
 								}
 							]
@@ -518,7 +538,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/fresh-products/due-date/?sectionId=1&warehouseId=1&numberDays=700",
+							"raw": "localhost:8080/api/v1/fresh-products/due-date/?sectionId=6&warehouseId=2&numberDays=700",
 							"host": [
 								"localhost"
 							],
@@ -533,11 +553,11 @@
 							"query": [
 								{
 									"key": "sectionId",
-									"value": "1"
+									"value": "6"
 								},
 								{
 									"key": "warehouseId",
-									"value": "1"
+									"value": "2"
 								},
 								{
 									"key": "numberDays",
@@ -554,13 +574,71 @@
 			"name": "Authorization",
 			"item": [
 				{
-					"name": "Authorization",
+					"name": "Authorization representative",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"user\": \"nathalia@email.com\",\n    \"password\": \"nat123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authorization buyer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"rod@email.com\",\n    \"password\": \"nat123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authorization seller",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"gabriel@email.com\",\n    \"password\": \"nat123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

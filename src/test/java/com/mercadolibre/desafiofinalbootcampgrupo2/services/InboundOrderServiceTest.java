@@ -1,9 +1,8 @@
-package com.mercadolibre.desafiofinalbootcampgrupo2.services.unit;
+package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.DateInvalidException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.InboundOrder;
-import com.mercadolibre.desafiofinalbootcampgrupo2.services.InboundOrderService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +12,7 @@ import java.util.List;
 import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.Factory.generateListOfValidBatchs;
 import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.Factory.generateValidInboundOrder;
 
-public class InboundOrderServiceTests {
+public class InboundOrderServiceTest {
 
     @Test
     public void verifyCreationDateShouldVerifyIfCreationDateWasCreated() {
