@@ -1,5 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
+
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ProductTypeDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.RepresentativeDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.SectionDAO;
@@ -10,11 +11,9 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.SectionSpaceNotAvailableException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 

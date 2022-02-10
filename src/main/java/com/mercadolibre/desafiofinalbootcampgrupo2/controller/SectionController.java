@@ -45,7 +45,7 @@ public class SectionController {
         }
     }
 
-    @DeleteMapping(value = "delete/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         try {
             sectionService.deleteSection(id);
