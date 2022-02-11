@@ -21,7 +21,7 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(unique = true)
+
     private String licensePlate;
     private String vehicleModel;
     private LocalDate maintenanceDate;
