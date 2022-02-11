@@ -90,8 +90,6 @@ com eles.
 ### 6º Requisito
 **Objetivo:** A instrução consiste em criar/adicionar uma nova User Story ao Projeto Final, mas desta vez sem especificar o problema a ser resolvido pelo Product Owner (PO), ou seja, de natureza GRATUITA. O participante terá a possibilidade de explorar criativamente diferentes alternativas de possíveis problemas enquanto estes se inserem no universo e na lógica de negócio proposta pela cadeira no Projecto Final, para depois desenvolver e implementar a solução que considere mais adequada.
 
-Para
-
 ## Autores
 Este projeto foi desenvolvido pelo GRUPO 02 / WAVE 4:
 
