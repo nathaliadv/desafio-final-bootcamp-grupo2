@@ -100,5 +100,9 @@ Este projeto foi desenvolvido pelo GRUPO 02 / WAVE 4:
 - Nathalia Dantas *(https://github.com/nathaliadantasv)*
 - Rodrigo Franco *(https://github.com/rodalmeidafranco)*
 
+
+##Sweagger
+http://localhost:8080/api/v1/swagger-ui.html#/
+
 ## Agradecimentos
 Agradecemos primeiramente ao MELI por ter nos proporcionado a experiência e oportunidade de ingressar como Software Developer e participarmos do IT Bootcamp. Agradecemos aos instrutores da Digital House: Kenyo Faria, Mauri Klein, Michelle de Souza, Joice Lima e Betania Melo, por sempre nos orientar a sermos melhor como pessoa e profissional. Por fim, agradecemos a todos grandes profissionais que palestraram e que nos mostraram os caminhos do Meli, da tecnologia e da ética, mas principalmente a Manu Braga e Natalia Ventura por todo acompanhamento ao longo do bootcamp.
