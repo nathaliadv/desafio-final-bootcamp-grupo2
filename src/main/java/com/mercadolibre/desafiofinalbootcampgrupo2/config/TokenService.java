@@ -2,7 +2,6 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.config;
 
 import java.util.Date;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.Representative;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;

@@ -1,8 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.dao.PurchaseItemDAO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ReturnCauseDAO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.dao.ReturnOrderDAO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dao.*;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ReturnItemCreateDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ReturnItemDTO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ReturnOrderCreateDTO;
@@ -11,10 +9,10 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.exception.DontMatchesExceptio
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +32,11 @@ public class ReturnOrderService {
     @Autowired
     ReturnCauseDAO returnCauseDAO;
 
+    @Autowired
+    ReturnCreditDAO returnCreditDAO;
+
+    @Autowired
+    ReturnStatusDAO returnStatusDAO;
 
     public ReturnOrder saveReturnOrder(List<ReturnItemCreateDTO> itens, String cause) {
         List<ReturnOrderItens> returnOrderItens = convertListPurchaseItemDtoInListReturnOrderItens(itens);
@@ -141,6 +144,15 @@ public class ReturnOrderService {
         return returnOrder;
     }
 
+    public ReturnOrder cancelReturnOrder(Long returnOrderId){
+        ReturnOrder returnOrder = findById(returnOrderId);
+
+        returnOrder.setReturnStatus(returnStatusDAO.findByStatusCode("CANCELLED"));
+        returnOrder = returnOrderDAO.save(returnOrder);
+        return returnOrder;
+    }
+
+
     public ReturnCause verifyAndReturnCause(String causa){
         ReturnCause returnCause = returnCauseDAO.findByCause(causa);
         if (returnCause == null) {
@@ -148,4 +160,43 @@ public class ReturnOrderService {
         }
         return returnCause;
     }
+
+//TO DO - APROVAÇÃO DO RETURN ORDER PARA QUE O ITEM SEJA RETORNADO AO ESTOQUE E CREDITO SEJA DADO AO BUYER.
+//    public void approveReturnOrder(Long returnOrderId){
+//        ReturnOrder returnOrder = findById(returnOrderId);
+//
+//        if(returnOrder.getReturnsCause().getCause().equals("WITHDRAWAL")) {
+//            returnItemToRespectivesBatches(returnOrder);
+//        }
+//
+//        returnCreditDAO.save(returnCreditToBuyer(returnOrder));
+//
+//    }
+//
+//    public void returnItemToRespectivesBatches(ReturnOrder returnOrder) {
+//        List<ReturnOrderItens> returnOrderItens = returnOrder.getReturnItens();
+//
+//        for(ReturnOrderItens item: returnOrderItens){
+//            int quantityItem = item.getQuantity();
+//            //List<Batch> batchList = item.getPurchaseItem().getBatch();
+//        }
+//
+//    }
+//
+//    public ReturnCredit returnCreditToBuyer(ReturnOrder returnOrder) {
+//        List<ReturnOrderItens> returnOrderItens = returnOrder.getReturnItens();
+//
+//        BigDecimal total = BigDecimal.ZERO;
+//
+//        for(ReturnOrderItens item: returnOrderItens){
+//            BigDecimal price = item.getPurchaseItem().getAdvertising().getPrice();
+//            int quantity = item.getQuantity();
+//            total = total.add(price.multiply(BigDecimal.valueOf(quantity)));
+//        }
+//
+//        return ReturnCredit.builder().
+//                returnOrder(returnOrder)
+//                .total(total)
+//                .build();
+//    }
 }

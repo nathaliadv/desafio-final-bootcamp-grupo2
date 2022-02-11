@@ -1,7 +1,6 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,10 +26,6 @@ public class Advertising {
 
     @ManyToOne
     private Seller seller;
-
-    @OneToMany(mappedBy = "advertising")
-    @JsonIgnore
-    private List<Batch> batchs;
 
     @ManyToOne
     private Product product;

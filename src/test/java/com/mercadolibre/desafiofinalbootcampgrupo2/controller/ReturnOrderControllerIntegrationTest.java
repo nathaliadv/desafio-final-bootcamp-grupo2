@@ -14,8 +14,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.Factory.generateListOfValidPurchaseOrderDTO;
-import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.Factory.generateValidReturnOrderCreateDTO;
+import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.Factory.*;
 import static com.mercadolibre.desafiofinalbootcampgrupo2.utils.TokenGenerator.getUserToken;
 
 
@@ -94,6 +93,36 @@ public class ReturnOrderControllerIntegrationTest extends ApplicationConfigTest 
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", token)
                         .content(payload))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    public void shouldNotUpdateReturnOrderWhenInvalidCorrectData() throws Exception {
+        ReturnOrderCreateDTO invalidReturnOrderCreateDTO = generateReturnOrderCreateWithInvalidCauseDTO();
+        String payload = mapper.writeValueAsString(invalidReturnOrderCreateDTO);
+        String token = getUserToken(mockMvc, TypeOfUser.BUYER);
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/fresh-products/returnorders/")
+                        .queryParam("returnOrderId", "2")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token)
+                        .content(payload))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andReturn();
+
+        String expect = "Cause not exists in the Database";
+        Assertions.assertTrue(result.getResponse().getContentAsString().contains(expect));
+
+    }
+
+    @Test
+    public void shouldCancelReturnOrderWhenCorrectData() throws Exception {
+        String token = getUserToken(mockMvc, TypeOfUser.BUYER);
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/fresh-products/returnorders/cancel/")
+                        .queryParam("returnOrderId", "2")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", token))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }

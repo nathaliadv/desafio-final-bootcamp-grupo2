@@ -1,6 +1,5 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.model;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

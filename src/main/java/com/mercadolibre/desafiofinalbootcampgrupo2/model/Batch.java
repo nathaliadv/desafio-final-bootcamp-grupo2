@@ -34,7 +34,4 @@ public class Batch {
 
     @ManyToOne(cascade = CascadeType.ALL)
     private InboundOrder inboundOrder;
-
-    @ManyToMany(mappedBy = "batch")
-    private List<PurchaseItens> purchaseItens;
 }

@@ -97,6 +97,8 @@ INSERT INTO tb_return_status
 VALUES (2, 'PENDING');
 INSERT INTO tb_return_status
 VALUES (3, 'REJECTED');
+INSERT INTO tb_return_status
+VALUES (4, 'CANCELLED');
 
 INSERT INTO tb_return_cause
 VALUES (1, 'WITHDRAWAL');
