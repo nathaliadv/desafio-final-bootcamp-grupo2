@@ -62,10 +62,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/fresh-products/due-date/*").hasAnyAuthority("Representative")
                 .antMatchers(HttpMethod.GET, "/fresh-products/due-date/list/*").hasAnyAuthority("Representative")
                 //fim - requisito 5
-//                .antMatchers(HttpMethod.POST, "/user/add/representative").permitAll()
-//                .antMatchers(HttpMethod.POST, "/user/add/buyer").permitAll()
-//                .antMatchers(HttpMethod.POST, "/user/add/seller").permitAll()
-//                .anyRequest().authenticated()
+                //inicio - requisito 6 - Matheus
+                .antMatchers(HttpMethod.POST, "/user/add/representative").permitAll()
+                .antMatchers(HttpMethod.POST, "/user/add/buyer").permitAll()
+                .antMatchers(HttpMethod.POST, "/user/add/seller").permitAll()
+                //fim - requisito 6
+                .anyRequest().authenticated()
 //                .anyRequest().permitAll()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

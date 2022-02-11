@@ -82,10 +82,10 @@ public class PurchaseOrderService implements EntityService<PurchaseOrder> {
         return convertPurchaseOrderInPurchaseOrderDto(purchaseOrder, authentication);
     }
 
-    public PurchaseOrderDTO updatePurchaseOrder(Long purchaseOrderId, PurchaseOrderUpdateDTO purchaseOrderDto, Authentication authentication) {
+    public PurchaseOrderDTO updatePurchaseOrder(Long purchaseOrderId, PurchaseOrderUpdateDTO purchaseOrderUpdateDto, Authentication authentication) {
         PurchaseOrder purchaseOrder = findById(purchaseOrderId);
 
-        PurchaseStatus status = purchaseOrderStatusDAO.findByStatusCode(purchaseOrderDto.getStatus());
+        PurchaseStatus status = purchaseOrderStatusDAO.findByStatusCode(purchaseOrderUpdateDto.getStatus());
         if (status == null) {
             throw new RepositoryException("Status not exists in the Database");
         }
@@ -94,7 +94,7 @@ public class PurchaseOrderService implements EntityService<PurchaseOrder> {
 
         purchaseOrderDAO.deleteAllByPurchaseOrder(purchaseOrder);
 
-        List<PurchaseItens> itens = convertListProductsDTOInPurchaseItens(purchaseOrderDto.getProducts());
+        List<PurchaseItens> itens = convertListProductsDTOInPurchaseItens(purchaseOrderUpdateDto.getProducts());
 
         for (PurchaseItens item : itens) {
             item.setPurchaseOrder(purchaseOrder);

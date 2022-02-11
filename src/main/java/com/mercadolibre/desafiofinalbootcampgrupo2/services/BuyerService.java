@@ -23,7 +23,4 @@ public class BuyerService implements EntityService<Buyer> {
                 .orElseThrow(() -> new RepositoryException("Buyer not exists in the Database"));
     }
 
-    public void saveBuyer(Buyer buyer){
-        buyerDAO.save(buyer);
-    }
 }

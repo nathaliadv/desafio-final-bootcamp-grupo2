@@ -134,7 +134,7 @@ public class InboundOrderService implements EntityService<InboundOrder> {
 
     private void verifyIfIsARepresentative(Long representativeCode ){
          if(representativeService.findById(representativeCode) == null)
-             throw new RepresentativeInvalidException("Representante invalido");
+             throw new RepresentativeInvalidException("Invalid Representative");
     }
   
     public void verifyManufactureDate(List<Batch> batchs) {

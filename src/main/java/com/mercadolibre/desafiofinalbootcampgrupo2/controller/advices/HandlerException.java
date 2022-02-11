@@ -47,6 +47,12 @@ public class HandlerException {
         return ResponseEntity.badRequest().body(bodyOfResponse);
     }
 
+    @ExceptionHandler(value = UserInvalidException.class)
+    protected ResponseEntity<Object> handleUserInvalid(UserInvalidException ex, WebRequest request) {
+        String bodyOfResponse = ex.getMessage();
+        return ResponseEntity.badRequest().body(bodyOfResponse);
+    }
+
     @ExceptionHandler(value = ProductNotFoundException.class)
     protected ResponseEntity<Object> handleProductNotFound(DateInvalidException ex, WebRequest request) {
         String bodyOfResponse = ex.getMessage();

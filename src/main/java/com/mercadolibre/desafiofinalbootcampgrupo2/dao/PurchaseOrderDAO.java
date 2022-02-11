@@ -15,7 +15,7 @@ public interface PurchaseOrderDAO extends JpaRepository<PurchaseOrder, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = " UPDATE purchase_order SET purchase_status_id = :status WHERE id = :id ", nativeQuery = true)
+    @Query(value = "UPDATE purchase_order SET purchase_status_id = :status WHERE id = :id ", nativeQuery = true)
     public void updatePurchaseStatus(@Param("status") Long idStatus, @Param("id") Long idPurchase);
 
     @Modifying

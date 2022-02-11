@@ -1,10 +1,14 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.model;
 
+import jdk.jshell.Snippet;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,8 +25,14 @@ public abstract class User implements Serializable, UserDetails, GrantedAuthorit
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
+    @NotNull(message = "Name can not be null")
     private String name;
+    @NotEmpty
+    @NotNull(message = "Email can not be null")
     private String email;
+    @NotEmpty
+    @NotNull(message = "Password can not be null")
     private String password;
 
     @Override

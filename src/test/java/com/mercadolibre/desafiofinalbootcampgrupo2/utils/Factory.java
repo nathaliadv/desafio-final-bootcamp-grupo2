@@ -1,12 +1,11 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.utils;
 
-import com.mercadolibre.desafiofinalbootcampgrupo2.dto.BatchDTO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.dto.InboundOrderDTO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.dto.ProductResponseDTO;
-import com.mercadolibre.desafiofinalbootcampgrupo2.dto.SectionDTO;
+import com.mercadolibre.desafiofinalbootcampgrupo2.dto.*;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.InboundOrder;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Section;
+import com.mercadolibre.desafiofinalbootcampgrupo2.model.User;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -14,6 +13,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Factory {
+
+    public static UserDTO generateValidUser() {
+        return UserDTO.builder()
+                .id(1L)
+                .email("test@gmail.com")
+                .name("Nome Teste")
+                .build();
+    }
 
     public static InboundOrder generateValidInboundOrder() {
         return InboundOrder.builder()
