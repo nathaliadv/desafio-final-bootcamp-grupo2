@@ -16,4 +16,7 @@ public class Representative extends User {
     @OneToMany(mappedBy = "representative")
     private List<Section> section;
 
+    @OneToMany(mappedBy = "representative")
+    private List<Vehicle> vehicles;
+
 }

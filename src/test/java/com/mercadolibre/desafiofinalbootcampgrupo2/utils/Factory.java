@@ -5,6 +5,7 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.InboundOrder;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Section;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -208,4 +209,39 @@ public class Factory {
 
         return ReturnOrderCreateDTO.builder().itens(itens).returnCause(returnCause).build();
     }
+
+    public static AdvertisingDTO generateValidAdvertisingDTO(){
+        return AdvertisingDTO.builder()
+                .description("This is a description about the Advertising")
+                .price(BigDecimal.valueOf(150))
+                .freeShipping(true)
+                .productCode(1L)
+                .build();
+    }
+
+    public static VehicleDTO generateListOfValidVehicleCreateDTO() {
+        return VehicleDTO.builder().
+                vehicleModel("Modelo Teste").
+                licensePlate("Placa Teste").
+                maintenanceDate(LocalDate.now().minusMonths(2)).
+                mileage(1000).
+                representativeId(1l).
+                warehouseId(1l).
+                build();
+
+    }
+
+    public static VehicleUpdateDTO generateListOfValidVehicleUpdateDTO() {
+        return VehicleUpdateDTO.builder().
+                licensePlate("Placa Teste").
+                maintenanceDate(LocalDate.now().minusMonths(2)).
+                mileage(1000).
+                warehouseId(1l).
+                id(1l).
+                build();
+
+    }
+
+
+
 }

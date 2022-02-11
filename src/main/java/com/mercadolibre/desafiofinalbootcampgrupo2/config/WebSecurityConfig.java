@@ -5,6 +5,7 @@ import com.mercadolibre.desafiofinalbootcampgrupo2.services.AuthenticationServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -67,10 +68,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/fresh-products/returnorders/*").hasAnyAuthority("Buyer")
                 .antMatchers(HttpMethod.PUT, "/fresh-products/returnorders/*").hasAnyAuthority("Buyer")
                 .antMatchers(HttpMethod.PUT, "/fresh-products/returnorders/cancel/*").hasAnyAuthority("Buyer")
+                //inicio - requisito 6 - RODRIGO
+                .antMatchers(HttpMethod.GET, "/fleet/*").hasAnyAuthority("Representative")
+                //.antMatchers(HttpMethod.GET, "/fresh-products/due-date/list/*").hasAnyAuthority("Representative")
+                //fim - requisito 6 - RODRIGO
+
 //                .antMatchers(HttpMethod.POST, "/user/add/representative").permitAll()
 //                .antMatchers(HttpMethod.POST, "/user/add/buyer").permitAll()
 //                .anyRequest().authenticated()
 //                .anyRequest().permitAll()
+                // INICIO - REQ 6 GABRIEL
+                .antMatchers("/fresh-products/advertisings/**").hasAnyAuthority("Seller")
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(new AuthenticationViaTokenFilter(tokenService, repository), UsernamePasswordAuthenticationFilter.class);
