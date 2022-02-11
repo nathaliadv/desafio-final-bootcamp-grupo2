@@ -40,7 +40,7 @@ public class VehicleController {
     }
 
     //Requiriment 06
-    @GetMapping(path = "/detailAllByMaintenanceDate/")
+    @GetMapping(path = "/detailAllByModelDate/")
     public ResponseEntity<List<VehicleDTO>> getVehicleByMaintenanceDate(@RequestParam String vehicleModel, Authentication authentication) {
         List<VehicleDTO> vehicleDTO = vehicleService.findVehicleByMaintenanceDate(vehicleModel, authentication);
         return ResponseEntity.ok(vehicleDTO);
