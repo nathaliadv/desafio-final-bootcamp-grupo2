@@ -6,6 +6,6 @@
 **Endpoints:**
 | HTTP | Modelo da URI | Descrição |
 |--|--|--|
-|GET| /api/v1/user//add/representative|Cadastra um Representante/|
-|GET| /api/v1/user/add/seller|Cadastra um Vendedor.|
+|POST| /api/v1/user/add/representative|Cadastra um Representante.|
+|POST| /api/v1/user/add/seller|Cadastra um Vendedor.|
 |POST| /api/v1/user/add/buyer|Cadastra um comprador.|
