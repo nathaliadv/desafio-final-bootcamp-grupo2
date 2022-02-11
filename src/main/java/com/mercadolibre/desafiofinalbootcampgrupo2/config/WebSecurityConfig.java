@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, "/fresh-products/orders/").hasAnyAuthority("Buyer")
                 //fim - requisito 2
                 //inicio - requisito 3
-                //.antMatchers(HttpMethod.GET, "/fresh-products/*").hasAnyAuthority("Representative")
+                .antMatchers(HttpMethod.GET, "/fresh-products/*").hasAnyAuthority("Representative")
                 //fim - requisito 3
                 //inicio - requisito 4
                 .antMatchers(HttpMethod.GET, "/fresh-products/warehouse/*").hasAnyAuthority("Representative")
@@ -63,6 +63,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/fresh-products/due-date/*").hasAnyAuthority("Representative")
                 .antMatchers(HttpMethod.GET, "/fresh-products/due-date/list/*").hasAnyAuthority("Representative")
                 //fim - requisito 5
+                //inicio - requisito 6 - nathalia
+                .antMatchers(HttpMethod.POST, "/fresh-products/returnorders/").hasAnyAuthority("Buyer")
+                .antMatchers(HttpMethod.GET, "/fresh-products/returnorders/*").hasAnyAuthority("Buyer")
+                .antMatchers(HttpMethod.PUT, "/fresh-products/returnorders/*").hasAnyAuthority("Buyer")
+                .antMatchers(HttpMethod.PUT, "/fresh-products/returnorders/cancel/*").hasAnyAuthority("Buyer")
                 //inicio - requisito 6 - RODRIGO
                 .antMatchers(HttpMethod.GET, "/fleet/*").hasAnyAuthority("Representative")
                 //.antMatchers(HttpMethod.GET, "/fresh-products/due-date/list/*").hasAnyAuthority("Representative")

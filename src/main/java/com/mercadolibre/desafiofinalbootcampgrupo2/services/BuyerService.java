@@ -3,7 +3,6 @@ package com.mercadolibre.desafiofinalbootcampgrupo2.services;
 import com.mercadolibre.desafiofinalbootcampgrupo2.dao.BuyerDAO;
 import com.mercadolibre.desafiofinalbootcampgrupo2.exception.RepositoryException;
 import com.mercadolibre.desafiofinalbootcampgrupo2.model.Buyer;
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.Representative;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

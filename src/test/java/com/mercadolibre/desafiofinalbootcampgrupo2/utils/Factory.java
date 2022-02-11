@@ -1,7 +1,9 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.utils;
 
 import com.mercadolibre.desafiofinalbootcampgrupo2.dto.*;
-import com.mercadolibre.desafiofinalbootcampgrupo2.model.*;
+import com.mercadolibre.desafiofinalbootcampgrupo2.model.Batch;
+import com.mercadolibre.desafiofinalbootcampgrupo2.model.InboundOrder;
+import com.mercadolibre.desafiofinalbootcampgrupo2.model.Section;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -168,6 +170,44 @@ public class Factory {
                 .build());
 
         return PurchaseOrderDTO.builder().status(status).products(list).build();
+    }
+
+    public static ReturnOrderCreateDTO generateValidReturnOrderCreateDTO() {
+        List<ReturnItemCreateDTO> itens = new ArrayList<>();
+        String returnCause = "DEFECT";
+
+        itens.add(ReturnItemCreateDTO.builder()
+                .purchaseItemId(5L)
+                .quantity(2)
+                .build()
+        );
+
+        itens.add(ReturnItemCreateDTO.builder()
+                .purchaseItemId(6L)
+                .quantity(5)
+                .build()
+        );
+
+        return ReturnOrderCreateDTO.builder().itens(itens).returnCause(returnCause).build();
+    }
+
+    public static ReturnOrderCreateDTO generateReturnOrderCreateWithInvalidCauseDTO() {
+        List<ReturnItemCreateDTO> itens = new ArrayList<>();
+        String returnCause = "INVALIDCAUSE";
+
+        itens.add(ReturnItemCreateDTO.builder()
+                .purchaseItemId(5L)
+                .quantity(2)
+                .build()
+        );
+
+        itens.add(ReturnItemCreateDTO.builder()
+                .purchaseItemId(6L)
+                .quantity(5)
+                .build()
+        );
+
+        return ReturnOrderCreateDTO.builder().itens(itens).returnCause(returnCause).build();
     }
 
     public static AdvertisingDTO generateValidAdvertisingDTO(){

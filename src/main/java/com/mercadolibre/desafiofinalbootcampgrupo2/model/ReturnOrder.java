@@ -10,26 +10,27 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "tb_vehicle")
-public class Vehicle {
+@Table(name = "tb_return_order")
+public class ReturnOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+    private LocalDate date;
 
-    private String licensePlate;
-    private String vehicleModel;
-    private LocalDate maintenanceDate;
-    private double mileage;
-
-    @ManyToOne
-    private Warehouse warehouse;
+    @OneToOne
+    private ReturnStatus returnStatus;
 
     @ManyToOne
-    private Representative representative;
+    private Buyer buyer;
 
+    @OneToMany(mappedBy = "returnOrder", cascade = CascadeType.ALL)
+    private List<ReturnOrderItens> returnItens;
+
+    @OneToOne
+    private ReturnCause returnsCause;
 }
