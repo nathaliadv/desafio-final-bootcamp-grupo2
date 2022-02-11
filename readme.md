@@ -101,7 +101,8 @@ Este projeto foi desenvolvido pelo GRUPO 02 / WAVE 4:
 - Rodrigo Franco *(https://github.com/rodalmeidafranco)*
 
 
-##Sweagger
+## Sweagger
+  
 http://localhost:8080/api/v1/swagger-ui.html#/
 
 ## Agradecimentos
