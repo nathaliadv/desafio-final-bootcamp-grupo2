@@ -1,15 +1,15 @@
-### 2º Requisito
+### 6º Requisito
 **Objetivo:** Como comprador quero abrir um chamado para realizar a devolução de produtos comprados.
 
-Cenário: 
-"O status da ordem de compra se encontra como DELIVERED.
-DADO QUE o comprador adicionou os produtos no carrinho de compras
-E finalizou o pedido
-E o pedido foi entregue
-QUANDO o comprador desejar realizar a devolução de um ou mais produtos
-ENTÃO uma ordem de devolução deve ser criada
-E o comprador pode um saldo para uma próxima compra ou um novo produto
-E de acordo com o motivo da devolução esse produto deve ou não retornar ao estoque."
+Cenário:  <br />
+"O status da ordem de compra se encontra como DELIVERED. <br />
+DADO QUE o comprador adicionou os produtos no carrinho de compras  <br />
+E finalizou o pedido <br />
+E o pedido foi entregue <br />
+QUANDO o comprador desejar realizar a devolução de um ou mais produtos <br />
+ENTÃO uma ordem de devolução deve ser criada <br />
+E o comprador pode um saldo para uma próxima compra ou um novo produto <br />
+E de acordo com o motivo da devolução esse produto deve ou não retornar ao estoque." <br />
 
 
 **Endpoints:**
