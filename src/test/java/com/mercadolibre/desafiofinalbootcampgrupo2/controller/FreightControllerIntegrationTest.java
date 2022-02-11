@@ -42,7 +42,7 @@ public class FreightControllerIntegrationTest extends ApplicationConfigTest {
 
     @Test
     public void shouldReturn201WhenInsertfreight() throws Exception {
-        String token = getUserToken(mockMvc, TypeOfUser.BUYER);
+        String token = getUserToken(mockMvc, TypeOfUser.REPRESENTATIVE);
         String payload = "{\n" +
                 "    \"state\" : \"PARANÁ\",\n" +
                 "    \"initial\": \"PR\",\n" +
@@ -58,6 +58,4 @@ public class FreightControllerIntegrationTest extends ApplicationConfigTest {
                         .content(payload))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
     }
-
-
 }
