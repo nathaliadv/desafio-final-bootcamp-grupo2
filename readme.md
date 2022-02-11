@@ -50,8 +50,8 @@ Marketplace para comprá-los, se desejar.
 **Endpoints:**
 | HTTP | Modelo da URI | Descrição |
 |--|--|--|
-| POST | /api/v1/fresh-products/inboundorder/ | Cadastre um lote com o estoque de produtos que o compõe.Devolva o lote criado com o código de status "201 CREATED". |
-| PUT | /api/v1/fresh-products/inboundorder/ | Caso o lote já exista e deva ser atualizado. Devolva o estoque atualizado com o código de status "201 CREATED". |
+| GET | /api/v1/fresh-products/ | Veja uma lista completa de produtos. Se a lista não existir, ela deve retornar um "404 Not Found". |
+| GET | /api/v1/fresh-products/list?querytype=[categoriaProduto] | Veja uma lista de produtos por categoria. Categoria: FS = Fresco, RF = Refrigerado , FF = Congelado. Se a lista não existir, ela deve retornar um "404 Not Found". |
 |POST| /api/v1/fresh-products/orders/ |Registre um pedido com a lista de produtos que compõem o PurchaseOrder. Calcule o preço final e devolva-o juntamente com o código de status "201 CREATED". Se não houver estoque de um produto, notifique a situação retornando um erro por produto, não no nível do pedido.
 |GET| /api/v1/fresh-products/orders/querytype=[idOrder]|Mostrar produtos no pedido.
 |PUT| /api/v1/fresh-products/orders/ query param=[idOrder] | Modifique o pedido existente. torná-lo do tipo de carrinho para modificar|
@@ -89,8 +89,6 @@ com eles.
 
 ### 6º Requisito
 **Objetivo:** A instrução consiste em criar/adicionar uma nova User Story ao Projeto Final, mas desta vez sem especificar o problema a ser resolvido pelo Product Owner (PO), ou seja, de natureza GRATUITA. O participante terá a possibilidade de explorar criativamente diferentes alternativas de possíveis problemas enquanto estes se inserem no universo e na lógica de negócio proposta pela cadeira no Projecto Final, para depois desenvolver e implementar a solução que considere mais adequada.
-
-Para
 
 ## Autores
 Este projeto foi desenvolvido pelo GRUPO 02 / WAVE 4:
