@@ -1,6 +1,5 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,27 +7,22 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@AllArgsConstructor
 @Builder
-@Table(name = "tb_advertising")
-public class Advertising {
+@Entity
+@Table(name = "tb_return_credit")
+public class ReturnCredit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String description;
-    private BigDecimal price;
-    private Boolean freeShipping;
 
-    @ManyToOne
-    private Seller seller;
+    @OneToOne
+    private ReturnOrder returnOrder;
 
-    @ManyToOne
-    private Product product;
+    private BigDecimal total;
 
 }

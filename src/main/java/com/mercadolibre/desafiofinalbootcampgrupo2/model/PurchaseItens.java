@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,7 +26,6 @@ public class PurchaseItens {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Advertising advertising;
-
 
     public PurchaseItens(ProductDTO product) {
         this.id = product.getAdvertisingId();

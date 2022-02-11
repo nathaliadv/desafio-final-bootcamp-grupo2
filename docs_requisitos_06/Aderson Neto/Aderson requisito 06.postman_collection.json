@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "178947a5-4470-4bc0-9431-a18e2fe12737",
+		"name": "Aderson requisito 06",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Requisito 06 - Aderson",
+			"item": [
+				{
+					"name": "Obter custo do frete por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/freight/cost/SP",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"freight",
+								"cost",
+								"SP"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Salvar novo estado por frete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"state\" : \"PARANÁ\",\n    \"initial\": \"PR\",\n    \"capital\": \"CURITIBA\",\n    \"region\": \"SUL\",\n    \"shippingCost\": 58 \n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/freight/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"freight",
+								"add"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

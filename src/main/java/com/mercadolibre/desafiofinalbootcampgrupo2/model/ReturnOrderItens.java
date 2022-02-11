@@ -1,34 +1,29 @@
 package com.mercadolibre.desafiofinalbootcampgrupo2.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Builder
-@Table(name = "tb_advertising")
-public class Advertising {
+@Entity
+@Table(name = "tb_return_order_itens")
+public class ReturnOrderItens {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String description;
-    private BigDecimal price;
-    private Boolean freeShipping;
+    private Integer quantity;
+
+    @OneToOne
+    private PurchaseItens purchaseItem;
 
     @ManyToOne
-    private Seller seller;
-
-    @ManyToOne
-    private Product product;
+    private ReturnOrder returnOrder;
 
 }

@@ -1,0 +1,710 @@
+{
+	"info": {
+		"_postman_id": "0df0854e-b24a-4398-8e48-c44210451ec0",
+		"name": "Bootcamp Projeto Integrador",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Requisito 01",
+			"item": [
+				{
+					"name": "POST InboundOrder to save Batch",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJmdWxhbm9AZW1haWwuY29tIiwiaWF0IjoxNjQ0NDMxMDI2LCJleHAiOjE2NDQ1MTc0MjZ9.sGzpkQJ2xmkl4LywJV4RNC03h16RAqyRR9UW44rBmfk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"creationDate\": \"2002-12-25\",\n    \"section\": {\n        \"sectionCode\": 1,\n        \"warehouseCode\":1   \n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 15,\n            \"currentQuantity\": 15,\n            \"expirationDate\": \"2023-12-29\",\n            \"manufacturingDate\": \"2022-01-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 5\n        },\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 10,\n            \"currentQuantity\": 10,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-01-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 5\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/inboundorder/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"inboundorder",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET InboundOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJmdWxhbm9AZW1haWwuY29tIiwiaWF0IjoxNjQ0NDMxMDI2LCJleHAiOjE2NDQ1MTc0MjZ9.sGzpkQJ2xmkl4LywJV4RNC03h16RAqyRR9UW44rBmfk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/inboundorder/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"inboundorder",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT InboundOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJmdWxhbm9AZW1haWwuY29tIiwiaWF0IjoxNjQ0NDMxMDI2LCJleHAiOjE2NDQ1MTc0MjZ9.sGzpkQJ2xmkl4LywJV4RNC03h16RAqyRR9UW44rBmfk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"creationDate\": \"2022-01-25\",\n    \"section\": {\n        \"sectionCode\": 1,\n        \"warehouseCode\":1\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 20,\n            \"currentQuantity\": 20,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-01-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        },\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 20,\n            \"currentQuantity\": 20,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-01-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/inboundorder/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"inboundorder",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Requisito 02",
+			"item": [
+				{
+					"name": "POST PurchaseOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJsdWFAZW1haWwuY29tIiwiaWF0IjoxNjQ0NDMyNjM3LCJleHAiOjE2NDQ1MTkwMzd9.W3zlQBePN1oP_fQiF7GdG7AGe-BDOeuSS9-OTkjrr9o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"products\": [\n\t\t{\n\t\t\t\"advertisingId\": 1,\n\t\t\t\"quantity\": 15\n\t\t},\n        {\n\t\t\t\"advertisingId\": 1,\n\t\t\t\"quantity\": 5\n\t\t}\n\t]\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/orders/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"orders",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST InboundOrder to test PurchaseOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"creationDate\": \"2002-12-25\",\n    \"section\": {\n        \"sectionCode\": 1,\n        \"warehouseCode\":1\n    },\n    \"batchs\":[\n        {\n            \"minimumTemperature\": 25,\n            \"currentTemperature\": 10,\n            \"initialQuantity\": 10,\n            \"currentQuantity\": 10,\n            \"expirationDate\": \"2023-11-25\",\n            \"manufacturingDate\": \"2022-02-22\",\n            \"manufacturingTime\": \"05:30:00\",\n            \"advertsimentId\": 1\n        }\n    ],\n    \"representative\": 1\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/inboundorder/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"inboundorder",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET  PurchaseOrder by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJsdWFAZW1haWwuY29tIiwiaWF0IjoxNjQ0NDMyMTU5LCJleHAiOjE2NDQ1MTg1NTl9.9pu669q44TLg9Obuf0cK48wFwVzcqaTEusWUxuhCEds",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/orders/?purchaseOrderId=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"orders",
+								""
+							],
+							"query": [
+								{
+									"key": "purchaseOrderId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All Advertising",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJmdWxhbm9AZW1haWwuY29tIiwiaWF0IjoxNjQ0NDMyNjA3LCJleHAiOjE2NDQ1MTkwMDd9.5XS1f1T1KBCNQvTCHXpUBPd1Xi-IgZOwhPvlFa0Bxx0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/in-stock",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"in-stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All Advertising by Type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJmdWxhbm9AZW1haWwuY29tIiwiaWF0IjoxNjQ0NDMyNjA3LCJleHAiOjE2NDQ1MTkwMDd9.5XS1f1T1KBCNQvTCHXpUBPd1Xi-IgZOwhPvlFa0Bxx0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/in-stock/by-type?type=FS",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"in-stock",
+								"by-type"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "FS"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT PurchaseOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJsdWFAZW1haWwuY29tIiwiaWF0IjoxNjQ0NDMyNjM3LCJleHAiOjE2NDQ1MTkwMzd9.W3zlQBePN1oP_fQiF7GdG7AGe-BDOeuSS9-OTkjrr9o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"DELIVERED\",\n    \"buyerId\": 1,\n    \"products\": [\n        {\n            \"advertisingId\": 1,\n            \"quantity\": 10\n        },\n        {\n            \"advertisingId\": 1,\n            \"quantity\": 10\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/orders/?purchaseOrderId=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"orders",
+								""
+							],
+							"query": [
+								{
+									"key": "purchaseOrderId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Requisito 03",
+			"item": [
+				{
+					"name": "GET Product Filtered by Warehouse",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/?productCode=4&warehouseCode=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								""
+							],
+							"query": [
+								{
+									"key": "productCode",
+									"value": "4"
+								},
+								{
+									"key": "warehouseCode",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Requisito 04",
+			"item": [
+				{
+					"name": "GET Product Filtered in ALL Warehouses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/warehouse/?productCode=4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"warehouse",
+								""
+							],
+							"query": [
+								{
+									"key": "productCode",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Auth Representative",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"fulano@email.com\",\n    \"password\": \"albertinho123\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth Buyer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"lua@email.com\",\n    \"password\": \"nat123\"\n    }"
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth Seller",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"gabriel@email.com\",\n    \"password\": \"nat123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Requisito 06 - Gabriel",
+			"item": [
+				{
+					"name": "GET Advertising by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJnYWJyaWVsQGVtYWlsLmNvbSIsImlhdCI6MTY0NDQ5ODQ3NSwiZXhwIjoxNjQ0NTg0ODc1fQ.r5wBuu0N_4gwYt-mwPyj7Mm2FnLJ2zu5crvjMi8jJDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/advertisings/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"advertisings",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All Advertisings by Free Shipping",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJnYWJyaWVsQGVtYWlsLmNvbSIsImlhdCI6MTY0NDQ5ODQ3NSwiZXhwIjoxNjQ0NTg0ODc1fQ.r5wBuu0N_4gwYt-mwPyj7Mm2FnLJ2zu5crvjMi8jJDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/advertisings?isFreeShipping=true",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"advertisings"
+							],
+							"query": [
+								{
+									"key": "isFreeShipping",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Advertising",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJnYWJyaWVsQGVtYWlsLmNvbSIsImlhdCI6MTY0NDQ5ODQ3NSwiZXhwIjoxNjQ0NTg0ODc1fQ.r5wBuu0N_4gwYt-mwPyj7Mm2FnLJ2zu5crvjMi8jJDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productCode\": 10,\n    \"description\": \"This is a description about this ad\",\n    \"price\": 200.00,\n    \"freeShipping\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/fresh-products/advertisings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"advertisings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Advertising",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJnYWJyaWVsQGVtYWlsLmNvbSIsImlhdCI6MTY0NDUwNzQyNCwiZXhwIjoxNjQ0NTkzODI0fQ.9dKynOTA3xJhsUTdHcaPvKl3e3U_Tio_v1WBE6yg-bo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productCode\": 10,\n    \"description\": \"This is a description about this ad\",\n    \"price\": 200.00,\n    \"freeShipping\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/fresh-products/advertisings/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"advertisings",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Advertising Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJnYWJyaWVsQGVtYWlsLmNvbSIsImlhdCI6MTY0NDUwNzQyNCwiZXhwIjoxNjQ0NTkzODI0fQ.9dKynOTA3xJhsUTdHcaPvKl3e3U_Tio_v1WBE6yg-bo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/fresh-products/advertisings/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"advertisings",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

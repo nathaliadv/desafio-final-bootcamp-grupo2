@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RepresentativeService implements EntityService<Representative> {
 
+    @Autowired
     private RepresentativeDAO representativeDAO;
 
     public RepresentativeService(RepresentativeDAO representativeDAO) {

@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "d953a0d3-b113-4706-afce-96b5d6f61eba",
+		"name": "Bootecamp Projeto Final - Requisito 6",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Requisito 6 - Nathalia",
+			"item": [
+				{
+					"name": "POST ReturnOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJyb2RAZW1haWwuY29tIiwiaWF0IjoxNjQ0NDkzNDUyLCJleHAiOjE2NDQ1Nzk4NTJ9.hYihrWVliGf3i5OibOXfF_sz6Pu9uPPHHgOsZDnyeTY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itens\": [\n        {\n            \"purchaseItemId\": 3,\n            \"quantity\": 1\n        },\n        {\n            \"purchaseItemId\": 4,\n            \"quantity\": 5\n        }\n    ],\n    \"returnCause\": \"WITHDRAWAL\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/returnorders/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"returnorders",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ReturnOrderById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJyb2RAZW1haWwuY29tIiwiaWF0IjoxNjQ0NTQxODQwLCJleHAiOjE2NDQ2MjgyNDB9.RqoW7tzNHi7D95l4ZJHXgVaOVpDPxKfzHAglZnbOa8c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/returnorders/?returnOrderId=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"returnorders",
+								""
+							],
+							"query": [
+								{
+									"key": "returnOrderId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT ReturnOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJyb2RAZW1haWwuY29tIiwiaWF0IjoxNjQ0NTQxODQwLCJleHAiOjE2NDQ2MjgyNDB9.RqoW7tzNHi7D95l4ZJHXgVaOVpDPxKfzHAglZnbOa8c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itens\": [\n        {\n            \"purchaseItemId\": 3,\n            \"quantity\": 1\n        },\n        {\n            \"purchaseItemId\": 4,\n            \"quantity\": 5\n        }\n    ],\n    \"returnCause\": \"WITHDRAWAL\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/returnorders/?returnOrderId=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"returnorders",
+								""
+							],
+							"query": [
+								{
+									"key": "returnOrderId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT ReturnOrder Cancel",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb3NzYSBBUFAiLCJzdWIiOiJyb2RAZW1haWwuY29tIiwiaWF0IjoxNjQ0NTQxODQwLCJleHAiOjE2NDQ2MjgyNDB9.RqoW7tzNHi7D95l4ZJHXgVaOVpDPxKfzHAglZnbOa8c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/returnorders/cancel/?returnOrderId=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"returnorders",
+								"cancel",
+								""
+							],
+							"query": [
+								{
+									"key": "returnOrderId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
